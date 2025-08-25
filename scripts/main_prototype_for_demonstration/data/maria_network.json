@@ -1,0 +1,438 @@
+{
+  "persona_id": "maria_santos_sari_sari",
+  "network_analysis": {
+    "total_connections": 25,
+    "network_strength": 0.92,
+    "trust_density": 0.89,
+    "reciprocal_relationships": 0.94
+  },
+  "nodes": [
+    {
+      "id": "maria_santos",
+      "label": "Maria Santos",
+      "type": "primary_user",
+      "trust_score": 1.0,
+      "x": 400,
+      "y": 300,
+      "size": 40,
+      "color": "#22c55e",
+      "description": "Sari-sari store owner, 42 years old"
+    },
+    {
+      "id": "husband_carlos",
+      "label": "Carlos Santos",
+      "type": "family_core",
+      "trust_score": 0.98,
+      "x": 350,
+      "y": 250,
+      "size": 30,
+      "color": "#2E8B57",
+      "description": "Husband, construction foreman"
+    },
+    {
+      "id": "daughter_ana",
+      "label": "Ana Santos",
+      "type": "family_core", 
+      "trust_score": 0.95,
+      "x": 450,
+      "y": 250,
+      "size": 25,
+      "color": "#2E8B57",
+      "description": "Eldest daughter, college student"
+    },
+    {
+      "id": "son_miguel",
+      "label": "Miguel Santos",
+      "type": "family_core",
+      "trust_score": 0.93,
+      "x": 320,
+      "y": 320,
+      "size": 20,
+      "color": "#2E8B57",
+      "description": "Son, high school student"
+    },
+    {
+      "id": "daughter_sofia",
+      "label": "Sofia Santos", 
+      "type": "family_core",
+      "trust_score": 0.90,
+      "x": 480,
+      "y": 320,
+      "size": 18,
+      "color": "#2E8B57",
+      "description": "Youngest daughter, elementary"
+    },
+    {
+      "id": "mother_teresa",
+      "label": "Teresa Reyes",
+      "type": "family_extended",
+      "trust_score": 0.96,
+      "x": 400,
+      "y": 180,
+      "size": 28,
+      "color": "#F97316",
+      "description": "Mother, retired teacher"
+    },
+    {
+      "id": "sister_luz",
+      "label": "Luz Santos-Garcia",
+      "type": "family_extended",
+      "trust_score": 0.92,
+      "x": 280,
+      "y": 280,
+      "size": 25,
+      "color": "#F97316",
+      "description": "Sister, nurse in Manila"
+    },
+    {
+      "id": "supplier_rodel",
+      "label": "Rodel's Wholesale",
+      "type": "business_supplier",
+      "trust_score": 0.89,
+      "x": 200,
+      "y": 350,
+      "size": 30,
+      "color": "#7C3AED",
+      "description": "Main supplier, 6 years relationship"
+    },
+    {
+      "id": "supplier_nanay_lita",
+      "label": "Nanay Lita's Bakery",
+      "type": "business_supplier",
+      "trust_score": 0.91,
+      "x": 150,
+      "y": 300,
+      "size": 25,
+      "color": "#7C3AED", 
+      "description": "Bread supplier, 8 years relationship"
+    },
+    {
+      "id": "customer_family_cruz",
+      "label": "Cruz Family",
+      "type": "loyal_customer",
+      "trust_score": 0.88,
+      "x": 550,
+      "y": 280,
+      "size": 20,
+      "color": "#FCD116",
+      "description": "Regular customers, 7 years"
+    },
+    {
+      "id": "customer_lola_maria",
+      "label": "Lola Maria",
+      "type": "loyal_customer",
+      "trust_score": 0.92,
+      "x": 580,
+      "y": 330,
+      "size": 22,
+      "color": "#FCD116",
+      "description": "Senior customer, daily visits"
+    },
+    {
+      "id": "customer_tindero_ben",
+      "label": "Tatay Ben",
+      "type": "loyal_customer",
+      "trust_score": 0.85,
+      "x": 520,
+      "y": 380,
+      "size": 18,
+      "color": "#FCD116",
+      "description": "Neighbor, morning coffee routine"
+    },
+    {
+      "id": "barangay_captain",
+      "label": "Kap. Roberto Villanueva",
+      "type": "community_leader",
+      "trust_score": 0.87,
+      "x": 300,
+      "y": 150,
+      "size": 32,
+      "color": "#DC2626",
+      "description": "Barangay Captain, knows Maria 10 years"
+    },
+    {
+      "id": "pta_president",
+      "label": "Mrs. Carmen Dela Cruz",
+      "type": "community_leader", 
+      "trust_score": 0.84,
+      "x": 500,
+      "y": 150,
+      "size": 25,
+      "color": "#DC2626",
+      "description": "PTA President, school committee"
+    },
+    {
+      "id": "church_leader",
+      "label": "Sister Agnes",
+      "type": "community_leader",
+      "trust_score": 0.90,
+      "x": 350,
+      "y": 100,
+      "size": 28,
+      "color": "#DC2626",
+      "description": "Parish coordinator, community service"
+    },
+    {
+      "id": "neighbor_family_torres",
+      "label": "Torres Family",
+      "type": "neighbor",
+      "trust_score": 0.83,
+      "x": 250,
+      "y": 400,
+      "size": 20,
+      "color": "#059669",
+      "description": "Next-door neighbors, 8 years"
+    },
+    {
+      "id": "neighbor_kuya_jun",
+      "label": "Kuya Jun",
+      "type": "neighbor",
+      "trust_score": 0.86,
+      "x": 450,
+      "y": 420,
+      "size": 18,
+      "color": "#059669",
+      "description": "Tricycle driver, 5 years"
+    },
+    {
+      "id": "coop_manager",
+      "label": "Maria Cooperative",
+      "type": "financial_institution",
+      "trust_score": 0.81,
+      "x": 150,
+      "y": 200,
+      "size": 26,
+      "color": "#6366F1",
+      "description": "Member for 4 years, savings account"
+    },
+    {
+      "id": "godparent_ninong_eddie",
+      "label": "Ninong Eddie",
+      "type": "godparent",
+      "trust_score": 0.89,
+      "x": 600,
+      "y": 200,
+      "size": 24,
+      "color": "#EC4899",
+      "description": "Ana's godfather, family friend 15 years"
+    },
+    {
+      "id": "godparent_ninang_susan",
+      "label": "Ninang Susan",
+      "type": "godparent",
+      "trust_score": 0.87,
+      "x": 650,
+      "y": 280,
+      "size": 22,
+      "color": "#EC4899",
+      "description": "Miguel's godmother, comadre"
+    }
+  ],
+  "edges": [
+    {
+      "from": "maria_santos",
+      "to": "husband_carlos",
+      "relationship": "spouse",
+      "strength": 0.98,
+      "duration_years": 20,
+      "interaction_frequency": "daily",
+      "color": "#2E8B57",
+      "width": 5
+    },
+    {
+      "from": "maria_santos", 
+      "to": "daughter_ana",
+      "relationship": "parent_child",
+      "strength": 0.95,
+      "duration_years": 20,
+      "interaction_frequency": "daily",
+      "color": "#2E8B57",
+      "width": 4
+    },
+    {
+      "from": "maria_santos",
+      "to": "son_miguel", 
+      "relationship": "parent_child",
+      "strength": 0.93,
+      "duration_years": 17,
+      "interaction_frequency": "daily",
+      "color": "#2E8B57",
+      "width": 4
+    },
+    {
+      "from": "maria_santos",
+      "to": "daughter_sofia",
+      "relationship": "parent_child",
+      "strength": 0.90,
+      "duration_years": 12,
+      "interaction_frequency": "daily",
+      "color": "#2E8B57",
+      "width": 4
+    },
+    {
+      "from": "maria_santos",
+      "to": "mother_teresa",
+      "relationship": "parent_child",
+      "strength": 0.96,
+      "duration_years": 42,
+      "interaction_frequency": "daily",
+      "color": "#F97316",
+      "width": 4
+    },
+    {
+      "from": "maria_santos",
+      "to": "sister_luz",
+      "relationship": "sibling",
+      "strength": 0.92,
+      "duration_years": 35,
+      "interaction_frequency": "weekly",
+      "color": "#F97316",
+      "width": 3
+    },
+    {
+      "from": "maria_santos",
+      "to": "supplier_rodel",
+      "relationship": "business_partnership",
+      "strength": 0.89,
+      "duration_years": 6,
+      "interaction_frequency": "weekly",
+      "color": "#7C3AED",
+      "width": 4,
+      "trust_basis": "consistent_payment"
+    },
+    {
+      "from": "maria_santos",
+      "to": "supplier_nanay_lita", 
+      "relationship": "business_partnership",
+      "strength": 0.91,
+      "duration_years": 8,
+      "interaction_frequency": "daily",
+      "color": "#7C3AED",
+      "width": 4,
+      "trust_basis": "long_term_reliability"
+    },
+    {
+      "from": "maria_santos",
+      "to": "customer_family_cruz",
+      "relationship": "loyal_customer",
+      "strength": 0.88,
+      "duration_years": 7,
+      "interaction_frequency": "daily",
+      "color": "#FCD116",
+      "width": 3,
+      "trust_basis": "credit_extended"
+    },
+    {
+      "from": "maria_santos",
+      "to": "customer_lola_maria",
+      "relationship": "loyal_customer",
+      "strength": 0.92,
+      "duration_years": 8,
+      "interaction_frequency": "daily", 
+      "color": "#FCD116",
+      "width": 3,
+      "trust_basis": "personal_relationship"
+    },
+    {
+      "from": "maria_santos",
+      "to": "barangay_captain",
+      "relationship": "community_member",
+      "strength": 0.87,
+      "duration_years": 10,
+      "interaction_frequency": "monthly",
+      "color": "#DC2626",
+      "width": 3,
+      "trust_basis": "community_service"
+    },
+    {
+      "from": "maria_santos",
+      "to": "church_leader",
+      "relationship": "parish_member",
+      "strength": 0.90,
+      "duration_years": 15,
+      "interaction_frequency": "weekly",
+      "color": "#DC2626", 
+      "width": 3,
+      "trust_basis": "shared_faith"
+    },
+    {
+      "from": "maria_santos",
+      "to": "coop_manager",
+      "relationship": "member",
+      "strength": 0.81,
+      "duration_years": 4,
+      "interaction_frequency": "monthly",
+      "color": "#6366F1",
+      "width": 2,
+      "trust_basis": "financial_history"
+    },
+    {
+      "from": "maria_santos",
+      "to": "godparent_ninong_eddie",
+      "relationship": "compadrazgo",
+      "strength": 0.89,
+      "duration_years": 15,
+      "interaction_frequency": "monthly",
+      "color": "#EC4899",
+      "width": 3,
+      "trust_basis": "family_bond"
+    }
+  ],
+  "trust_analysis": {
+    "network_metrics": {
+      "average_trust_score": 0.895,
+      "trust_score_variance": 0.003,
+      "network_density": 0.68,
+      "clustering_coefficient": 0.72,
+      "centrality_score": 0.91
+    },
+    "relationship_categories": {
+      "family_core": {
+        "count": 5,
+        "average_trust": 0.942,
+        "total_weight": 0.40
+      },
+      "family_extended": {
+        "count": 2,
+        "average_trust": 0.940,
+        "total_weight": 0.15
+      },
+      "business_relationships": {
+        "count": 2,
+        "average_trust": 0.900,
+        "total_weight": 0.20
+      },
+      "community_connections": {
+        "count": 3,
+        "average_trust": 0.870,
+        "total_weight": 0.15
+      },
+      "social_bonds": {
+        "count": 8,
+        "average_trust": 0.863,
+        "total_weight": 0.10
+      }
+    },
+    "risk_factors": {
+      "single_point_of_failure": false,
+      "over_dependence_on_family": false,
+      "business_relationship_diversity": true,
+      "community_integration_strength": "high",
+      "geographic_concentration": "moderate"
+    },
+    "strengths": [
+      "Strong family foundation with multiple income earners",
+      "Diversified business relationships with proven track record",
+      "Deep community integration spanning multiple organizations",
+      "Long-term relationships indicating stability and reliability",
+      "Active participation in both religious and civic activities"
+    ],
+    "cultural_authenticity_indicators": [
+      "Compadrazgo system (godparent relationships) properly maintained",
+      "Multi-generational family involvement in decision making",
+      "Suki system evident in customer relationships",
+      "Community leadership recognition and engagement",
+      "Traditional Filipino family structure respected"
+    ]
+  }
+}

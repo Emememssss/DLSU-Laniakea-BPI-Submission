@@ -1,0 +1,119 @@
+{
+  "model_metadata": {
+    "version": "2.0.0",
+    "last_updated": "2025-08-23",
+    "framework": "sklearn_tensorflow_hybrid",
+    "description": "ML-powered KapwaScore neural network and ensemble configuration"
+  },
+  "neural_network_architecture": {
+    "mlp_classifier": {
+      "hidden_layer_sizes": [64, 32, 16],
+      "activation": "relu",
+      "max_iter": 1000,
+      "learning_rate": "adaptive",
+      "early_stopping": true,
+      "validation_fraction": 0.1
+    },
+    "feature_dimensions": {
+      "input_features": 37,
+      "behavioral_features": 7,
+      "temporal_features": 30,
+      "cultural_features": 6
+    }
+  },
+  "ensemble_configuration": {
+    "random_forest": {
+      "n_estimators": 100,
+      "max_depth": 10,
+      "class_weight": "balanced",
+      "feature_importance_threshold": 0.05
+    },
+    "isolation_forest": {
+      "contamination": 0.1,
+      "n_estimators": 100,
+      "max_samples": "auto"
+    },
+    "ensemble_weights": {
+      "trustworthiness_classifier": 0.5,
+      "neural_classifier": 0.5,
+      "anomaly_adjustment_factor": 0.3
+    }
+  },
+  "feature_scaling": {
+    "method": "StandardScaler",
+    "fit_parameters": {
+      "with_mean": true,
+      "with_std": true
+    }
+  },
+  "trustworthiness_thresholds": {
+    "high_trust": 0.85,
+    "medium_trust": 0.65,
+    "low_trust": 0.45,
+    "suspicious": 0.25
+  },
+  "risk_categories": {
+    "VERY_LOW_RISK": {
+      "score_threshold": 800,
+      "trust_threshold": 0.8
+    },
+    "LOW_RISK": {
+      "score_threshold": 700,
+      "trust_threshold": 0.7
+    },
+    "MEDIUM_RISK": {
+      "score_threshold": 500,
+      "trust_threshold": 0.5
+    },
+    "HIGH_RISK": {
+      "score_threshold": 300,
+      "trust_threshold": 0.3
+    },
+    "SUSPICIOUS_PATTERNS": {
+      "score_threshold": 0,
+      "trust_threshold": 0.0
+    }
+  },
+  "model_performance_tracking": {
+    "accuracy_metrics": ["accuracy", "precision", "recall", "f1_score"],
+    "cross_validation_folds": 5,
+    "performance_threshold": 0.80
+  },
+  "behavioral_pattern_features": {
+    "transaction_velocity": {
+      "description": "Rate of transactions over time",
+      "normal_range": [0.3, 2.0],
+      "suspicious_threshold": 3.0
+    },
+    "community_consistency": {
+      "description": "Consistency in community interactions",
+      "weight": 0.20,
+      "calculation": "weighted_average"
+    },
+    "payment_rhythm": {
+      "description": "Regularity of payment patterns", 
+      "weight": 0.25,
+      "consistency_factor": 0.7
+    },
+    "cultural_authenticity": {
+      "description": "Authenticity of cultural behaviors",
+      "weight": 0.30,
+      "authenticity_threshold": 0.8
+    },
+    "network_stability": {
+      "description": "Stability of social connections",
+      "weight": 0.15,
+      "family_size_factor": 6.0
+    },
+    "financial_prudence": {
+      "description": "Prudent financial behavior patterns",
+      "weight": 0.25,
+      "income_threshold": 25000
+    },
+    "digital_footprint_coherence": {
+      "description": "Coherence of digital activities",
+      "weight": 0.35,
+      "components": ["digital_literacy", "smartphone_usage", "banking_sessions"]
+    }
+  }
+}

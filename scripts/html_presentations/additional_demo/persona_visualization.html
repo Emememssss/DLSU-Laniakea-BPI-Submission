@@ -1,0 +1,580 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARAYA - Live Persona Category Demonstration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'haraya-brown': '#8B4513',
+                        'haraya-green': '#228B22',
+                        'haraya-gold': '#FFD700',
+                        'haraya-earth': '#D2B48C'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .persona-glow {
+            box-shadow: 0 0 15px rgba(255, 215, 0, 0.4);
+        }
+        .data-stream {
+            animation: dataFlow 3s infinite;
+        }
+        @keyframes dataFlow {
+            0% { transform: translateX(-100%); opacity: 0; }
+            50% { opacity: 1; }
+            100% { transform: translateX(100%); opacity: 0; }
+        }
+        .persona-card:hover {
+            transform: translateY(-5px);
+            transition: all 0.3s ease;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-gray-900 via-haraya-brown to-haraya-green min-h-screen text-white">
+    <!-- Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 class="text-4xl font-bold mb-4">HARAYA Evidence-Based Persona System</h1>
+            <p class="text-xl opacity-90">8 Research-Validated Filipino Microfinance Categories</p>
+            <div class="mt-4 flex justify-center space-x-4">
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                    <span class="text-sm">Algorithm: K-means + GMM</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                    <span class="text-sm">Validation: 7-1-2 Split</span>
+                </div>
+                <div class="bg-white/10 backdrop-blur-sm rounded-lg px-4 py-2">
+                    <span class="text-sm">Data Points: <span id="dataPointCounter">47,382</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Generation Controls -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6 mb-8">
+            <div class="flex flex-wrap justify-center items-center space-x-4 space-y-2">
+                <button id="generateBtn" class="bg-haraya-gold text-haraya-brown px-6 py-3 rounded-lg font-bold hover:bg-haraya-gold/80 transition-all">
+                    Generate New Personas
+                </button>
+                <button id="realTimeBtn" class="bg-haraya-green text-white px-6 py-3 rounded-lg font-bold hover:bg-haraya-green/80 transition-all">
+                    Start Real-Time Stream
+                </button>
+                <div class="flex items-center space-x-2">
+                    <label class="text-sm">Region Filter:</label>
+                    <select id="regionFilter" class="bg-white/20 rounded px-3 py-1 text-white">
+                        <option value="all">All Philippines</option>
+                        <option value="luzon">Luzon</option>
+                        <option value="visayas">Visayas</option>
+                        <option value="mindanao">Mindanao</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Evidence-Based 8-Category Persona Grid -->
+        <div class="grid lg:grid-cols-4 md:grid-cols-2 gap-6 mb-8">
+            <!-- Rural Entrepreneur -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="rural-entrepreneur">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">🏪</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Rural Entrepreneur</h3>
+                    <p class="text-sm opacity-80">Sari-sari Store Owner</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Aling Nena (48)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱10,000-18,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">850</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">Community Standing Primary</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Urban Gig Worker -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="urban-gig-worker">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">🚗</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Urban Gig Worker</h3>
+                    <p class="text-sm opacity-80">Grab/Delivery Driver</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Kuya Marlon (29)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱15,000-25,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">650</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 65%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">Platform Performance + Digital</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Agricultural Worker -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="agricultural-worker">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">🌾</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Agricultural Worker</h3>
+                    <p class="text-sm opacity-80">Rice Farmer</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Mang Jose (55)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱7,000-10,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">780</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 78%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">Seasonal + Cooperative Networks</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Service Provider -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="service-provider">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">🍜</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Service Provider</h3>
+                    <p class="text-sm opacity-80">Carinderia Owner</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Ate Gina (42)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱12,000-22,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">760</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 76%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">Customer Suki Relationships</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tech-Savvy Youth -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="tech-savvy-youth">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">📱</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Tech-Savvy Youth</h3>
+                    <p class="text-sm opacity-80">Online Seller</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Justine (22)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱8,000-20,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">720</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 72%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">Digital Reputation + Growth</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Traditional Merchant -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="traditional-merchant">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">🛒</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Traditional Merchant</h3>
+                    <p class="text-sm opacity-80">Market Vendor</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Manang Lita (58)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱18,000-30,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">890</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 89%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">30+ Years Market Presence</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Women-Led Business -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="women-led-business">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">👩‍💼</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Women-Led Business</h3>
+                    <p class="text-sm opacity-80">Home-based Producer</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Nanay Cora (45)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱9,000-16,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">820</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 82%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">Community Leadership</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Seasonal Worker -->
+            <div class="persona-card bg-white/15 backdrop-blur-sm rounded-xl p-6 cursor-pointer" data-category="seasonal-worker">
+                <div class="text-center mb-4">
+                    <div class="text-4xl mb-2">🔨</div>
+                    <h3 class="text-xl font-bold text-haraya-gold">Seasonal Worker</h3>
+                    <p class="text-sm opacity-80">Construction Worker</p>
+                </div>
+                <div class="space-y-3 text-sm">
+                    <div class="flex justify-between">
+                        <span>Sample:</span>
+                        <span class="font-bold">Rico (34)</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>Avg Income:</span>
+                        <span class="font-bold">₱15,000-20,000</span>
+                    </div>
+                    <div class="flex justify-between">
+                        <span>KapwaScore:</span>
+                        <span class="font-bold text-haraya-gold">680</span>
+                    </div>
+                    <div class="mt-4">
+                        <div class="bg-gray-700 rounded-full h-2">
+                            <div class="bg-haraya-green rounded-full h-2" style="width: 68%"></div>
+                        </div>
+                        <p class="text-xs mt-1 opacity-70">Family Support Reliability</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Data Visualization Section -->
+        <div class="grid lg:grid-cols-2 gap-8 mb-8">
+            <!-- Trust Score Distribution -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4 text-haraya-gold">KapwaScore Distribution</h3>
+                <canvas id="trustScoreChart" width="400" height="300"></canvas>
+            </div>
+
+            <!-- Regional Demographics -->
+            <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+                <h3 class="text-xl font-bold mb-4 text-haraya-gold">Regional Distribution</h3>
+                <canvas id="regionalChart" width="400" height="300"></canvas>
+            </div>
+        </div>
+
+        <!-- Live Generation Stream -->
+        <div class="bg-white/10 backdrop-blur-sm rounded-xl p-6">
+            <h3 class="text-xl font-bold mb-4 text-haraya-gold">Live Persona Generation Stream</h3>
+            <div id="generationStream" class="bg-black/50 rounded-lg p-4 h-64 overflow-y-auto font-mono text-sm">
+                <div class="text-haraya-gold">HARAYA ML Pipeline Initialized...</div>
+                <div class="text-green-400">K-means clustering: 8 clusters identified</div>
+                <div class="text-blue-400">Gaussian Mixture Model: convergence achieved</div>
+                <div class="text-white">Ready for live persona generation...</div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Persona data management
+        const personaData = {
+            'rural-entrepreneur': { population: 23.5, score: 780, income: 18500 },
+            'urban-freelancer': { population: 16.8, score: 620, income: 35200 },
+            'single-mother': { population: 19.2, score: 850, income: 12800 },
+            'ofw-family': { population: 14.3, score: 720, income: 28900 },
+            'young-professional': { population: 11.7, score: 580, income: 25600 },
+            'senior-citizen': { population: 8.9, score: 920, income: 15200 },
+            'small-business': { population: 13.4, score: 740, income: 22100 },
+            'informal-worker': { population: 11.2, score: 690, income: 14700 }
+        };
+
+        let streamingActive = false;
+        let dataPoints = 47382;
+
+        // Initialize Charts
+        function initializeCharts() {
+            // Trust Score Distribution Chart
+            const trustCtx = document.getElementById('trustScoreChart').getContext('2d');
+            new Chart(trustCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['500-600', '600-700', '700-800', '800-900', '900+'],
+                    datasets: [{
+                        label: 'Number of Personas',
+                        data: [2847, 8942, 15632, 12890, 7071],
+                        backgroundColor: [
+                            '#FF6B6B',
+                            '#FFE66D',
+                            '#4ECDC4',
+                            '#45B7D1',
+                            '#96CEB4'
+                        ],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#FFFFFF' }
+                        }
+                    },
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            ticks: { color: '#FFFFFF' },
+                            grid: { color: '#FFFFFF33' }
+                        },
+                        x: {
+                            ticks: { color: '#FFFFFF' },
+                            grid: { color: '#FFFFFF33' }
+                        }
+                    }
+                }
+            });
+
+            // Regional Distribution Chart
+            const regionalCtx = document.getElementById('regionalChart').getContext('2d');
+            new Chart(regionalCtx, {
+                type: 'pie',
+                data: {
+                    labels: ['Luzon', 'Visayas', 'Mindanao'],
+                    datasets: [{
+                        data: [52.3, 28.7, 19.0],
+                        backgroundColor: ['#FFD700', '#228B22', '#8B4513'],
+                        borderColor: '#FFFFFF',
+                        borderWidth: 2
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    plugins: {
+                        legend: {
+                            labels: { color: '#FFFFFF' }
+                        }
+                    }
+                }
+            });
+        }
+
+        // Live data streaming simulation
+        function startStreaming() {
+            if (streamingActive) return;
+            
+            streamingActive = true;
+            const stream = document.getElementById('generationStream');
+            
+            const messages = [
+                'Generating rural entrepreneur persona from Mindanao...',
+                'Clustering complete: High bayanihan score detected',
+                'Processing digital footprint: Low smartphone usage, high community trust',
+                'KapwaScore calculated: 780 (Strong community networks)',
+                'Generated: Maria Santos, 34, Rice Farmer + Sari-sari Store',
+                '---',
+                'Generating urban freelancer persona from Metro Manila...',
+                'Digital behavior analysis: High online activity, medium community engagement',
+                'Cultural values assessment: Modern lifestyle, traditional family ties',
+                'KapwaScore calculated: 620 (Digital-first, community-aware)',
+                'Generated: John Carlo Rivera, 28, Graphic Designer',
+                '---',
+                'Regional clustering: Visayas entrepreneurial pattern detected',
+                'Generating small business owner persona...',
+                'Economic behavior: Seasonal income, strong local networks',
+                'Cultural integration: High pakikipagkunware, medium utang na loob',
+                'KapwaScore calculated: 740 (Local community hub)',
+                'Generated: Rosa Delgado, 45, Bakery Owner',
+                '---'
+            ];
+            
+            let messageIndex = 0;
+            const streamInterval = setInterval(() => {
+                if (messageIndex >= messages.length) {
+                    messageIndex = 0;
+                }
+                
+                const message = messages[messageIndex];
+                const timestamp = new Date().toLocaleTimeString();
+                const messageColor = message.includes('Generated:') ? 'text-haraya-gold' : 
+                                  message.includes('KapwaScore') ? 'text-green-400' :
+                                  message.includes('---') ? 'text-gray-500' : 'text-white';
+                
+                stream.innerHTML += `<div class="${messageColor}">[${timestamp}] ${message}</div>`;
+                stream.scrollTop = stream.scrollHeight;
+                
+                messageIndex++;
+                
+                // Update data point counter
+                dataPoints += Math.floor(Math.random() * 10) + 1;
+                document.getElementById('dataPointCounter').textContent = dataPoints.toLocaleString();
+                
+                if (!streamingActive) {
+                    clearInterval(streamInterval);
+                }
+            }, 2000);
+        }
+
+        function stopStreaming() {
+            streamingActive = false;
+        }
+
+        // Generate new personas with slight variations
+        function generateNewPersonas() {
+            Object.keys(personaData).forEach(category => {
+                const data = personaData[category];
+                
+                // Add small random variations
+                const popVariation = (Math.random() - 0.5) * 2; // ±1%
+                const scoreVariation = Math.floor((Math.random() - 0.5) * 40); // ±20 points
+                
+                const newPop = Math.max(5, Math.min(30, data.population + popVariation));
+                const newScore = Math.max(300, Math.min(1000, data.score + scoreVariation));
+                
+                // Update display
+                document.getElementById(`${category.split('-')[0]}-population`).textContent = `${newPop.toFixed(1)}%`;
+                
+                // Update progress bar
+                const card = document.querySelector(`[data-category="${category}"]`);
+                const scoreDisplay = card.querySelector('.font-bold.text-haraya-gold');
+                scoreDisplay.textContent = newScore;
+                
+                const progressBar = card.querySelector('.bg-haraya-green');
+                progressBar.style.width = `${newScore / 10}%`;
+                
+                // Add glow effect during generation
+                card.classList.add('persona-glow');
+                setTimeout(() => card.classList.remove('persona-glow'), 1000);
+            });
+            
+            // Update generation stream
+            const stream = document.getElementById('generationStream');
+            const timestamp = new Date().toLocaleTimeString();
+            stream.innerHTML += `<div class="text-haraya-gold">[${timestamp}] New persona batch generated - 8 categories updated</div>`;
+            stream.scrollTop = stream.scrollHeight;
+        }
+
+        // Persona card interaction
+        function selectPersona(card) {
+            // Remove previous selections
+            document.querySelectorAll('.persona-card').forEach(c => {
+                c.classList.remove('persona-glow');
+            });
+            
+            // Highlight selected
+            card.classList.add('persona-glow');
+            
+            const category = card.getAttribute('data-category');
+            const data = personaData[category];
+            
+            // Log to stream
+            const stream = document.getElementById('generationStream');
+            const timestamp = new Date().toLocaleTimeString();
+            stream.innerHTML += `<div class="text-blue-400">[${timestamp}] Selected: ${category} - Analyzing detailed profile...</div>`;
+            stream.scrollTop = stream.scrollHeight;
+        }
+
+        // Event listeners
+        document.getElementById('generateBtn').addEventListener('click', generateNewPersonas);
+        
+        document.getElementById('realTimeBtn').addEventListener('click', function() {
+            if (streamingActive) {
+                stopStreaming();
+                this.textContent = 'Start Real-Time Stream';
+                this.classList.remove('bg-red-600');
+                this.classList.add('bg-haraya-green');
+            } else {
+                startStreaming();
+                this.textContent = 'Stop Stream';
+                this.classList.remove('bg-haraya-green');
+                this.classList.add('bg-red-600');
+            }
+        });
+
+        document.querySelectorAll('.persona-card').forEach(card => {
+            card.addEventListener('click', () => selectPersona(card));
+        });
+
+        // Regional filter
+        document.getElementById('regionFilter').addEventListener('change', function(e) {
+            const region = e.target.value;
+            const stream = document.getElementById('generationStream');
+            const timestamp = new Date().toLocaleTimeString();
+            stream.innerHTML += `<div class="text-yellow-400">[${timestamp}] Filter applied: ${region === 'all' ? 'All Philippines' : region}</div>`;
+            stream.scrollTop = stream.scrollHeight;
+        });
+
+        // Initialize
+        initializeCharts();
+
+        // Auto-generate some activity
+        setTimeout(() => {
+            document.getElementById('realTimeBtn').click();
+        }, 2000);
+    </script>
+</body>
+</html>

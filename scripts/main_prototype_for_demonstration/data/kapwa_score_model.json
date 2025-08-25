@@ -1,0 +1,226 @@
+{
+  "model_version": "1.0.0",
+  "algorithm_name": "KapwaScore Cultural Intelligence Engine",
+  "description": "The world's first culturally-intelligent trust scoring system specifically designed for Filipino values and community structures",
+  "base_score": 500,
+  "maximum_score": 1000,
+  "cultural_factors": [
+    {
+      "id": "kapwa_network",
+      "label": "Kapwa Network Strength",
+      "description": "Measures the strength of shared identity connections and community integration",
+      "weight": 0.30,
+      "max_points": 300,
+      "components": [
+        {
+          "name": "family_core_strength",
+          "weight": 0.4,
+          "description": "Immediate and extended family relationships"
+        },
+        {
+          "name": "community_integration",
+          "weight": 0.35,
+          "description": "Integration with local community structures"
+        },
+        {
+          "name": "shared_identity_recognition",
+          "weight": 0.25,
+          "description": "Recognition of interconnectedness with others"
+        }
+      ]
+    },
+    {
+      "id": "bayanihan_participation",
+      "label": "Bayanihan Community Spirit",
+      "description": "Evaluates active participation in community cooperation and mutual aid",
+      "weight": 0.25,
+      "max_points": 250,
+      "components": [
+        {
+          "name": "crisis_response_history",
+          "weight": 0.4,
+          "description": "History of helping community during crises"
+        },
+        {
+          "name": "cooperative_activities",
+          "weight": 0.35,
+          "description": "Regular participation in community projects"
+        },
+        {
+          "name": "leadership_roles",
+          "weight": 0.25,
+          "description": "Taking leadership in community initiatives"
+        }
+      ]
+    },
+    {
+      "id": "utang_na_loob_integrity",
+      "label": "Utang na Loob (Debt of Gratitude)",
+      "description": "Measures reliability in fulfilling reciprocal obligations and maintaining relationship bonds",
+      "weight": 0.25,
+      "max_points": 250,
+      "components": [
+        {
+          "name": "obligation_fulfillment",
+          "weight": 0.45,
+          "description": "Track record of fulfilling reciprocal obligations"
+        },
+        {
+          "name": "relationship_maintenance",
+          "weight": 0.35,
+          "description": "Consistency in maintaining long-term relationships"
+        },
+        {
+          "name": "gratitude_expression",
+          "weight": 0.20,
+          "description": "Appropriate recognition and expression of gratitude"
+        }
+      ]
+    },
+    {
+      "id": "traditional_credit",
+      "label": "Traditional Financial Factors",
+      "description": "Conventional financial metrics adapted for Filipino context",
+      "weight": 0.20,
+      "max_points": 200,
+      "components": [
+        {
+          "name": "income_stability",
+          "weight": 0.4,
+          "description": "Consistency and predictability of income"
+        },
+        {
+          "name": "payment_history",
+          "weight": 0.35,
+          "description": "Track record of bill payments and financial obligations"
+        },
+        {
+          "name": "savings_behavior",
+          "weight": 0.25,
+          "description": "Evidence of financial planning and saving habits"
+        }
+      ]
+    }
+  ],
+  "risk_categories": [
+    {
+      "name": "Excellent",
+      "score_range": [850, 1000],
+      "color": "#2E8B57",
+      "description": "Exceptional community trust and financial reliability",
+      "loan_eligibility": "₱50,000 - ₱200,000",
+      "interest_rate_tier": "preferred_plus"
+    },
+    {
+      "name": "Very Good", 
+      "score_range": [750, 849],
+      "color": "#10B981",
+      "description": "Strong cultural integration with good financial standing",
+      "loan_eligibility": "₱25,000 - ₱150,000",
+      "interest_rate_tier": "preferred"
+    },
+    {
+      "name": "Good",
+      "score_range": [650, 749],
+      "color": "#0057A6",
+      "description": "Solid community connections with moderate financial profile",
+      "loan_eligibility": "₱15,000 - ₱75,000",
+      "interest_rate_tier": "standard"
+    },
+    {
+      "name": "Fair",
+      "score_range": [550, 649],
+      "color": "#F59E0B",
+      "description": "Developing community trust with basic financial stability",
+      "loan_eligibility": "₱10,000 - ₱40,000",
+      "interest_rate_tier": "standard_plus"
+    },
+    {
+      "name": "Needs Development",
+      "score_range": [500, 549],
+      "color": "#EF4444",
+      "description": "Limited community integration requiring support and mentoring",
+      "loan_eligibility": "₱5,000 - ₱20,000",
+      "interest_rate_tier": "development"
+    }
+  ],
+  "scoring_methodology": {
+    "calculation_steps": [
+      "Collect cultural factor inputs from user assessment",
+      "Apply community validation multipliers based on regional data",
+      "Calculate weighted component scores using cultural factor weights",
+      "Apply contextual adjustments for life circumstances",
+      "Generate final KapwaScore and risk category classification"
+    ],
+    "validation_sources": [
+      "Community leader endorsements",
+      "Barangay official verification",
+      "Family network confirmation",
+      "Historical behavioral patterns",
+      "Digital footprint analysis"
+    ]
+  },
+  "cultural_adjustments": {
+    "regional_multipliers": {
+      "NCR": 1.0,
+      "CALABARZON": 1.05,
+      "Central_Luzon": 1.03,
+      "Western_Visayas": 1.08,
+      "Central_Visayas": 1.07,
+      "Davao_Region": 1.06,
+      "Northern_Mindanao": 1.04,
+      "SOCCSKSARGEN": 1.05
+    },
+    "age_factors": {
+      "youth_18_25": 0.95,
+      "young_adult_26_35": 1.0,
+      "middle_age_36_50": 1.05,
+      "mature_51_65": 1.08,
+      "senior_65_plus": 1.1
+    },
+    "occupation_modifiers": {
+      "rural_entrepreneur": 1.1,
+      "urban_professional": 1.0,
+      "informal_worker": 1.05,
+      "agricultural_worker": 1.15,
+      "service_provider": 1.03,
+      "traditional_merchant": 1.12
+    }
+  },
+  "explanation_framework": {
+    "transparency_level": "high",
+    "explanation_components": [
+      "Cultural factor breakdown with specific contributions",
+      "Community validation evidence",
+      "Comparison with similar demographic profiles",
+      "Improvement recommendations",
+      "Cultural context interpretation"
+    ],
+    "bias_detection": {
+      "monitored_factors": ["age", "gender", "region", "occupation", "income_level"],
+      "fairness_metrics": ["demographic_parity", "equal_opportunity", "calibration"],
+      "audit_frequency": "monthly"
+    }
+  },
+  "implementation_notes": {
+    "data_sources": [
+      "User self-assessment questionnaire",
+      "Community validation surveys", 
+      "Digital footprint analysis (with consent)",
+      "Public records and verifications",
+      "Historical transaction patterns"
+    ],
+    "privacy_compliance": [
+      "Data Privacy Act of 2012 (Philippines)",
+      "BSP Digital Banking Regulations",
+      "Cultural sensitivity guidelines",
+      "Community consent protocols"
+    ],
+    "performance_metrics": {
+      "accuracy_target": "85%+",
+      "cultural_authenticity_score": "90%+",
+      "community_acceptance_rate": "80%+",
+      "default_prediction_improvement": "40%+"
+    }
+  }
+}

@@ -1,0 +1,597 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARAYA Community Network Visualization</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .network-container {
+            background: radial-gradient(circle at center, #f8fafc 0%, #e2e8f0 100%);
+        }
+        .node-family { fill: #059669; stroke: #047857; }
+        .node-godparent { fill: #dc2626; stroke: #b91c1c; }
+        .node-neighbor { fill: #2563eb; stroke: #1d4ed8; }
+        .node-community { fill: #7c3aed; stroke: #6d28d9; }
+        .node-user { fill: #f59e0b; stroke: #d97706; }
+        
+        .link-strong { stroke: #059669; stroke-width: 3; opacity: 0.8; }
+        .link-medium { stroke: #2563eb; stroke-width: 2; opacity: 0.6; }
+        .link-weak { stroke: #6b7280; stroke-width: 1; opacity: 0.4; }
+        
+        .node {
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .node:hover {
+            stroke-width: 3;
+            filter: drop-shadow(0 0 10px rgba(0,0,0,0.3));
+        }
+        
+        .tooltip {
+            position: absolute;
+            background: rgba(0, 0, 0, 0.9);
+            color: white;
+            padding: 10px;
+            border-radius: 5px;
+            font-size: 12px;
+            pointer-events: none;
+            z-index: 1000;
+        }
+        
+        .trust-flow {
+            animation: trust-pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes trust-pulse {
+            0%, 100% { opacity: 0.3; }
+            50% { opacity: 1; }
+        }
+        
+        .metric-card {
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        
+        .metric-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Header -->
+    <div class="bg-gradient-to-r from-purple-600 to-blue-600 text-white p-6">
+        <div class="max-w-7xl mx-auto">
+            <h1 class="text-3xl font-bold mb-2">Community Network Visualization</h1>
+            <p class="text-purple-100">Interactive Trust Relationships in Filipino Communities</p>
+            <div class="mt-4 flex space-x-4">
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🤝 Kapwa Connections</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">🏘️ Bayanihan Networks</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full text-sm">💰 Financial Trust</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto p-6">
+        <!-- Controls -->
+        <div class="bg-white rounded-xl shadow-lg p-6 mb-6">
+            <div class="flex flex-wrap items-center justify-between gap-4">
+                <div class="flex items-center space-x-4">
+                    <h2 class="text-xl font-bold text-gray-800">Network Controls</h2>
+                    <button id="animateBtn" class="bg-purple-600 text-white px-4 py-2 rounded-lg hover:bg-purple-700 transition-colors">
+                        Start Trust Flow Animation
+                    </button>
+                    <button id="resetBtn" class="bg-gray-600 text-white px-4 py-2 rounded-lg hover:bg-gray-700 transition-colors">
+                        Reset View
+                    </button>
+                </div>
+                
+                <div class="flex items-center space-x-6">
+                    <!-- Legend -->
+                    <div class="flex items-center space-x-4 text-sm">
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-yellow-500 rounded-full mr-2"></div>
+                            <span>You (Maria)</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-green-600 rounded-full mr-2"></div>
+                            <span>Family</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-red-600 rounded-full mr-2"></div>
+                            <span>Godparents</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-blue-600 rounded-full mr-2"></div>
+                            <span>Neighbors</span>
+                        </div>
+                        <div class="flex items-center">
+                            <div class="w-4 h-4 bg-purple-600 rounded-full mr-2"></div>
+                            <span>Community</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+            <!-- Network Visualization -->
+            <div class="lg:col-span-2">
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden">
+                    <div class="p-6 border-b border-gray-200">
+                        <h2 class="text-xl font-bold text-gray-800">Interactive Trust Network</h2>
+                        <p class="text-sm text-gray-600 mt-1">Click on nodes to explore relationships • Hover for details</p>
+                    </div>
+                    <div class="network-container relative" style="height: 600px;">
+                        <svg id="networkSvg" width="100%" height="100%"></svg>
+                        <div id="tooltip" class="tooltip" style="display: none;"></div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Network Metrics -->
+            <div class="space-y-6">
+                <!-- Trust Metrics -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Network Trust Metrics</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="metric-card bg-green-50 border border-green-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-green-800">Network Density</span>
+                                <span class="text-xl font-bold text-green-600" id="networkDensity">87%</span>
+                            </div>
+                            <div class="w-full bg-green-200 rounded-full h-2 mt-2">
+                                <div class="bg-green-600 h-2 rounded-full" style="width: 87%"></div>
+                            </div>
+                            <p class="text-xs text-green-700 mt-1">How interconnected your network is</p>
+                        </div>
+                        
+                        <div class="metric-card bg-blue-50 border border-blue-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-blue-800">Trust Velocity</span>
+                                <span class="text-xl font-bold text-blue-600" id="trustVelocity">92%</span>
+                            </div>
+                            <div class="w-full bg-blue-200 rounded-full h-2 mt-2">
+                                <div class="bg-blue-600 h-2 rounded-full" style="width: 92%"></div>
+                            </div>
+                            <p class="text-xs text-blue-700 mt-1">Speed of trust propagation</p>
+                        </div>
+                        
+                        <div class="metric-card bg-purple-50 border border-purple-200 rounded-lg p-4">
+                            <div class="flex justify-between items-center">
+                                <span class="text-sm font-medium text-purple-800">Social Capital</span>
+                                <span class="text-xl font-bold text-purple-600" id="socialCapital">850</span>
+                            </div>
+                            <div class="w-full bg-purple-200 rounded-full h-2 mt-2">
+                                <div class="bg-purple-600 h-2 rounded-full" style="width: 85%"></div>
+                            </div>
+                            <p class="text-xs text-purple-700 mt-1">Overall community standing</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Bayanihan Circles -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Active Bayanihan Circles</h3>
+                    
+                    <div class="space-y-3">
+                        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium text-yellow-800">Family Financial Circle</h4>
+                                <span class="text-xs bg-yellow-200 text-yellow-800 px-2 py-1 rounded">8 members</span>
+                            </div>
+                            <div class="text-sm text-yellow-700">
+                                <div class="flex justify-between">
+                                    <span>Trust Level:</span>
+                                    <span class="font-medium">Excellent (95%)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Guarantee Capacity:</span>
+                                    <span class="font-medium">₱500,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-blue-50 border border-blue-200 rounded-lg p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium text-blue-800">Neighborhood Paluwagan</h4>
+                                <span class="text-xs bg-blue-200 text-blue-800 px-2 py-1 rounded">12 members</span>
+                            </div>
+                            <div class="text-sm text-blue-700">
+                                <div class="flex justify-between">
+                                    <span>Trust Level:</span>
+                                    <span class="font-medium">Good (78%)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Monthly Pool:</span>
+                                    <span class="font-medium">₱36,000</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="bg-purple-50 border border-purple-200 rounded-lg p-3">
+                            <div class="flex justify-between items-center mb-2">
+                                <h4 class="font-medium text-purple-800">Business Support Network</h4>
+                                <span class="text-xs bg-purple-200 text-purple-800 px-2 py-1 rounded">6 members</span>
+                            </div>
+                            <div class="text-sm text-purple-700">
+                                <div class="flex justify-between">
+                                    <span>Trust Level:</span>
+                                    <span class="font-medium">Very Good (85%)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Business Fund:</span>
+                                    <span class="font-medium">₱200,000</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Relationship Strength Analysis -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-lg font-bold text-gray-800 mb-4">Relationship Strength</h3>
+                    
+                    <canvas id="relationshipChart" width="300" height="200"></canvas>
+                    
+                    <div class="mt-4 space-y-2 text-sm">
+                        <div class="flex justify-between">
+                            <span class="flex items-center">
+                                <div class="w-3 h-3 bg-green-500 rounded-full mr-2"></div>
+                                Strong (90-100%)
+                            </span>
+                            <span class="font-medium">45%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="flex items-center">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full mr-2"></div>
+                                Medium (70-89%)
+                            </span>
+                            <span class="font-medium">35%</span>
+                        </div>
+                        <div class="flex justify-between">
+                            <span class="flex items-center">
+                                <div class="w-3 h-3 bg-gray-500 rounded-full mr-2"></div>
+                                Developing (50-69%)
+                            </span>
+                            <span class="font-medium">20%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network Impact -->
+                <div class="bg-gradient-to-br from-purple-500 to-blue-500 text-white rounded-xl p-6">
+                    <h3 class="font-bold text-lg mb-4">Financial Impact Potential</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="text-center">
+                            <div class="text-3xl font-bold" id="impactAmount">₱2.3M</div>
+                            <div class="text-sm text-purple-100">Total Community Capital</div>
+                        </div>
+                        
+                        <div class="grid grid-cols-2 gap-4 text-center">
+                            <div>
+                                <div class="text-xl font-bold">32</div>
+                                <div class="text-xs text-purple-100">Connected Lives</div>
+                            </div>
+                            <div>
+                                <div class="text-xl font-bold">8</div>
+                                <div class="text-xs text-purple-100">Active Guarantors</div>
+                            </div>
+                        </div>
+                        
+                        <div class="text-center text-sm text-purple-100">
+                            Your financial success creates ripple effects through your entire Kapwa network
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Network Insights -->
+        <div class="mt-6 bg-white rounded-xl shadow-lg p-6">
+            <h2 class="text-xl font-bold text-gray-800 mb-6">Network Intelligence Insights</h2>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-green-800 mb-2">🎯 Loan Recommendation</h3>
+                    <p class="text-sm text-green-700 mb-3">Based on your network strength, you qualify for:</p>
+                    <div class="bg-white rounded p-3">
+                        <div class="font-medium text-green-800">BPI NegosyoKo Enhanced</div>
+                        <div class="text-sm text-gray-600">Up to ₱500,000 at 1.5% monthly</div>
+                        <div class="text-xs text-green-600 mt-1">✓ Family circle guarantee available</div>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-blue-800 mb-2">📈 Growth Opportunities</h3>
+                    <p class="text-sm text-blue-700 mb-3">Strengthen these connections to improve your score:</p>
+                    <div class="space-y-2">
+                        <div class="text-xs bg-white rounded p-2">
+                            <div class="font-medium">Barangay Captain Connection</div>
+                            <div class="text-gray-600">+15 points potential</div>
+                        </div>
+                        <div class="text-xs bg-white rounded p-2">
+                            <div class="font-medium">Business Network Expansion</div>
+                            <div class="text-gray-600">+25 points potential</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                    <h3 class="font-semibold text-purple-800 mb-2">⚠️ Risk Mitigation</h3>
+                    <p class="text-sm text-purple-700 mb-3">Your network provides these safety nets:</p>
+                    <div class="space-y-2">
+                        <div class="text-xs bg-white rounded p-2">
+                            <div class="font-medium">Emergency Support</div>
+                            <div class="text-gray-600">₱150,000 rapid response</div>
+                        </div>
+                        <div class="text-xs bg-white rounded p-2">
+                            <div class="font-medium">Backup Guarantors</div>
+                            <div class="text-gray-600">5 willing co-signers</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Network data
+        const networkData = {
+            nodes: [
+                // User (center)
+                { id: "maria", name: "Maria Santos", type: "user", group: 0, trust: 100, x: 400, y: 300 },
+                
+                // Family (green)
+                { id: "mother", name: "Nanay Carmen", type: "family", group: 1, trust: 95 },
+                { id: "father", name: "Tatay Roberto", type: "family", group: 1, trust: 95 },
+                { id: "sister", name: "Ate Susan", type: "family", group: 1, trust: 90 },
+                { id: "brother", name: "Kuya Miguel", type: "family", group: 1, trust: 88 },
+                { id: "daughter", name: "Anna", type: "family", group: 1, trust: 98 },
+                { id: "son", name: "Luis", type: "family", group: 1, trust: 98 },
+                
+                // Godparents (red)
+                { id: "ninong", name: "Ninong Carlos", type: "godparent", group: 2, trust: 85 },
+                { id: "ninang", name: "Ninang Rosa", type: "godparent", group: 2, trust: 80 },
+                { id: "kumpare", name: "Kumpare Jun", type: "godparent", group: 2, trust: 82 },
+                
+                // Neighbors (blue)
+                { id: "neighbor1", name: "Mrs. Reyes", type: "neighbor", group: 3, trust: 75 },
+                { id: "neighbor2", name: "Mang Tony", type: "neighbor", group: 3, trust: 70 },
+                { id: "neighbor3", name: "Aling Nena", type: "neighbor", group: 3, trust: 72 },
+                { id: "neighbor4", name: "Ka Pedro", type: "neighbor", group: 3, trust: 68 },
+                
+                // Community (purple)
+                { id: "captain", name: "Brgy Captain", type: "community", group: 4, trust: 78 },
+                { id: "teacher", name: "Teacher Grace", type: "community", group: 4, trust: 76 },
+                { id: "pastor", name: "Pastor Mark", type: "community", group: 4, trust: 80 },
+                { id: "doctor", name: "Dr. Cruz", type: "community", group: 4, trust: 74 }
+            ],
+            links: [
+                // Family connections (strong)
+                { source: "maria", target: "mother", strength: "strong", trust: 95 },
+                { source: "maria", target: "father", strength: "strong", trust: 95 },
+                { source: "maria", target: "sister", strength: "strong", trust: 90 },
+                { source: "maria", target: "brother", strength: "strong", trust: 88 },
+                { source: "maria", target: "daughter", strength: "strong", trust: 98 },
+                { source: "maria", target: "son", strength: "strong", trust: 98 },
+                
+                // Godparent connections (medium-strong)
+                { source: "maria", target: "ninong", strength: "medium", trust: 85 },
+                { source: "maria", target: "ninang", strength: "medium", trust: 80 },
+                { source: "maria", target: "kumpare", strength: "medium", trust: 82 },
+                
+                // Neighbor connections (medium)
+                { source: "maria", target: "neighbor1", strength: "medium", trust: 75 },
+                { source: "maria", target: "neighbor2", strength: "medium", trust: 70 },
+                { source: "maria", target: "neighbor3", strength: "medium", trust: 72 },
+                { source: "maria", target: "neighbor4", strength: "weak", trust: 68 },
+                
+                // Community connections (medium-weak)
+                { source: "maria", target: "captain", strength: "medium", trust: 78 },
+                { source: "maria", target: "teacher", strength: "weak", trust: 76 },
+                { source: "maria", target: "pastor", strength: "medium", trust: 80 },
+                { source: "maria", target: "doctor", strength: "weak", trust: 74 },
+                
+                // Inter-network connections
+                { source: "mother", target: "ninang", strength: "weak", trust: 65 },
+                { source: "father", target: "ninong", strength: "weak", trust: 70 },
+                { source: "sister", target: "neighbor1", strength: "weak", trust: 60 },
+                { source: "kumpare", target: "captain", strength: "weak", trust: 55 }
+            ]
+        };
+
+        // D3.js Network Visualization
+        const svg = d3.select("#networkSvg");
+        const width = 800;
+        const height = 600;
+        
+        svg.attr("viewBox", `0 0 ${width} ${height}`);
+
+        const tooltip = d3.select("#tooltip");
+
+        // Create force simulation
+        const simulation = d3.forceSimulation(networkData.nodes)
+            .force("link", d3.forceLink(networkData.links).id(d => d.id).distance(80))
+            .force("charge", d3.forceManyBody().strength(-200))
+            .force("center", d3.forceCenter(width / 2, height / 2))
+            .force("collision", d3.forceCollide().radius(25));
+
+        // Create links
+        const link = svg.append("g")
+            .selectAll("line")
+            .data(networkData.links)
+            .enter().append("line")
+            .attr("class", d => `link-${d.strength}`)
+            .attr("stroke-dasharray", d => d.strength === "weak" ? "5,5" : "0,0");
+
+        // Create nodes
+        const node = svg.append("g")
+            .selectAll("circle")
+            .data(networkData.nodes)
+            .enter().append("circle")
+            .attr("r", d => d.type === "user" ? 20 : 15)
+            .attr("class", d => `node node-${d.type}`)
+            .call(d3.drag()
+                .on("start", dragstarted)
+                .on("drag", dragged)
+                .on("end", dragended))
+            .on("mouseover", showTooltip)
+            .on("mouseout", hideTooltip)
+            .on("click", selectNode);
+
+        // Add labels
+        const label = svg.append("g")
+            .selectAll("text")
+            .data(networkData.nodes)
+            .enter().append("text")
+            .text(d => d.name.split(" ")[0])
+            .attr("font-size", "10px")
+            .attr("text-anchor", "middle")
+            .attr("dy", ".35em")
+            .attr("fill", "white")
+            .style("pointer-events", "none");
+
+        // Update positions on simulation tick
+        simulation.on("tick", () => {
+            link
+                .attr("x1", d => d.source.x)
+                .attr("y1", d => d.source.y)
+                .attr("x2", d => d.target.x)
+                .attr("y2", d => d.target.y);
+
+            node
+                .attr("cx", d => d.x)
+                .attr("cy", d => d.y);
+
+            label
+                .attr("x", d => d.x)
+                .attr("y", d => d.y);
+        });
+
+        // Drag functions
+        function dragstarted(event, d) {
+            if (!event.active) simulation.alphaTarget(0.3).restart();
+            d.fx = d.x;
+            d.fy = d.y;
+        }
+
+        function dragged(event, d) {
+            d.fx = event.x;
+            d.fy = event.y;
+        }
+
+        function dragended(event, d) {
+            if (!event.active) simulation.alphaTarget(0);
+            d.fx = null;
+            d.fy = null;
+        }
+
+        // Tooltip functions
+        function showTooltip(event, d) {
+            const relationshipTypes = {
+                user: "You",
+                family: "Family Member",
+                godparent: "Godparent/Kumpare",
+                neighbor: "Neighbor",
+                community: "Community Leader"
+            };
+
+            tooltip
+                .style("display", "block")
+                .style("left", (event.pageX + 10) + "px")
+                .style("top", (event.pageY - 10) + "px")
+                .html(`
+                    <strong>${d.name}</strong><br/>
+                    <em>${relationshipTypes[d.type]}</em><br/>
+                    Trust Level: ${d.trust}%<br/>
+                    ${d.type === "user" ? "KapwaScore: 850" : ""}
+                `);
+        }
+
+        function hideTooltip() {
+            tooltip.style("display", "none");
+        }
+
+        // Node selection
+        function selectNode(event, d) {
+            // Reset all nodes
+            node.style("stroke-width", 2);
+            
+            // Highlight selected node and connections
+            node.filter(n => n.id === d.id).style("stroke-width", 4);
+            
+            // Update metrics based on selection
+            updateMetricsForNode(d);
+        }
+
+        // Update metrics based on selected node
+        function updateMetricsForNode(selectedNode) {
+            // This would normally calculate based on the selected node's connections
+            // For demo purposes, we'll show different values
+            const metrics = {
+                networkDensity: Math.floor(Math.random() * 20) + 70,
+                trustVelocity: Math.floor(Math.random() * 15) + 80,
+                socialCapital: Math.floor(Math.random() * 200) + 700
+            };
+
+            document.getElementById('networkDensity').textContent = metrics.networkDensity + '%';
+            document.getElementById('trustVelocity').textContent = metrics.trustVelocity + '%';
+            document.getElementById('socialCapital').textContent = metrics.socialCapital;
+        }
+
+        // Trust flow animation
+        function animateTrustFlow() {
+            link.classed("trust-flow", true);
+            setTimeout(() => {
+                link.classed("trust-flow", false);
+            }, 3000);
+        }
+
+        // Relationship strength chart
+        const ctx = document.getElementById('relationshipChart').getContext('2d');
+        const relationshipChart = new Chart(ctx, {
+            type: 'doughnut',
+            data: {
+                labels: ['Strong', 'Medium', 'Developing'],
+                datasets: [{
+                    data: [45, 35, 20],
+                    backgroundColor: ['#059669', '#2563eb', '#6b7280'],
+                    borderWidth: 0
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: false
+                    }
+                }
+            }
+        });
+
+        // Event listeners
+        document.getElementById('animateBtn').addEventListener('click', animateTrustFlow);
+        
+        document.getElementById('resetBtn').addEventListener('click', () => {
+            simulation.alpha(1).restart();
+            node.style("stroke-width", 2);
+        });
+
+        // Real-time updates simulation
+        setInterval(() => {
+            const randomIncrease = Math.floor(Math.random() * 3) + 1;
+            const currentAmount = document.getElementById('impactAmount').textContent;
+            const currentValue = parseFloat(currentAmount.replace('₱', '').replace('M', ''));
+            const newValue = (currentValue + randomIncrease * 0.1).toFixed(1);
+            document.getElementById('impactAmount').textContent = `₱${newValue}M`;
+        }, 5000);
+    </script>
+</body>
+</html>

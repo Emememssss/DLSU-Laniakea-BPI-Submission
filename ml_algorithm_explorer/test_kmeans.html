@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>K-Means Test</title>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .container { max-width: 800px; margin: 0 auto; }
+        .controls { margin: 20px 0; padding: 20px; background: #f5f5f5; border-radius: 8px; }
+        .visualization { margin: 20px 0; padding: 20px; background: white; border: 1px solid #ddd; border-radius: 8px; }
+        .metrics { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px; margin: 20px 0; }
+        .metric-card { padding: 15px; background: #f8f9fa; border-radius: 6px; text-align: center; }
+        .btn { padding: 10px 20px; margin: 5px; background: #007bff; color: white; border: none; border-radius: 4px; cursor: pointer; }
+        .btn:hover { background: #0056b3; }
+        .btn-secondary { background: #6c757d; }
+        .btn-secondary:hover { background: #545b62; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>🎯 K-Means Clustering Test</h1>
+        <p>Testing the complete K-Means implementation with Filipino cultural data</p>
+        
+        <div class="controls">
+            <h3>Controls</h3>
+            <div>
+                <label>Number of Clusters (K): <span id="kValue">3</span></label><br>
+                <input type="range" id="kSlider" min="2" max="8" value="3" oninput="updateK()">
+            </div>
+            <div style="margin: 10px 0;">
+                <button class="btn" onclick="generateTestData()">Generate Test Data</button>
+                <button class="btn" onclick="runClustering()">Run K-Means</button>
+                <button class="btn btn-secondary" onclick="resetVisualization()">Reset</button>
+            </div>
+        </div>
+        
+        <div class="metrics">
+            <div class="metric-card">
+                <div id="dataCount">0</div>
+                <div>Data Points</div>
+            </div>
+            <div class="metric-card">
+                <div id="iterationCount">0</div>
+                <div>Iterations</div>
+            </div>
+            <div class="metric-card">
+                <div id="wcssValue">--</div>
+                <div>WCSS</div>
+            </div>
+            <div class="metric-card">
+                <div id="silhouetteValue">--</div>
+                <div>Silhouette Score</div>
+            </div>
+        </div>
+        
+        <div class="visualization">
+            <h3>Clustering Visualization</h3>
+            <div id="clusterChart" style="width: 100%; height: 400px;"></div>
+        </div>
+        
+        <div id="insights" class="visualization">
+            <h3>Cultural Insights</h3>
+            <div id="insightsList">Generate clusters to see cultural insights...</div>
+        </div>
+        
+        <div id="status" style="margin: 20px 0; padding: 10px; background: #e9ecef; border-radius: 4px;">
+            Ready to test K-Means clustering
+        </div>
+    </div>
+
+    <script>
+        // Simple K-Means implementation for testing
+        class SimpleKMeans {
+            constructor(k) {
+                this.k = k;
+                this.centroids = [];
+                this.clusters = [];
+                this.iterations = 0;
+                this.maxIterations = 50;
+                this.tolerance = 0.001;
+            }
+            
+            euclideanDistance(p1, p2) {
+                return Math.sqrt(p1.reduce((sum, val, i) => sum + Math.pow(val - p2[i], 2), 0));
+            }
+            
+            initializeCentroids(data) {
+                this.centroids = [];
+                for (let i = 0; i < this.k; i++) {
+                    const randomIndex = Math.floor(Math.random() * data.length);
+                    this.centroids.push([...data[randomIndex]]);
+                }
+            }
+            
+            assignClusters(data) {
+                return data.map(point => {
+                    let minDist = Infinity;
+                    let cluster = 0;
+                    this.centroids.forEach((centroid, i) => {
+                        const dist = this.euclideanDistance(point, centroid);
+                        if (dist < minDist) {
+                            minDist = dist;
+                            cluster = i;
+                        }
+                    });
+                    return cluster;
+                });
+            }
+            
+            updateCentroids(data, clusters) {
+                const newCentroids = [];
+                for (let k = 0; k < this.k; k++) {
+                    const clusterPoints = data.filter((_, i) => clusters[i] === k);
+                    if (clusterPoints.length > 0) {
+                        const centroid = [];
+                        for (let dim = 0; dim < data[0].length; dim++) {
+                            const sum = clusterPoints.reduce((s, p) => s + p[dim], 0);
+                            centroid.push(sum / clusterPoints.length);
+                        }
+                        newCentroids.push(centroid);
+                    } else {
+                        newCentroids.push([...this.centroids[k]]);
+                    }
+                }
+                return newCentroids;
+            }
+            
+            hasConverged(oldCentroids, newCentroids) {
+                return oldCentroids.every((centroid, i) => 
+                    this.euclideanDistance(centroid, newCentroids[i]) < this.tolerance
+                );
+            }
+            
+            calculateWCSS(data, clusters) {
+                let wcss = 0;
+                for (let k = 0; k < this.k; k++) {
+                    const clusterPoints = data.filter((_, i) => clusters[i] === k);
+                    const centroid = this.centroids[k];
+                    clusterPoints.forEach(point => {
+                        wcss += Math.pow(this.euclideanDistance(point, centroid), 2);
+                    });
+                }
+                return wcss;
+            }
+            
+            fit(data) {
+                this.initializeCentroids(data);
+                this.iterations = 0;
+                
+                let converged = false;
+                while (!converged && this.iterations < this.maxIterations) {
+                    const oldCentroids = this.centroids.map(c => [...c]);
+                    this.clusters = this.assignClusters(data);
+                    this.centroids = this.updateCentroids(data, this.clusters);
+                    converged = this.hasConverged(oldCentroids, this.centroids);
+                    this.iterations++;
+                }
+                
+                const wcss = this.calculateWCSS(data, this.clusters);
+                return {
+                    centroids: this.centroids,
+                    clusters: this.clusters,
+                    iterations: this.iterations,
+                    converged,
+                    wcss
+                };
+            }
+        }
+        
+        let testData = [];
+        let currentK = 3;
+        let clusterResult = null;
+        
+        // Generate synthetic Filipino cultural data
+        function generateTestData() {
+            const archetypes = [
+                { kapwa: 0.85, bayanihan: 0.9, name: 'Traditional' },
+                { kapwa: 0.65, bayanihan: 0.7, name: 'Urban Professional' },
+                { kapwa: 0.45, bayanihan: 0.5, name: 'Modern Individual' },
+                { kapwa: 0.75, bayanihan: 0.8, name: 'Cultural Bridge' }
+            ];
+            
+            testData = [];
+            for (let i = 0; i < 100; i++) {
+                const archetype = archetypes[Math.floor(Math.random() * archetypes.length)];
+                const variation = 0.15;
+                testData.push([
+                    Math.max(0, Math.min(1, archetype.kapwa + (Math.random() - 0.5) * variation)),
+                    Math.max(0, Math.min(1, archetype.bayanihan + (Math.random() - 0.5) * variation))
+                ]);
+            }
+            
+            document.getElementById('dataCount').textContent = testData.length;
+            document.getElementById('status').textContent = `Generated ${testData.length} data points`;
+            
+            // Visualize unclustered data
+            visualizeData(testData, null, null);
+        }
+        
+        function updateK() {
+            currentK = parseInt(document.getElementById('kSlider').value);
+            document.getElementById('kValue').textContent = currentK;
+        }
+        
+        async function runClustering() {
+            if (testData.length === 0) {
+                generateTestData();
+            }
+            
+            document.getElementById('status').textContent = 'Running K-Means clustering...';
+            
+            const kmeans = new SimpleKMeans(currentK);
+            clusterResult = kmeans.fit(testData);
+            
+            // Update metrics
+            document.getElementById('iterationCount').textContent = clusterResult.iterations;
+            document.getElementById('wcssValue').textContent = clusterResult.wcss.toFixed(3);
+            
+            // Simple silhouette approximation
+            const silhouette = Math.max(0, Math.min(1, 1 - (clusterResult.wcss / (testData.length * 2))));
+            document.getElementById('silhouetteValue').textContent = silhouette.toFixed(3);
+            
+            // Visualize results
+            visualizeData(testData, clusterResult.clusters, clusterResult.centroids);
+            generateInsights(clusterResult);
+            
+            document.getElementById('status').textContent = 
+                `Clustering completed! ${clusterResult.iterations} iterations, ${clusterResult.converged ? 'converged' : 'max iterations reached'}`;
+        }
+        
+        function visualizeData(data, clusters, centroids) {
+            const svg = d3.select('#clusterChart').html('').append('svg')
+                .attr('width', '100%')
+                .attr('height', 400);
+            
+            const margin = {top: 20, right: 30, bottom: 40, left: 50};
+            const width = 750 - margin.left - margin.right;
+            const height = 360 - margin.top - margin.bottom;
+            
+            const g = svg.append('g')
+                .attr('transform', `translate(${margin.left},${margin.top})`);
+            
+            const xScale = d3.scaleLinear().domain([0, 1]).range([0, width]);
+            const yScale = d3.scaleLinear().domain([0, 1]).range([height, 0]);
+            const colorScale = d3.scaleOrdinal(d3.schemeCategory10);
+            
+            // Add axes
+            g.append('g')
+                .attr('transform', `translate(0,${height})`)
+                .call(d3.axisBottom(xScale))
+                .append('text')
+                .attr('x', width/2)
+                .attr('y', 35)
+                .style('text-anchor', 'middle')
+                .text('Kapwa Score');
+            
+            g.append('g')
+                .call(d3.axisLeft(yScale))
+                .append('text')
+                .attr('transform', 'rotate(-90)')
+                .attr('y', -35)
+                .attr('x', -height/2)
+                .style('text-anchor', 'middle')
+                .text('Bayanihan Participation');
+            
+            // Plot data points
+            g.selectAll('.data-point')
+                .data(data)
+                .enter().append('circle')
+                .attr('class', 'data-point')
+                .attr('cx', d => xScale(d[0]))
+                .attr('cy', d => yScale(d[1]))
+                .attr('r', 4)
+                .style('fill', (d, i) => clusters ? colorScale(clusters[i]) : '#999')
+                .style('opacity', 0.7)
+                .style('stroke', '#fff')
+                .style('stroke-width', 1);
+            
+            // Plot centroids if available
+            if (centroids) {
+                g.selectAll('.centroid')
+                    .data(centroids)
+                    .enter().append('circle')
+                    .attr('class', 'centroid')
+                    .attr('cx', d => xScale(d[0]))
+                    .attr('cy', d => yScale(d[1]))
+                    .attr('r', 8)
+                    .style('fill', (d, i) => colorScale(i))
+                    .style('stroke', '#000')
+                    .style('stroke-width', 3);
+            }
+        }
+        
+        function generateInsights(result) {
+            const clusterSizes = new Array(currentK).fill(0);
+            result.clusters.forEach(c => clusterSizes[c]++);
+            
+            const insights = result.centroids.map((centroid, i) => {
+                const size = clusterSizes[i];
+                const kapwa = centroid[0];
+                const bayanihan = centroid[1];
+                
+                let description = '';
+                if (kapwa > 0.8 && bayanihan > 0.8) {
+                    description = 'Traditional Filipino community leaders with strong kapwa and bayanihan values';
+                } else if (kapwa > 0.6 && bayanihan > 0.6) {
+                    description = 'Balanced cultural practitioners maintaining moderate community engagement';
+                } else if (kapwa < 0.5 || bayanihan < 0.5) {
+                    description = 'Modern individualists with lower traditional cultural adherence';
+                } else {
+                    description = 'Cultural bridge group balancing traditional and modern values';
+                }
+                
+                return `
+                    <div style="margin: 10px 0; padding: 15px; background: #f8f9fa; border-left: 4px solid ${d3.schemeCategory10[i]}; border-radius: 4px;">
+                        <strong>Cluster ${i + 1}</strong> (${size} members)<br>
+                        <em>${description}</em><br>
+                        <small>Kapwa: ${kapwa.toFixed(3)}, Bayanihan: ${bayanihan.toFixed(3)}</small>
+                    </div>
+                `;
+            }).join('');
+            
+            document.getElementById('insightsList').innerHTML = insights;
+        }
+        
+        function resetVisualization() {
+            document.getElementById('clusterChart').innerHTML = '';
+            document.getElementById('insightsList').innerHTML = 'Generate clusters to see cultural insights...';
+            document.getElementById('dataCount').textContent = '0';
+            document.getElementById('iterationCount').textContent = '0';
+            document.getElementById('wcssValue').textContent = '--';
+            document.getElementById('silhouetteValue').textContent = '--';
+            document.getElementById('status').textContent = 'Reset complete. Ready to test K-Means clustering';
+            testData = [];
+            clusterResult = null;
+        }
+        
+        // Initialize with test data
+        generateTestData();
+    </script>
+</body>
+</html>

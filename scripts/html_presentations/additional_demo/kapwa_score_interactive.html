@@ -1,0 +1,604 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KapwaScore Interactive Demo - HARAYA</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://unpkg.com/@heroicons/react@2.0.16/24/outline/index.js" type="module"></script>
+    <style>
+        .cultural-gradient {
+            background: linear-gradient(135deg, #1e40af 0%, #7c3aed 50%, #dc2626 100%);
+        }
+        .kapwa-glow {
+            box-shadow: 0 0 20px rgba(124, 58, 237, 0.3);
+        }
+        .trust-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.05); opacity: 0.8; }
+        }
+        .score-animation {
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <div class="cultural-gradient text-white p-6 shadow-lg">
+        <div class="max-w-6xl mx-auto">
+            <h1 class="text-3xl font-bold mb-2">KapwaScore Interactive Demo</h1>
+            <p class="text-blue-100">Culturally-Intelligent Trust Scoring for Filipino Communities</p>
+            <div class="mt-4 text-sm">
+                <span class="bg-white/20 px-3 py-1 rounded-full">🏆 HARAYA AI-Powered Platform</span>
+                <span class="bg-white/20 px-3 py-1 rounded-full ml-2">🤝 BPI Integration Ready</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="max-w-6xl mx-auto p-6">
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            
+            <!-- User Input Panel -->
+            <div class="bg-white rounded-xl shadow-lg p-6 border-l-4 border-purple-500">
+                <h2 class="text-2xl font-bold text-gray-800 mb-6 flex items-center">
+                    👤 Kapamilya Profile
+                    <span class="text-sm font-normal text-gray-500 ml-2">(Family Member)</span>
+                </h2>
+                
+                <!-- Personal Information -->
+                <div class="space-y-4 mb-6">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Pangalan (Name)</label>
+                        <input type="text" id="userName" placeholder="Juan Dela Cruz" 
+                               class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500 focus:border-transparent">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Edad (Age)</label>
+                            <input type="number" id="userAge" placeholder="35" min="18" max="80"
+                                   class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Rehiyon (Region)</label>
+                            <select id="userRegion" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                                <option value="metro-manila">Metro Manila</option>
+                                <option value="cebu">Cebu</option>
+                                <option value="davao">Davao</option>
+                                <option value="iloilo">Iloilo</option>
+                                <option value="baguio">Baguio</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Trabaho (Occupation)</label>
+                        <select id="userOccupation" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-purple-500">
+                            <option value="rural-entrepreneur">Rural Entrepreneur (Magsasaka)</option>
+                            <option value="urban-freelancer">Urban Freelancer</option>
+                            <option value="single-mother">Single Mother (Nanay Solo)</option>
+                            <option value="ofw-family">OFW Family Member</option>
+                            <option value="young-professional">Young Professional</option>
+                            <option value="senior-citizen">Senior Citizen</option>
+                            <option value="small-business">Small Business Owner</option>
+                            <option value="informal-worker">Informal Worker</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Cultural Factors -->
+                <div class="bg-purple-50 p-4 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-purple-800 mb-4">🏘️ Kapwa Connections</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Family Network Size (Pamilyang Network)
+                            </label>
+                            <input type="range" id="familyNetwork" min="1" max="50" value="15" 
+                                   class="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>Small (1-5)</span>
+                                <span>Large (20+)</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Bayanihan Participation Level
+                            </label>
+                            <input type="range" id="bayanihanLevel" min="1" max="10" value="7" 
+                                   class="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>Minimal</span>
+                                <span>Very Active</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">
+                                Utang na Loob History
+                            </label>
+                            <input type="range" id="utangNaLoob" min="1" max="10" value="8" 
+                                   class="w-full h-2 bg-purple-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>Few Connections</span>
+                                <span>Many Deep Bonds</span>
+                            </div>
+                        </div>
+                        
+                        <div class="mt-4 p-3 bg-white rounded border-l-4 border-purple-300">
+                            <div class="text-xs text-purple-700 font-medium mb-1">💡 Cultural Intelligence</div>
+                            <div class="text-xs text-gray-600">
+                                HARAYA recognizes that Filipino trust networks operate differently from Western credit scores. 
+                                Your Kapwa connections often predict financial reliability better than traditional metrics.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Traditional Factors -->
+                <div class="bg-blue-50 p-4 rounded-lg mb-6">
+                    <h3 class="text-lg font-semibold text-blue-800 mb-4">💰 Traditional Factors</h3>
+                    
+                    <div class="space-y-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Income</label>
+                            <select id="monthlyIncome" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500">
+                                <option value="15000">₱15,000 - ₱25,000</option>
+                                <option value="30000">₱25,000 - ₱35,000</option>
+                                <option value="45000">₱35,000 - ₱50,000</option>
+                                <option value="60000">₱50,000+</option>
+                            </select>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Employment Stability</label>
+                            <input type="range" id="employmentStability" min="1" max="10" value="6" 
+                                   class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>Irregular</span>
+                                <span>Very Stable</span>
+                            </div>
+                        </div>
+                        
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Financial History</label>
+                            <input type="range" id="financialHistory" min="1" max="10" value="5" 
+                                   class="w-full h-2 bg-blue-200 rounded-lg appearance-none cursor-pointer">
+                            <div class="flex justify-between text-xs text-gray-500 mt-1">
+                                <span>Poor</span>
+                                <span>Excellent</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <button onclick="calculateKapwaScore()" 
+                        class="w-full bg-gradient-to-r from-purple-600 to-blue-600 text-white py-3 px-6 rounded-lg font-semibold hover:from-purple-700 hover:to-blue-700 transition-all duration-300 transform hover:scale-105">
+                    Calculate KapwaScore 🧮
+                </button>
+            </div>
+
+            <!-- Results Panel -->
+            <div class="space-y-6">
+                
+                <!-- KapwaScore Display -->
+                <div class="bg-white rounded-xl shadow-lg p-6 kapwa-glow">
+                    <div class="text-center">
+                        <h2 class="text-2xl font-bold text-gray-800 mb-4">Your KapwaScore</h2>
+                        <div class="relative w-40 h-40 mx-auto mb-6">
+                            <canvas id="scoreCircle" width="160" height="160"></canvas>
+                            <div class="absolute inset-0 flex items-center justify-center">
+                                <div class="text-center">
+                                    <div id="scoreValue" class="text-4xl font-bold text-purple-600 score-animation">--</div>
+                                    <div class="text-sm text-gray-500">out of 100</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div id="scoreCategory" class="text-lg font-semibold text-gray-700 mb-2">Ready to Calculate</div>
+                        <div id="scoreMeaning" class="text-sm text-gray-600">Enter your details to see your KapwaScore</div>
+                    </div>
+                </div>
+
+                <!-- Score Breakdown -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Score Breakdown</h3>
+                    <div class="space-y-4">
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-gray-700">Cultural Factors (60%)</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div id="culturalBar" class="bg-purple-500 h-2 rounded-full score-animation" style="width: 0%"></div>
+                                </div>
+                                <span id="culturalScore" class="text-sm font-bold text-purple-600">--</span>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-center justify-between">
+                            <span class="text-sm font-medium text-gray-700">Traditional Factors (40%)</span>
+                            <div class="flex items-center">
+                                <div class="w-32 bg-gray-200 rounded-full h-2 mr-3">
+                                    <div id="traditionalBar" class="bg-blue-500 h-2 rounded-full score-animation" style="width: 0%"></div>
+                                </div>
+                                <span id="traditionalScore" class="text-sm font-bold text-blue-600">--</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- Cultural Subfactors -->
+                    <div class="mt-6 p-4 bg-purple-50 rounded-lg">
+                        <h4 class="font-semibold text-purple-800 mb-3">Cultural Factor Details</h4>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex justify-between">
+                                <span>Family Network Strength</span>
+                                <span id="familyScore" class="font-medium">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Bayanihan Participation</span>
+                                <span id="bayanihanScore" class="font-medium">--</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span>Utang na Loob Network</span>
+                                <span id="utangScore" class="font-medium">--</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Loan Recommendation -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">BPI Loan Recommendation</h3>
+                    <div id="loanRecommendation" class="space-y-4">
+                        <div class="text-center text-gray-500 py-8">
+                            Calculate your KapwaScore to see personalized BPI loan recommendations
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Explainable AI (SHAP-style) -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">
+                        🤖 AI Explanation
+                        <span class="text-sm font-normal text-gray-500">(Why this score?)</span>
+                    </h3>
+                    <div id="aiExplanation" class="space-y-3">
+                        <div class="text-center text-gray-500 py-4">
+                            Calculate your KapwaScore to see AI factor importance analysis
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Impact -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h3 class="text-xl font-bold text-gray-800 mb-4">Community Impact</h3>
+                    <div id="communityImpact" class="text-center text-gray-500 py-4">
+                        See how your financial success affects your community network
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <div class="bg-gray-800 text-white p-6 mt-12">
+        <div class="max-w-6xl mx-auto text-center">
+            <p class="text-gray-300">🚀 HARAYA AI-Powered Community Trust Scoring System</p>
+            <p class="text-sm text-gray-400 mt-2">While others translate interfaces, HARAYA translates values.</p>
+        </div>
+    </div>
+
+    <script>
+        let scoreChart = null;
+
+        function calculateKapwaScore() {
+            // Get input values
+            const familyNetwork = parseInt(document.getElementById('familyNetwork').value);
+            const bayanihanLevel = parseInt(document.getElementById('bayanihanLevel').value);
+            const utangNaLoob = parseInt(document.getElementById('utangNaLoob').value);
+            const monthlyIncome = parseInt(document.getElementById('monthlyIncome').value);
+            const employmentStability = parseInt(document.getElementById('employmentStability').value);
+            const financialHistory = parseInt(document.getElementById('financialHistory').value);
+            const occupation = document.getElementById('userOccupation').value;
+            const region = document.getElementById('userRegion').value;
+
+            // Cultural factor calculations (60% weight)
+            const familyScore = Math.min(100, (familyNetwork / 50) * 100);
+            const bayanihanScore = bayanihanLevel * 10;
+            const utangScore = utangNaLoob * 10;
+            const culturalTotal = (familyScore * 0.4 + bayanihanScore * 0.35 + utangScore * 0.25);
+
+            // Traditional factor calculations (40% weight)
+            const incomeScore = Math.min(100, (monthlyIncome / 60000) * 100);
+            const stabilityScore = employmentStability * 10;
+            const historyScore = financialHistory * 10;
+            const traditionalTotal = (incomeScore * 0.4 + stabilityScore * 0.3 + historyScore * 0.3);
+
+            // Final KapwaScore (Cultural 60%, Traditional 40%)
+            const finalScore = Math.round(culturalTotal * 0.6 + traditionalTotal * 0.4);
+
+            // Update displays
+            updateScoreDisplay(finalScore, culturalTotal, traditionalTotal);
+            updateBreakdown(familyScore, bayanihanScore, utangScore, culturalTotal, traditionalTotal);
+            updateLoanRecommendation(finalScore, occupation, monthlyIncome);
+            updateCommunityImpact(finalScore, familyNetwork, bayanihanLevel);
+            updateAIExplanation(finalScore, {
+                family: familyScore,
+                bayanihan: bayanihanScore,
+                utang: utangScore,
+                income: incomeScore,
+                stability: stabilityScore,
+                history: historyScore
+            }, occupation);
+        }
+
+        function updateScoreDisplay(score, cultural, traditional) {
+            document.getElementById('scoreValue').textContent = score;
+            
+            let category, meaning, color;
+            if (score >= 85) {
+                category = "Excellent (Napakahusay)";
+                meaning = "Strong community trust with excellent financial potential";
+                color = "#059669";
+            } else if (score >= 70) {
+                category = "Good (Mabuti)";
+                meaning = "Solid community standing with good financial prospects";
+                color = "#3B82F6";
+            } else if (score >= 55) {
+                category = "Fair (Katamtaman)";
+                meaning = "Developing trust networks with moderate financial capacity";
+                color = "#F59E0B";
+            } else {
+                category = "Needs Support (Kailangan ng Tulong)";
+                meaning = "Building community connections and financial stability";
+                color = "#EF4444";
+            }
+
+            document.getElementById('scoreCategory').textContent = category;
+            document.getElementById('scoreMeaning').textContent = meaning;
+
+            // Create/update circular chart
+            const canvas = document.getElementById('scoreCircle');
+            const ctx = canvas.getContext('2d');
+            
+            if (scoreChart) {
+                scoreChart.destroy();
+            }
+
+            scoreChart = new Chart(ctx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [score, 100 - score],
+                        backgroundColor: [color, '#E5E7EB'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    cutout: '75%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+        }
+
+        function updateBreakdown(family, bayanihan, utang, cultural, traditional) {
+            // Update progress bars
+            document.getElementById('culturalBar').style.width = cultural + '%';
+            document.getElementById('traditionalBar').style.width = traditional + '%';
+            
+            // Update scores
+            document.getElementById('culturalScore').textContent = Math.round(cultural);
+            document.getElementById('traditionalScore').textContent = Math.round(traditional);
+            document.getElementById('familyScore').textContent = Math.round(family);
+            document.getElementById('bayanihanScore').textContent = Math.round(bayanihan);
+            document.getElementById('utangScore').textContent = Math.round(utang);
+        }
+
+        function updateLoanRecommendation(score, occupation, income) {
+            const container = document.getElementById('loanRecommendation');
+            
+            let product, amount, rate, terms;
+            
+            if (score >= 75) {
+                product = "BPI NegosyoKo Business Loan";
+                amount = "₱50,000 - ₱500,000";
+                rate = "1.5% per month";
+                terms = "6-24 months";
+            } else if (score >= 60) {
+                product = "BPI InstaCashKo Personal Loan";
+                amount = "₱20,000 - ₱150,000";
+                rate = "2.0% per month";
+                terms = "6-18 months";
+            } else if (score >= 45) {
+                product = "BPI AgriNegosyoKo Micro Loan";
+                amount = "₱5,000 - ₱50,000";
+                rate = "2.5% per month";
+                terms = "3-12 months";
+            } else {
+                product = "Community Building Program";
+                amount = "Build your KapwaScore first";
+                rate = "Financial literacy training";
+                terms = "3-6 months preparation";
+            }
+
+            container.innerHTML = `
+                <div class="bg-gradient-to-r from-blue-50 to-purple-50 p-4 rounded-lg">
+                    <h4 class="font-bold text-blue-800 mb-2">${product}</h4>
+                    <div class="grid grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <span class="text-gray-600">Amount:</span>
+                            <span class="font-semibold ml-2">${amount}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Rate:</span>
+                            <span class="font-semibold ml-2">${rate}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Terms:</span>
+                            <span class="font-semibold ml-2">${terms}</span>
+                        </div>
+                        <div>
+                            <span class="text-gray-600">Status:</span>
+                            <span class="font-semibold ml-2 text-green-600">Pre-approved</span>
+                        </div>
+                    </div>
+                </div>
+            `;
+        }
+
+        function updateCommunityImpact(score, familySize, bayanihanLevel) {
+            const container = document.getElementById('communityImpact');
+            
+            const communityMembers = familySize + (bayanihanLevel * 2);
+            const impactMultiplier = score / 100;
+            const economicImpact = Math.round(communityMembers * impactMultiplier * 1000);
+
+            container.innerHTML = `
+                <div class="grid grid-cols-2 gap-4 text-sm">
+                    <div class="text-center p-3 bg-purple-50 rounded-lg">
+                        <div class="text-2xl font-bold text-purple-600">${communityMembers}</div>
+                        <div class="text-gray-600">Connected Lives</div>
+                    </div>
+                    <div class="text-center p-3 bg-blue-50 rounded-lg">
+                        <div class="text-2xl font-bold text-blue-600">₱${economicImpact.toLocaleString()}</div>
+                        <div class="text-gray-600">Community Impact</div>
+                    </div>
+                </div>
+                <p class="text-xs text-gray-500 mt-3 text-center">
+                    Your financial success creates ripple effects through your Kapwa network
+                </p>
+            `;
+        }
+
+        function updateAIExplanation(finalScore, factors, occupation) {
+            const container = document.getElementById('aiExplanation');
+            
+            // Calculate feature importance (SHAP-style values)
+            const featureImportance = [
+                {
+                    name: "Utang na Loob Network",
+                    value: factors.utang,
+                    weight: 0.6 * 0.25, // 15% of total score
+                    impact: (factors.utang - 50) * 0.15,
+                    cultural: true,
+                    explanation: "Deep reciprocal bonds predict loan repayment better than credit history"
+                },
+                {
+                    name: "Bayanihan Participation",
+                    value: factors.bayanihan,
+                    weight: 0.6 * 0.35, // 21% of total score
+                    impact: (factors.bayanihan - 50) * 0.21,
+                    cultural: true,
+                    explanation: "Community cooperation indicates collective responsibility for debts"
+                },
+                {
+                    name: "Family Network Size",
+                    value: factors.family,
+                    weight: 0.6 * 0.4, // 24% of total score
+                    impact: (factors.family - 50) * 0.24,
+                    cultural: true,
+                    explanation: "Extended family provides financial safety net and accountability"
+                },
+                {
+                    name: "Income Level",
+                    value: factors.income,
+                    weight: 0.4 * 0.4, // 16% of total score
+                    impact: (factors.income - 50) * 0.16,
+                    cultural: false,
+                    explanation: "Monthly income determines repayment capacity"
+                },
+                {
+                    name: "Employment Stability",
+                    value: factors.stability,
+                    weight: 0.4 * 0.3, // 12% of total score
+                    impact: (factors.stability - 50) * 0.12,
+                    cultural: false,
+                    explanation: "Job security affects consistent payment ability"
+                },
+                {
+                    name: "Financial History",
+                    value: factors.history,
+                    weight: 0.4 * 0.3, // 12% of total score
+                    impact: (factors.history - 50) * 0.12,
+                    cultural: false,
+                    explanation: "Past payment behavior indicates future reliability"
+                }
+            ];
+
+            // Sort by absolute impact
+            featureImportance.sort((a, b) => Math.abs(b.impact) - Math.abs(a.impact));
+
+            let html = '<div class="text-sm text-gray-600 mb-4">Most influential factors in your KapwaScore calculation:</div>';
+            
+            featureImportance.forEach((factor, index) => {
+                const barWidth = Math.abs(factor.impact * 2); // Scale for visualization
+                const isPositive = factor.impact >= 0;
+                const barColor = factor.cultural ? 
+                    (isPositive ? 'bg-purple-500' : 'bg-purple-300') : 
+                    (isPositive ? 'bg-blue-500' : 'bg-blue-300');
+                
+                html += `
+                    <div class="mb-4 p-3 ${factor.cultural ? 'bg-purple-50' : 'bg-blue-50'} rounded-lg">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="font-medium text-sm ${factor.cultural ? 'text-purple-800' : 'text-blue-800'}">
+                                ${factor.name}
+                                ${factor.cultural ? '🏘️' : '💰'}
+                            </span>
+                            <span class="text-xs font-bold ${isPositive ? 'text-green-600' : 'text-orange-600'}">
+                                ${isPositive ? '+' : ''}${factor.impact.toFixed(1)}
+                            </span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2 mb-2">
+                            <div class="${barColor} h-2 rounded-full transition-all duration-500" 
+                                 style="width: ${Math.min(100, Math.max(5, barWidth))}%"></div>
+                        </div>
+                        <div class="text-xs text-gray-600">${factor.explanation}</div>
+                    </div>
+                `;
+            });
+
+            // Add cultural intelligence insight
+            const culturalAdvantage = finalScore > 60;
+            html += `
+                <div class="mt-4 p-3 border-l-4 ${culturalAdvantage ? 'border-green-500 bg-green-50' : 'border-yellow-500 bg-yellow-50'} rounded">
+                    <div class="font-semibold text-sm mb-1">
+                        ${culturalAdvantage ? '🎯 Cultural Intelligence Advantage' : '📈 Growth Opportunity'}
+                    </div>
+                    <div class="text-xs text-gray-700">
+                        ${culturalAdvantage ? 
+                            'Your strong community connections give you an advantage over traditional credit scoring. Filipino cultural values like kapwa create financial accountability that banks are learning to recognize.' :
+                            'Strengthening your community connections could improve your score more than just increasing income. Consider joining bayanihan activities or deepening family financial discussions.'
+                        }
+                    </div>
+                </div>
+            `;
+
+            container.innerHTML = html;
+        }
+
+        // Initialize with default calculation
+        document.addEventListener('DOMContentLoaded', function() {
+            // Add event listeners for real-time updates
+            ['familyNetwork', 'bayanihanLevel', 'utangNaLoob', 'monthlyIncome', 'employmentStability', 'financialHistory'].forEach(id => {
+                document.getElementById(id).addEventListener('input', calculateKapwaScore);
+            });
+
+            ['userOccupation', 'userRegion'].forEach(id => {
+                document.getElementById(id).addEventListener('change', calculateKapwaScore);
+            });
+
+            // Initial calculation
+            calculateKapwaScore();
+        });
+    </script>
+</body>
+</html>

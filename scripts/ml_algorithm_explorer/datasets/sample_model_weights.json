@@ -1,0 +1,254 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "last_updated": "2025-08-23",
+    "description": "Sample trained model weights and behavioral pattern templates for frontend implementation",
+    "training_dataset_size": 1000,
+    "model_accuracy": 0.847
+  },
+  "neural_network_weights": {
+    "input_layer": {
+      "dimensions": [37, 64],
+      "activation": "relu",
+      "sample_weights": [
+        [0.234, -0.167, 0.445, 0.223, -0.334, 0.556, 0.112, -0.289],
+        [0.445, 0.223, -0.167, 0.334, 0.112, -0.445, 0.289, 0.556],
+        [-0.167, 0.445, 0.334, -0.223, 0.556, 0.234, -0.112, 0.289]
+      ],
+      "bias_sample": [0.1, -0.05, 0.2, 0.15, -0.1, 0.3, 0.05, -0.2]
+    },
+    "hidden_layer_1": {
+      "dimensions": [64, 32],
+      "activation": "relu",
+      "sample_weights": [
+        [0.324, -0.267, 0.445, 0.123, -0.334, 0.456, 0.212, -0.389],
+        [0.545, 0.123, -0.267, 0.434, 0.212, -0.345, 0.389, 0.656],
+        [-0.167, 0.345, 0.434, -0.123, 0.656, 0.334, -0.212, 0.489]
+      ],
+      "bias_sample": [0.2, -0.15, 0.3, 0.25, -0.2, 0.4, 0.15, -0.3]
+    },
+    "hidden_layer_2": {
+      "dimensions": [32, 16],
+      "activation": "relu", 
+      "sample_weights": [
+        [0.424, -0.367, 0.545, 0.223, -0.434, 0.556, 0.312, -0.489],
+        [0.645, 0.223, -0.367, 0.534, 0.312, -0.445, 0.489, 0.756]
+      ],
+      "bias_sample": [0.3, -0.25, 0.4, 0.35, -0.3, 0.5, 0.25, -0.4]
+    },
+    "output_layer": {
+      "dimensions": [16, 1],
+      "activation": "sigmoid",
+      "sample_weights": [[0.524, -0.467, 0.645, 0.323, -0.534, 0.656, 0.412, -0.589]],
+      "bias_sample": [0.1]
+    }
+  },
+  "random_forest_feature_importance": {
+    "transaction_velocity": 0.156,
+    "community_consistency": 0.187,
+    "payment_rhythm": 0.234,
+    "cultural_authenticity": 0.198,
+    "network_stability": 0.089,
+    "financial_prudence": 0.076,
+    "digital_footprint_coherence": 0.060
+  },
+  "isolation_forest_parameters": {
+    "contamination": 0.1,
+    "decision_scores": {
+      "normal_range": [-0.2, 0.1],
+      "suspicious_threshold": 0.2,
+      "anomaly_threshold": 0.5
+    }
+  },
+  "cultural_authenticity_baselines": {
+    "metro_manila": {
+      "baseline_score": 0.73,
+      "variation_range": [0.45, 0.92],
+      "typical_patterns": {
+        "digital_literacy_age_correlation": -0.4,
+        "family_community_correlation": 0.6,
+        "income_education_correlation": 0.7
+      }
+    },
+    "luzon_rural": {
+      "baseline_score": 0.85,
+      "variation_range": [0.65, 0.95],
+      "typical_patterns": {
+        "digital_literacy_age_correlation": -0.6,
+        "family_community_correlation": 0.8,
+        "income_education_correlation": 0.5
+      }
+    },
+    "visayas_urban": {
+      "baseline_score": 0.78,
+      "variation_range": [0.55, 0.90],
+      "typical_patterns": {
+        "digital_literacy_age_correlation": -0.45,
+        "family_community_correlation": 0.7,
+        "income_education_correlation": 0.65
+      }
+    },
+    "visayas_rural": {
+      "baseline_score": 0.88,
+      "variation_range": [0.70, 0.96],
+      "typical_patterns": {
+        "digital_literacy_age_correlation": -0.7,
+        "family_community_correlation": 0.85,
+        "income_education_correlation": 0.4
+      }
+    },
+    "mindanao_urban": {
+      "baseline_score": 0.76,
+      "variation_range": [0.50, 0.88],
+      "typical_patterns": {
+        "digital_literacy_age_correlation": -0.5,
+        "family_community_correlation": 0.75,
+        "income_education_correlation": 0.6
+      }
+    },
+    "mindanao_rural": {
+      "baseline_score": 0.87,
+      "variation_range": [0.68, 0.95],
+      "typical_patterns": {
+        "digital_literacy_age_correlation": -0.75,
+        "family_community_correlation": 0.82,
+        "income_education_correlation": 0.35
+      }
+    }
+  },
+  "behavioral_pattern_templates": {
+    "high_trust_profile": {
+      "transaction_velocity": 1.2,
+      "community_consistency": 0.85,
+      "payment_rhythm": 0.78,
+      "cultural_authenticity": 0.82,
+      "network_stability": 0.76,
+      "financial_prudence": 0.71,
+      "digital_footprint_coherence": 0.68,
+      "trustworthiness_probability": 0.87
+    },
+    "medium_trust_profile": {
+      "transaction_velocity": 0.8,
+      "community_consistency": 0.65,
+      "payment_rhythm": 0.58,
+      "cultural_authenticity": 0.62,
+      "network_stability": 0.56,
+      "financial_prudence": 0.51,
+      "digital_footprint_coherence": 0.48,
+      "trustworthiness_probability": 0.67
+    },
+    "low_trust_profile": {
+      "transaction_velocity": 0.4,
+      "community_consistency": 0.35,
+      "payment_rhythm": 0.28,
+      "cultural_authenticity": 0.32,
+      "network_stability": 0.26,
+      "financial_prudence": 0.21,
+      "digital_footprint_coherence": 0.18,
+      "trustworthiness_probability": 0.37
+    },
+    "suspicious_profile": {
+      "transaction_velocity": 3.5,
+      "community_consistency": 0.15,
+      "payment_rhythm": 0.95,
+      "cultural_authenticity": 0.12,
+      "network_stability": 0.06,
+      "financial_prudence": 0.98,
+      "digital_footprint_coherence": 0.88,
+      "trustworthiness_probability": 0.18
+    }
+  },
+  "scam_detection_templates": {
+    "identity_theft_pattern": {
+      "velocity_anomaly": 0.85,
+      "pattern_inconsistency": 0.92,
+      "network_isolation": 0.78,
+      "cultural_inauthenticity": 0.89,
+      "temporal_irregularity": 0.67,
+      "data_fabrication": 0.45,
+      "relationship_manipulation": 0.73,
+      "financial_impossibility": 0.82
+    },
+    "synthetic_identity_pattern": {
+      "velocity_anomaly": 0.23,
+      "pattern_inconsistency": 0.67,
+      "network_isolation": 0.89,
+      "cultural_inauthenticity": 0.94,
+      "temporal_irregularity": 0.34,
+      "data_fabrication": 0.91,
+      "relationship_manipulation": 0.85,
+      "financial_impossibility": 0.76
+    },
+    "application_fraud_pattern": {
+      "velocity_anomaly": 0.45,
+      "pattern_inconsistency": 0.78,
+      "network_isolation": 0.56,
+      "cultural_inauthenticity": 0.67,
+      "temporal_irregularity": 0.23,
+      "data_fabrication": 0.89,
+      "relationship_manipulation": 0.45,
+      "financial_impossibility": 0.92
+    }
+  },
+  "regional_scoring_adjustments": {
+    "metro_manila": {
+      "digital_weight_boost": 0.1,
+      "traditional_weight_reduction": 0.05,
+      "income_expectation_multiplier": 1.2,
+      "family_size_adjustment": 0.9
+    },
+    "luzon_rural": {
+      "digital_weight_reduction": 0.08,
+      "traditional_weight_boost": 0.12,
+      "income_expectation_multiplier": 0.7,
+      "family_size_adjustment": 1.1
+    },
+    "visayas_urban": {
+      "digital_weight_adjustment": 0.02,
+      "traditional_weight_adjustment": 0.03,
+      "income_expectation_multiplier": 0.9,
+      "family_size_adjustment": 1.0
+    },
+    "visayas_rural": {
+      "digital_weight_reduction": 0.12,
+      "traditional_weight_boost": 0.15,
+      "income_expectation_multiplier": 0.6,
+      "family_size_adjustment": 1.15
+    },
+    "mindanao_urban": {
+      "digital_weight_adjustment": 0.0,
+      "traditional_weight_boost": 0.05,
+      "income_expectation_multiplier": 0.85,
+      "family_size_adjustment": 1.05
+    },
+    "mindanao_rural": {
+      "digital_weight_reduction": 0.15,
+      "traditional_weight_boost": 0.18,
+      "income_expectation_multiplier": 0.55,
+      "family_size_adjustment": 1.2
+    }
+  },
+  "performance_benchmarks": {
+    "model_accuracy_by_region": {
+      "metro_manila": 0.834,
+      "luzon_rural": 0.867,
+      "visayas_urban": 0.845,
+      "visayas_rural": 0.881,
+      "mindanao_urban": 0.839,
+      "mindanao_rural": 0.875
+    },
+    "false_positive_rates": {
+      "young_entrepreneurs": 0.12,
+      "ofw_families": 0.08,
+      "seasonal_workers": 0.15,
+      "recent_migrants": 0.18,
+      "overall": 0.09
+    },
+    "processing_performance": {
+      "average_calculation_time_ms": 145,
+      "cultural_analysis_time_ms": 67,
+      "ml_prediction_time_ms": 58,
+      "scam_detection_time_ms": 34
+    }
+  }
+}

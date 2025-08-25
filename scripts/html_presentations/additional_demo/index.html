@@ -1,0 +1,472 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARAYA - KapwaScore™ Interactive Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'haraya-blue': '#1e40af',
+                        'haraya-gold': '#f59e0b',
+                        'kapwa-green': '#10b981',
+                        'bayanihan-orange': '#f97316'
+                    }
+                }
+            }
+        }
+    </script>
+</head>
+<body class="bg-gray-50 font-sans">
+    <!-- Header -->
+    <header class="bg-haraya-blue text-white shadow-lg">
+        <div class="container mx-auto px-6 py-4">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-3">
+                    <div class="w-10 h-10 bg-haraya-gold rounded-full flex items-center justify-center">
+                        <span class="text-haraya-blue font-bold text-xl">H</span>
+                    </div>
+                    <div>
+                        <h1 class="text-2xl font-bold">HARAYA</h1>
+                        <p class="text-blue-200 text-sm">Community Trust-Based Microfinance</p>
+                    </div>
+                </div>
+                <div class="text-right">
+                    <p class="text-blue-200 text-sm">Integrated with</p>
+                    <p class="font-semibold">BPI BanKo</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container mx-auto px-6 py-8">
+        <!-- Cultural Innovation Banner -->
+        <div class="bg-gradient-to-r from-kapwa-green to-bayanihan-orange text-white rounded-lg p-6 mb-8 shadow-lg">
+            <h2 class="text-3xl font-bold mb-2">KapwaScore™ - Ang Unang Cultural AI sa Pilipinas</h2>
+            <p class="text-lg opacity-90">The world's first culturally-intelligent trust scoring system powered by Filipino values of <strong>Kapwa</strong> and <strong>Bayanihan</strong></p>
+        </div>
+
+        <!-- Interactive Demo Section -->
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Left Panel: User Input -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="w-6 h-6 bg-haraya-blue rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">1</span>
+                    Persona Selection / Pagpili ng Persona
+                </h3>
+                
+                <div class="space-y-4">
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">User Category / Kategorya ng User</label>
+                        <select id="userCategory" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-haraya-blue focus:border-haraya-blue" onchange="updatePersonaData()">
+                            <option value="">Select Category / Pumili ng Kategorya</option>
+                            <option value="rural_entrepreneurs">Rural Entrepreneurs (Sari-sari Store Owners)</option>
+                            <option value="urban_gig_workers">Urban Gig Workers (Delivery Drivers)</option>
+                            <option value="agricultural_workers">Agricultural Workers (Farmers/Fishermen)</option>
+                            <option value="service_providers">Service Providers (Repair/Tutoring)</option>
+                            <option value="tech_savvy_youth">Tech-Savvy Youth (Online Sellers)</option>
+                            <option value="traditional_merchants">Traditional Merchants (Market Vendors)</option>
+                            <option value="women_led_businesses">Women-Led Businesses (Home-based)</option>
+                            <option value="seasonal_workers">Seasonal Workers (Construction/Tourism)</option>
+                        </select>
+                    </div>
+
+                    <div class="grid grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Age / Edad</label>
+                            <input type="number" id="age" min="18" max="70" value="35" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-haraya-blue focus:border-haraya-blue" onchange="calculateKapwaScore()">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-2">Monthly Income / Kita (₱)</label>
+                            <input type="number" id="income" min="5000" max="50000" value="12000" class="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-haraya-blue focus:border-haraya-blue" onchange="calculateKapwaScore()">
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Community Standing / Katayuan sa Komunidad</label>
+                        <div class="flex items-center space-x-4">
+                            <input type="range" id="communityStanding" min="0" max="100" value="75" class="flex-1" onchange="calculateKapwaScore()">
+                            <span id="communityValue" class="text-sm font-medium text-gray-600 w-12">75</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Based on bayanihan participation, church involvement, neighborhood trust</p>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Digital Literacy / Digital na Kaalaman (1-10)</label>
+                        <div class="flex items-center space-x-4">
+                            <input type="range" id="digitalLiteracy" min="1" max="10" value="5" class="flex-1" onchange="calculateKapwaScore()">
+                            <span id="digitalValue" class="text-sm font-medium text-gray-600 w-12">5</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-2">Bayanihan Network Size / Laki ng Kapamilya Network</label>
+                        <div class="flex items-center space-x-4">
+                            <input type="range" id="networkSize" min="5" max="50" value="20" class="flex-1" onchange="calculateKapwaScore()">
+                            <span id="networkValue" class="text-sm font-medium text-gray-600 w-12">20</span>
+                        </div>
+                        <p class="text-xs text-gray-500 mt-1">Number of community members who can vouch for you</p>
+                    </div>
+
+                    <button onclick="calculateKapwaScore()" class="w-full bg-haraya-blue text-white py-3 px-6 rounded-lg font-semibold hover:bg-blue-700 transition duration-200">
+                        Calculate KapwaScore™ / Kalkulahin ang KapwaScore™
+                    </button>
+                </div>
+            </div>
+
+            <!-- Right Panel: Results -->
+            <div class="bg-white rounded-lg shadow-lg p-6">
+                <h3 class="text-xl font-bold text-gray-800 mb-4 flex items-center">
+                    <span class="w-6 h-6 bg-kapwa-green rounded-full flex items-center justify-center text-white text-sm font-bold mr-3">2</span>
+                    KapwaScore™ Results
+                </h3>
+
+                <!-- Trust Score Display -->
+                <div class="text-center mb-6">
+                    <div class="relative w-32 h-32 mx-auto mb-4">
+                        <canvas id="scoreChart" width="128" height="128"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-center">
+                                <div id="trustScore" class="text-3xl font-bold text-haraya-blue">750</div>
+                                <div class="text-xs text-gray-500">/ 1000</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="riskCategory" class="text-lg font-semibold text-kapwa-green">LOW RISK</div>
+                    <div id="loanEligibility" class="text-sm text-gray-600">Eligible for ₱25,000 - ₱150,000 loan</div>
+                </div>
+
+                <!-- Score Breakdown -->
+                <div class="space-y-3 mb-6">
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span class="text-sm font-medium">Community Trust (Kapwa) - 40%</span>
+                        <span id="communityScore" class="text-sm font-bold text-kapwa-green">300/400</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span class="text-sm font-medium">Digital Behavior - 35%</span>
+                        <span id="digitalScore" class="text-sm font-bold text-blue-600">263/350</span>
+                    </div>
+                    <div class="flex justify-between items-center p-3 bg-gray-50 rounded">
+                        <span class="text-sm font-medium">Financial Patterns - 25%</span>
+                        <span id="financialScore" class="text-sm font-bold text-bayanihan-orange">187/250</span>
+                    </div>
+                </div>
+
+                <!-- Cultural Context Explanation -->
+                <div class="bg-gradient-to-r from-kapwa-green/10 to-bayanihan-orange/10 p-4 rounded-lg">
+                    <h4 class="font-semibold text-gray-800 mb-2 flex items-center">
+                        <span class="mr-2">🤝</span> Cultural Context / Kontekstong Kultural
+                    </h4>
+                    <div id="culturalExplanation" class="text-sm text-gray-700">
+                        <p>Your strong community standing reflects the Filipino value of <strong>kapwa</strong> (shared identity). Your active participation in bayanihan activities demonstrates reliability and trustworthiness valued in Filipino culture.</p>
+                    </div>
+                </div>
+
+                <!-- BPI Integration Preview -->
+                <div class="mt-6 p-4 bg-haraya-blue/10 rounded-lg border-l-4 border-haraya-blue">
+                    <h4 class="font-semibold text-haraya-blue mb-2">BPI BanKo Integration</h4>
+                    <p class="text-sm text-gray-700">Based on your KapwaScore™, you're eligible for enhanced BPI NegosyoKo loan terms with faster approval and cultural support.</p>
+                    <button class="mt-2 text-sm bg-haraya-blue text-white px-4 py-2 rounded hover:bg-blue-700 transition duration-200">
+                        Apply through BPI BanKo →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Cultural Innovation Showcase -->
+        <div class="mt-12 bg-white rounded-lg shadow-lg p-8">
+            <h3 class="text-2xl font-bold text-gray-800 mb-6 text-center">Cultural Innovation Showcase</h3>
+            
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-kapwa-green rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl">🤝</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Kapwa-Based Trust</h4>
+                    <p class="text-sm text-gray-600">Leveraging Filipino shared identity values for creditworthiness assessment</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-bayanihan-orange rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl">🏘️</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Bayanihan Networks</h4>
+                    <p class="text-sm text-gray-600">Community vouching system based on traditional Filipino mutual aid</p>
+                </div>
+                
+                <div class="text-center">
+                    <div class="w-16 h-16 bg-haraya-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                        <span class="text-white text-2xl">🧠</span>
+                    </div>
+                    <h4 class="font-semibold text-gray-800 mb-2">Cultural AI</h4>
+                    <p class="text-sm text-gray-600">First AI system designed specifically for Filipino cultural values</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Live Data Visualization -->
+        <div class="mt-8 bg-white rounded-lg shadow-lg p-6">
+            <h3 class="text-xl font-bold text-gray-800 mb-4">Live Persona Category Distribution</h3>
+            <div class="h-64">
+                <canvas id="personaChart"></canvas>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white py-8 mt-12">
+        <div class="container mx-auto px-6 text-center">
+            <div class="mb-4">
+                <h3 class="text-xl font-bold text-haraya-gold">HARAYA</h3>
+                <p class="text-gray-400">Pioneering Culturally-Intelligent Microfinance</p>
+            </div>
+            <div class="text-sm text-gray-400">
+                <p>"While others copy templates, HARAYA pioneers culturally-intelligent microfinance"</p>
+                <p class="mt-2">🤝 Built with Filipino values • 🧠 Powered by Cultural AI • 🏦 Integrated with BPI</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Persona data for different categories
+        const personaData = {
+            rural_entrepreneurs: {
+                name: "Aling Nena",
+                description: "48-year-old sari-sari store owner from Laguna",
+                baseScore: 750,
+                communityWeight: 0.85,
+                digitalWeight: 0.3,
+                financialWeight: 0.7
+            },
+            urban_gig_workers: {
+                name: "Kuya Joel",
+                description: "32-year-old delivery driver from Metro Manila",
+                baseScore: 680,
+                communityWeight: 0.6,
+                digitalWeight: 0.8,
+                financialWeight: 0.6
+            },
+            agricultural_workers: {
+                name: "Mang Ramon",
+                description: "45-year-old rice farmer from Nueva Ecija",
+                baseScore: 720,
+                communityWeight: 0.9,
+                digitalWeight: 0.2,
+                financialWeight: 0.5
+            },
+            service_providers: {
+                name: "Ate Maria",
+                description: "35-year-old tutoring service provider",
+                baseScore: 790,
+                communityWeight: 0.8,
+                digitalWeight: 0.6,
+                financialWeight: 0.8
+            },
+            tech_savvy_youth: {
+                name: "Gian",
+                description: "24-year-old online seller from Cebu",
+                baseScore: 710,
+                communityWeight: 0.6,
+                digitalWeight: 0.9,
+                financialWeight: 0.7
+            },
+            traditional_merchants: {
+                name: "Tatay Ben",
+                description: "58-year-old market vendor",
+                baseScore: 820,
+                communityWeight: 0.95,
+                digitalWeight: 0.3,
+                financialWeight: 0.9
+            },
+            women_led_businesses: {
+                name: "Nanay Carmen",
+                description: "36-year-old home-based food business",
+                baseScore: 780,
+                communityWeight: 0.9,
+                digitalWeight: 0.5,
+                financialWeight: 0.8
+            },
+            seasonal_workers: {
+                name: "Kuya Rico",
+                description: "29-year-old construction worker",
+                baseScore: 650,
+                communityWeight: 0.6,
+                digitalWeight: 0.4,
+                financialWeight: 0.4
+            }
+        };
+
+        let scoreChart, personaChart;
+
+        // Initialize charts
+        function initializeCharts() {
+            // Score chart (doughnut)
+            const scoreCtx = document.getElementById('scoreChart').getContext('2d');
+            scoreChart = new Chart(scoreCtx, {
+                type: 'doughnut',
+                data: {
+                    datasets: [{
+                        data: [750, 250],
+                        backgroundColor: ['#10b981', '#e5e7eb'],
+                        borderWidth: 0
+                    }]
+                },
+                options: {
+                    responsive: false,
+                    maintainAspectRatio: false,
+                    cutout: '70%',
+                    plugins: {
+                        legend: { display: false },
+                        tooltip: { enabled: false }
+                    }
+                }
+            });
+
+            // Persona distribution chart
+            const personaCtx = document.getElementById('personaChart').getContext('2d');
+            personaChart = new Chart(personaCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Rural\nEntrepreneurs', 'Urban Gig\nWorkers', 'Agricultural\nWorkers', 'Service\nProviders', 'Tech-Savvy\nYouth', 'Traditional\nMerchants', 'Women-Led\nBusinesses', 'Seasonal\nWorkers'],
+                    datasets: [{
+                        label: 'Average KapwaScore',
+                        data: [750, 680, 720, 790, 710, 820, 780, 650],
+                        backgroundColor: [
+                            '#10b981', '#3b82f6', '#f59e0b', '#8b5cf6',
+                            '#ef4444', '#06b6d4', '#f97316', '#6b7280'
+                        ],
+                        borderRadius: 4
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 1000,
+                            title: { display: true, text: 'KapwaScore (0-1000)' }
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    }
+                }
+            });
+        }
+
+        // Update persona data when category changes
+        function updatePersonaData() {
+            const category = document.getElementById('userCategory').value;
+            if (category && personaData[category]) {
+                const persona = personaData[category];
+                // Auto-fill some fields based on persona
+                document.getElementById('age').value = Math.floor(Math.random() * 20) + 25;
+                document.getElementById('income').value = Math.floor(persona.baseScore * 20);
+                document.getElementById('communityStanding').value = Math.floor(persona.communityWeight * 100);
+                document.getElementById('digitalLiteracy').value = Math.floor(persona.digitalWeight * 10);
+                document.getElementById('networkSize').value = Math.floor(15 + persona.communityWeight * 20);
+                
+                calculateKapwaScore();
+            }
+        }
+
+        // Calculate KapwaScore based on inputs
+        function calculateKapwaScore() {
+            const age = parseInt(document.getElementById('age').value) || 35;
+            const income = parseInt(document.getElementById('income').value) || 12000;
+            const communityStanding = parseInt(document.getElementById('communityStanding').value) || 75;
+            const digitalLiteracy = parseInt(document.getElementById('digitalLiteracy').value) || 5;
+            const networkSize = parseInt(document.getElementById('networkSize').value) || 20;
+            const category = document.getElementById('userCategory').value;
+
+            // Update slider displays
+            document.getElementById('communityValue').textContent = communityStanding;
+            document.getElementById('digitalValue').textContent = digitalLiteracy;
+            document.getElementById('networkValue').textContent = networkSize;
+
+            // Calculate component scores
+            const communityScore = Math.floor((communityStanding * 3 + networkSize * 5) / 2);
+            const digitalScore = Math.floor(digitalLiteracy * 35);
+            const financialScore = Math.floor((income / 500) + (age > 40 ? 50 : 30));
+
+            // Calculate total score
+            const totalScore = Math.min(1000, communityScore + digitalScore + financialScore);
+
+            // Update displays
+            document.getElementById('trustScore').textContent = totalScore;
+            document.getElementById('communityScore').textContent = `${communityScore}/400`;
+            document.getElementById('digitalScore').textContent = `${digitalScore}/350`;
+            document.getElementById('financialScore').textContent = `${financialScore}/250`;
+
+            // Determine risk category
+            let riskCategory, riskColor, loanRange;
+            if (totalScore >= 750) {
+                riskCategory = "LOW RISK";
+                riskColor = "#10b981";
+                loanRange = "₱25,000 - ₱150,000";
+            } else if (totalScore >= 600) {
+                riskCategory = "MEDIUM RISK";
+                riskColor = "#f59e0b";
+                loanRange = "₱10,000 - ₱75,000";
+            } else {
+                riskCategory = "HIGH RISK";
+                riskColor = "#ef4444";
+                loanRange = "₱5,000 - ₱25,000";
+            }
+
+            document.getElementById('riskCategory').textContent = riskCategory;
+            document.getElementById('riskCategory').style.color = riskColor;
+            document.getElementById('loanEligibility').textContent = `Eligible for ${loanRange} loan`;
+
+            // Update cultural explanation
+            updateCulturalExplanation(communityStanding, networkSize, category);
+
+            // Update score chart
+            if (scoreChart) {
+                scoreChart.data.datasets[0].data = [totalScore, 1000 - totalScore];
+                scoreChart.data.datasets[0].backgroundColor = [riskColor, '#e5e7eb'];
+                scoreChart.update();
+            }
+        }
+
+        // Update cultural explanation based on inputs
+        function updateCulturalExplanation(communityStanding, networkSize, category) {
+            let explanation = "";
+            
+            if (communityStanding >= 80) {
+                explanation += "Your strong community standing reflects the Filipino value of <strong>kapwa</strong> (shared identity). ";
+            } else if (communityStanding >= 60) {
+                explanation += "Your good community relationships show understanding of <strong>kapwa</strong> principles. ";
+            } else {
+                explanation += "Building stronger community connections can improve your <strong>kapwa</strong> score. ";
+            }
+
+            if (networkSize >= 25) {
+                explanation += "Your large bayanihan network demonstrates the Filipino spirit of community support and mutual aid.";
+            } else if (networkSize >= 15) {
+                explanation += "Your bayanihan network shows good community integration.";
+            } else {
+                explanation += "Expanding your community network through bayanihan activities can strengthen your trust score.";
+            }
+
+            if (category && personaData[category]) {
+                explanation += ` As a ${personaData[category].description}, your cultural context is valued in our assessment.`;
+            }
+
+            document.getElementById('culturalExplanation').innerHTML = `<p>${explanation}</p>`;
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeCharts();
+            calculateKapwaScore();
+        });
+    </script>
+</body>
+</html>

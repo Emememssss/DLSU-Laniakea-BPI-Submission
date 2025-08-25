@@ -1,0 +1,292 @@
+[
+  {
+    "id": "maria_santos_sari_sari",
+    "name": "Maria Santos",
+    "age": 42,
+    "occupation": "Sari-Sari Store Owner",
+    "location": "Laguna",
+    "region": "Region IV-A (CALABARZON)",
+    "story": "Maria runs a small sari-sari store in her barangay and wants to expand her inventory for better community service. She has been serving her neighbors for 8 years and is known for her trustworthiness and community involvement.",
+    "demographics": {
+      "monthly_income": 22000,
+      "income_stability": "moderate",
+      "education_level": "high_school_graduate",
+      "family_size": 5,
+      "homeownership": "owned",
+      "business_years": 8
+    },
+    "cultural_profile": {
+      "kapwa_network_strength": 0.92,
+      "bayanihan_participation": 0.88,
+      "utang_na_loob_fulfillment": 0.95,
+      "family_support_system": 0.94,
+      "community_standing": 0.89
+    },
+    "financial_behavior": {
+      "savings_discipline": 0.75,
+      "bill_payment_consistency": 0.92,
+      "loan_repayment_history": "excellent",
+      "emergency_fund_months": 2.5,
+      "business_growth_mindset": 0.85
+    },
+    "digital_profile": {
+      "smartphone_ownership": true,
+      "digital_literacy_score": 6,
+      "mobile_banking_usage": "regular",
+      "social_media_activity": "moderate",
+      "online_learning_participation": "occasional"
+    },
+    "community_network": {
+      "family_connections": 12,
+      "supplier_relationships": 6,
+      "customer_base_size": 150,
+      "barangay_involvement": "active",
+      "church_participation": "regular",
+      "parent_group_member": true
+    },
+    "baseKapwaScore": 785,
+    "risk_category": "low",
+    "loan_eligibility": {
+      "amount_range": "₱25,000 - ₱100,000",
+      "approval_probability": 0.92,
+      "interest_rate_tier": "preferred"
+    },
+    "bpi_integration": {
+      "suitable_products": ["NegosyoKo Business Loan", "InstaCashKo Credit Line"],
+      "enhancement_potential": "high",
+      "community_guarantee": true
+    }
+  },
+  {
+    "id": "juan_dela_cruz_driver",
+    "name": "Juan Dela Cruz",
+    "age": 29,
+    "occupation": "Grab Driver",
+    "location": "Quezon City",
+    "region": "NCR",
+    "story": "Juan is a full-time Grab driver who wants to purchase his own vehicle to increase his earnings. He currently rents and dreams of owning his car to build long-term wealth.",
+    "demographics": {
+      "monthly_income": 18000,
+      "income_stability": "variable",
+      "education_level": "college_undergraduate",
+      "family_size": 3,
+      "homeownership": "rented",
+      "work_years": 4
+    },
+    "cultural_profile": {
+      "kapwa_network_strength": 0.78,
+      "bayanihan_participation": 0.65,
+      "utang_na_loob_fulfillment": 0.82,
+      "family_support_system": 0.88,
+      "community_standing": 0.71
+    },
+    "financial_behavior": {
+      "savings_discipline": 0.68,
+      "bill_payment_consistency": 0.85,
+      "loan_repayment_history": "good",
+      "emergency_fund_months": 1.2,
+      "business_growth_mindset": 0.91
+    },
+    "digital_profile": {
+      "smartphone_ownership": true,
+      "digital_literacy_score": 8,
+      "mobile_banking_usage": "frequent",
+      "social_media_activity": "high",
+      "online_learning_participation": "active"
+    },
+    "community_network": {
+      "family_connections": 8,
+      "driver_community_ties": 25,
+      "customer_base_size": 0,
+      "barangay_involvement": "minimal",
+      "church_participation": "occasional",
+      "professional_group_member": true
+    },
+    "baseKapwaScore": 682,
+    "risk_category": "medium",
+    "loan_eligibility": {
+      "amount_range": "₱15,000 - ₱75,000",
+      "approval_probability": 0.78,
+      "interest_rate_tier": "standard"
+    },
+    "bpi_integration": {
+      "suitable_products": ["Auto Loan", "InstaCashKo Credit Line"],
+      "enhancement_potential": "medium",
+      "community_guarantee": false
+    }
+  },
+  {
+    "id": "carmen_reyes_seamstress",
+    "name": "Carmen Reyes",
+    "age": 36,
+    "occupation": "Home-based Seamstress",
+    "location": "Iloilo",
+    "region": "Region VI (Western Visayas)",
+    "story": "Carmen runs a home-based tailoring business and wants to upgrade her equipment to accept more orders. She's known for her quality work and has many repeat customers.",
+    "demographics": {
+      "monthly_income": 16000,
+      "income_stability": "seasonal",
+      "education_level": "vocational_graduate",
+      "family_size": 4,
+      "homeownership": "owned",
+      "business_years": 12
+    },
+    "cultural_profile": {
+      "kapwa_network_strength": 0.94,
+      "bayanihan_participation": 0.92,
+      "utang_na_loob_fulfillment": 0.96,
+      "family_support_system": 0.97,
+      "community_standing": 0.93
+    },
+    "financial_behavior": {
+      "savings_discipline": 0.82,
+      "bill_payment_consistency": 0.89,
+      "loan_repayment_history": "excellent",
+      "emergency_fund_months": 3.1,
+      "business_growth_mindset": 0.78
+    },
+    "digital_profile": {
+      "smartphone_ownership": true,
+      "digital_literacy_score": 5,
+      "mobile_banking_usage": "occasional",
+      "social_media_activity": "moderate",
+      "online_learning_participation": "rare"
+    },
+    "community_network": {
+      "family_connections": 18,
+      "customer_base_size": 85,
+      "supplier_relationships": 4,
+      "barangay_involvement": "very_active",
+      "church_participation": "regular",
+      "women_group_leader": true
+    },
+    "baseKapwaScore": 823,
+    "risk_category": "low",
+    "loan_eligibility": {
+      "amount_range": "₱30,000 - ₱120,000",
+      "approval_probability": 0.95,
+      "interest_rate_tier": "preferred"
+    },
+    "bpi_integration": {
+      "suitable_products": ["NegosyoKo Business Loan", "Ka-Negosyo Loan"],
+      "enhancement_potential": "high",
+      "community_guarantee": true
+    }
+  },
+  {
+    "id": "ricardo_santos_construction",
+    "name": "Ricardo Santos",
+    "age": 34,
+    "occupation": "Construction Worker",
+    "location": "Cebu",
+    "region": "Region VII (Central Visayas)",
+    "story": "Ricardo works in construction and wants to start his own contracting business. His work is seasonal, but he has strong community connections and proven skills.",
+    "demographics": {
+      "monthly_income": 15000,
+      "income_stability": "seasonal",
+      "education_level": "high_school_graduate",
+      "family_size": 4,
+      "homeownership": "family_owned",
+      "work_years": 15
+    },
+    "cultural_profile": {
+      "kapwa_network_strength": 0.86,
+      "bayanihan_participation": 0.91,
+      "utang_na_loob_fulfillment": 0.88,
+      "family_support_system": 0.92,
+      "community_standing": 0.84
+    },
+    "financial_behavior": {
+      "savings_discipline": 0.63,
+      "bill_payment_consistency": 0.76,
+      "loan_repayment_history": "good",
+      "emergency_fund_months": 0.8,
+      "business_growth_mindset": 0.89
+    },
+    "digital_profile": {
+      "smartphone_ownership": true,
+      "digital_literacy_score": 4,
+      "mobile_banking_usage": "rare",
+      "social_media_activity": "low",
+      "online_learning_participation": "none"
+    },
+    "community_network": {
+      "family_connections": 22,
+      "work_crew_relationships": 12,
+      "contractor_connections": 8,
+      "barangay_involvement": "active",
+      "church_participation": "regular",
+      "cooperative_member": true
+    },
+    "baseKapwaScore": 651,
+    "risk_category": "medium",
+    "loan_eligibility": {
+      "amount_range": "₱10,000 - ₱50,000",
+      "approval_probability": 0.71,
+      "interest_rate_tier": "standard"
+    },
+    "bpi_integration": {
+      "suitable_products": ["Ka-Negosyo Loan", "InstaCashKo Credit Line"],
+      "enhancement_potential": "medium",
+      "community_guarantee": true
+    }
+  },
+  {
+    "id": "josephine_cruz_online_seller",
+    "name": "Josephine Cruz",
+    "age": 24,
+    "occupation": "Online Seller",
+    "location": "Davao",
+    "region": "Region XI (Davao Region)",
+    "story": "Josephine sells handmade accessories online and wants to expand her inventory and marketing reach. She's tech-savvy but new to formal business financing.",
+    "demographics": {
+      "monthly_income": 14000,
+      "income_stability": "variable",
+      "education_level": "college_graduate",
+      "family_size": 3,
+      "homeownership": "family_owned",
+      "business_years": 2
+    },
+    "cultural_profile": {
+      "kapwa_network_strength": 0.72,
+      "bayanihan_participation": 0.58,
+      "utang_na_loob_fulfillment": 0.79,
+      "family_support_system": 0.91,
+      "community_standing": 0.68
+    },
+    "financial_behavior": {
+      "savings_discipline": 0.71,
+      "bill_payment_consistency": 0.88,
+      "loan_repayment_history": "limited",
+      "emergency_fund_months": 1.5,
+      "business_growth_mindset": 0.95
+    },
+    "digital_profile": {
+      "smartphone_ownership": true,
+      "digital_literacy_score": 9,
+      "mobile_banking_usage": "frequent",
+      "social_media_activity": "very_high",
+      "online_learning_participation": "very_active"
+    },
+    "community_network": {
+      "family_connections": 14,
+      "online_customer_base": 300,
+      "supplier_relationships": 8,
+      "barangay_involvement": "minimal",
+      "church_participation": "occasional",
+      "entrepreneur_group_member": true
+    },
+    "baseKapwaScore": 716,
+    "risk_category": "medium",
+    "loan_eligibility": {
+      "amount_range": "₱20,000 - ₱80,000",
+      "approval_probability": 0.82,
+      "interest_rate_tier": "standard"
+    },
+    "bpi_integration": {
+      "suitable_products": ["NegosyoKo Business Loan", "Digital Business Loan"],
+      "enhancement_potential": "high",
+      "community_guarantee": false
+    }
+  }
+]

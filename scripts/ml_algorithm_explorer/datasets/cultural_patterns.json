@@ -1,0 +1,279 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "last_updated": "2025-08-23",
+    "description": "Filipino cultural intelligence patterns and regional variations for adaptive scoring"
+  },
+  "base_cultural_weights": {
+    "kapwa_strength": 0.25,
+    "bayanihan_authenticity": 0.25,
+    "utang_na_loob_depth": 0.20,
+    "community_validation": 0.15,
+    "family_centrality": 0.10,
+    "regional_cultural_fit": 0.05
+  },
+  "regional_cultural_patterns": {
+    "metro_manila": {
+      "individualism_factor": 0.3,
+      "digital_integration": 0.8,
+      "traditional_values_strength": 0.6,
+      "economic_mobility_emphasis": 0.7,
+      "expected_income_range": [15000, 35000],
+      "typical_businesses": ["online_seller", "freelancer", "delivery_driver"],
+      "cultural_characteristics": {
+        "urbanization_level": "high",
+        "technology_adoption": "high",
+        "family_structure_variation": "moderate"
+      }
+    },
+    "metro_cebu": {
+      "individualism_factor": 0.2,
+      "digital_integration": 0.6,
+      "traditional_values_strength": 0.7,
+      "economic_mobility_emphasis": 0.6,
+      "expected_income_range": [12000, 28000],
+      "typical_businesses": ["online_seller", "retail_shop", "freelancer"],
+      "cultural_characteristics": {
+        "urbanization_level": "high",
+        "technology_adoption": "moderate",
+        "family_structure_variation": "low"
+      }
+    },
+    "metro_davao": {
+      "individualism_factor": 0.25,
+      "digital_integration": 0.5,
+      "traditional_values_strength": 0.8,
+      "economic_mobility_emphasis": 0.5,
+      "expected_income_range": [10000, 25000],
+      "typical_businesses": ["retail_shop", "freelancer", "delivery_driver"],
+      "cultural_characteristics": {
+        "urbanization_level": "moderate",
+        "technology_adoption": "moderate",
+        "family_structure_variation": "low"
+      }
+    },
+    "luzon_rural": {
+      "individualism_factor": 0.1,
+      "digital_integration": 0.4,
+      "traditional_values_strength": 0.9,
+      "economic_mobility_emphasis": 0.4,
+      "expected_income_range": [8000, 18000],
+      "typical_businesses": ["sari_sari_store", "rice_farmer", "kakanin_seller"],
+      "cultural_characteristics": {
+        "urbanization_level": "low",
+        "technology_adoption": "low",
+        "family_structure_variation": "very_low"
+      }
+    },
+    "visayas_urban": {
+      "individualism_factor": 0.2,
+      "digital_integration": 0.6,
+      "traditional_values_strength": 0.7,
+      "economic_mobility_emphasis": 0.6,
+      "expected_income_range": [10000, 24000],
+      "typical_businesses": ["retail_shop", "online_seller", "freelancer"],
+      "cultural_characteristics": {
+        "urbanization_level": "moderate",
+        "technology_adoption": "moderate",
+        "family_structure_variation": "low"
+      }
+    },
+    "visayas_rural": {
+      "individualism_factor": 0.1,
+      "digital_integration": 0.3,
+      "traditional_values_strength": 0.95,
+      "economic_mobility_emphasis": 0.3,
+      "expected_income_range": [7000, 16000],
+      "typical_businesses": ["fisherman", "sari_sari_store", "handicrafts"],
+      "cultural_characteristics": {
+        "urbanization_level": "low",
+        "technology_adoption": "very_low",
+        "family_structure_variation": "very_low"
+      }
+    },
+    "mindanao_urban": {
+      "individualism_factor": 0.25,
+      "digital_integration": 0.5,
+      "traditional_values_strength": 0.8,
+      "economic_mobility_emphasis": 0.5,
+      "expected_income_range": [9000, 22000],
+      "typical_businesses": ["retail_shop", "online_seller", "delivery_driver"],
+      "cultural_characteristics": {
+        "urbanization_level": "moderate",
+        "technology_adoption": "moderate",
+        "family_structure_variation": "low"
+      }
+    },
+    "mindanao_rural": {
+      "individualism_factor": 0.1,
+      "digital_integration": 0.2,
+      "traditional_values_strength": 0.9,
+      "economic_mobility_emphasis": 0.3,
+      "expected_income_range": [6000, 15000],
+      "typical_businesses": ["crop_farmer", "sari_sari_store", "handicrafts"],
+      "cultural_characteristics": {
+        "urbanization_level": "low",
+        "technology_adoption": "very_low",
+        "family_structure_variation": "very_low"
+      }
+    }
+  },
+  "generational_patterns": {
+    "gen_z": {
+      "age_range": [18, 27],
+      "digital_nativity": 0.9,
+      "traditional_adherence": 0.5,
+      "economic_urgency": 0.8,
+      "cultural_adaptation_rate": 0.9,
+      "family_value_weight": 0.6,
+      "technology_comfort": 0.95
+    },
+    "millennial": {
+      "age_range": [28, 42],
+      "digital_nativity": 0.7,
+      "traditional_adherence": 0.6,
+      "economic_urgency": 0.9,
+      "cultural_adaptation_rate": 0.7,
+      "family_value_weight": 0.8,
+      "technology_comfort": 0.8
+    },
+    "gen_x": {
+      "age_range": [43, 57],
+      "digital_nativity": 0.4,
+      "traditional_adherence": 0.8,
+      "economic_urgency": 0.7,
+      "cultural_adaptation_rate": 0.5,
+      "family_value_weight": 0.9,
+      "technology_comfort": 0.6
+    },
+    "boomer": {
+      "age_range": [58, 75],
+      "digital_nativity": 0.2,
+      "traditional_adherence": 0.9,
+      "economic_urgency": 0.4,
+      "cultural_adaptation_rate": 0.3,
+      "family_value_weight": 0.95,
+      "technology_comfort": 0.4
+    }
+  },
+  "cultural_value_indicators": {
+    "kapwa": {
+      "description": "Shared identity and collective consciousness",
+      "measurement_factors": ["family_size", "community_standing_score", "location_stability_score"],
+      "weight_factors": {
+        "family_size_normalization": 6.0,
+        "community_weight": 0.4,
+        "stability_weight": 0.2
+      }
+    },
+    "bayanihan": {
+      "description": "Community spirit and mutual assistance",
+      "measurement_factors": ["mobile_money_transactions_per_month", "community_standing_score"],
+      "weight_factors": {
+        "transaction_normalization": 30.0,
+        "community_weight": 0.6,
+        "participation_weight": 0.4
+      }
+    },
+    "utang_na_loob": {
+      "description": "Debt of gratitude and reciprocity",
+      "measurement_factors": ["bill_payment_consistency", "location_stability_score", "age"],
+      "weight_factors": {
+        "payment_weight": 0.5,
+        "stability_weight": 0.3,
+        "age_normalization": 42.0,
+        "age_weight": 0.2
+      }
+    },
+    "pakikipagkunware": {
+      "description": "Accommodation and social harmony",
+      "measurement_factors": ["bill_payment_consistency", "community_standing_score"],
+      "weight_factors": {
+        "payment_weight": 0.5,
+        "community_weight": 0.5
+      }
+    },
+    "hiya": {
+      "description": "Shame, propriety, and social sensitivity",
+      "measurement_factors": ["community_standing_score", "family_size"],
+      "weight_factors": {
+        "community_weight": 0.7,
+        "family_normalization": 6.0,
+        "family_weight": 0.3
+      }
+    },
+    "amor_propio": {
+      "description": "Self-esteem and personal dignity",
+      "measurement_factors": ["education_level", "monthly_income", "digital_literacy_score"],
+      "weight_factors": {
+        "education_normalization": 5.0,
+        "income_normalization": 25000,
+        "digital_normalization": 10.0,
+        "education_weight": 0.4,
+        "income_weight": 0.4,
+        "digital_weight": 0.2
+      }
+    }
+  },
+  "adaptive_weight_adjustments": {
+    "regional_authenticity_thresholds": {
+      "high_authenticity": 0.8,
+      "medium_authenticity": 0.5,
+      "low_authenticity": 0.3
+    },
+    "weight_adjustment_factors": {
+      "high_regional_auth_boost": {
+        "bayanihan_authenticity": 0.05,
+        "utang_na_loob_depth": 0.03
+      },
+      "low_regional_auth_penalty": {
+        "kapwa_strength": -0.03,
+        "community_validation": -0.02
+      },
+      "young_generation_adjustment": {
+        "regional_cultural_fit": 0.03,
+        "family_centrality": -0.02
+      },
+      "elder_generation_adjustment": {
+        "utang_na_loob_depth": 0.03,
+        "community_validation": 0.02
+      },
+      "high_integration_boost": {
+        "community_validation": 0.04,
+        "bayanihan_authenticity": 0.03
+      },
+      "low_integration_penalty": {
+        "community_validation": -0.05,
+        "kapwa_strength": -0.02
+      }
+    }
+  },
+  "socioeconomic_consistency": {
+    "education_income_expectations": {
+      "1": [8000, 15000],
+      "2": [10000, 18000],
+      "3": [12000, 22000],
+      "4": [15000, 30000],
+      "5": [20000, 40000]
+    },
+    "business_income_norms": {
+      "sari_sari_store": [8000, 18000],
+      "online_seller": [10000, 35000],
+      "freelancer": [12000, 40000],
+      "delivery_driver": [12000, 20000],
+      "rice_farmer": [7000, 15000],
+      "fisherman": [8000, 16000],
+      "construction": [10000, 18000],
+      "retail_shop": [9000, 20000],
+      "kakanin_seller": [6000, 12000],
+      "handicrafts": [5000, 15000]
+    }
+  },
+  "cultural_authenticity_correlations": {
+    "family_size_income_correlation": 0.3,
+    "age_digital_literacy_correlation": -0.4,
+    "community_standing_stability_correlation": 0.6,
+    "education_income_correlation": 0.7,
+    "region_business_correlation": 0.8
+  }
+}

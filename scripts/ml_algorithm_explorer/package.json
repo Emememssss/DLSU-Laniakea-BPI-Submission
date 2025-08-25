@@ -1,0 +1,60 @@
+{
+  "name": "haraya-ml-algorithm-explorer",
+  "version": "1.0.0",
+  "description": "HARAYA ML Algorithm Explorer - Interactive Cultural Intelligence Platform",
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "dev": "python3 -m http.server 8080",
+    "build": "echo 'Static build - no build process needed'",
+    "lint": "eslint assets/js/**/*.js",
+    "validate": "npm test && npm run lint"
+  },
+  "keywords": [
+    "machine-learning",
+    "cultural-intelligence",
+    "fintech",
+    "javascript",
+    "tensorflow",
+    "filipino-culture"
+  ],
+  "author": "HARAYA Team",
+  "license": "MIT",
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-environment-jsdom": "^29.7.0",
+    "eslint": "^8.57.0",
+    "eslint-config-standard": "^17.1.0",
+    "@testing-library/jest-dom": "^6.1.5",
+    "@babel/preset-env": "^7.23.0",
+    "babel-jest": "^29.7.0"
+  },
+  "jest": {
+    "testEnvironment": "jsdom",
+    "setupFilesAfterEnv": [
+      "<rootDir>/tests/setupTests.js"
+    ],
+    "coverageDirectory": "coverage",
+    "collectCoverageFrom": [
+      "assets/js/**/*.js",
+      "!assets/js/**/*.test.js",
+      "!assets/js/**/*.spec.js"
+    ],
+    "testMatch": [
+      "<rootDir>/tests/**/*.test.js",
+      "<rootDir>/tests/**/*.spec.js"
+    ],
+    "coverageThreshold": {
+      "global": {
+        "branches": 80,
+        "functions": 80,
+        "lines": 80,
+        "statements": 80
+      }
+    }
+  },
+  "babel": {
+    "presets": [["@babel/preset-env", { "targets": { "node": "current" } }]]
+  }
+}

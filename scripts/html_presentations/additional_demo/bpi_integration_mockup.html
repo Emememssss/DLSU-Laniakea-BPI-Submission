@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BPI BanKo + HARAYA Integration Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        .bpi-gradient {
+            background: linear-gradient(135deg, #003366 0%, #0066cc 50%, #004499 100%);
+        }
+        .haraya-gradient {
+            background: linear-gradient(135deg, #7c3aed 0%, #1e40af 50%, #dc2626 100%);
+        }
+        .integration-glow {
+            box-shadow: 0 0 30px rgba(0, 51, 102, 0.3);
+        }
+        .transition-smooth {
+            transition: all 0.3s ease-in-out;
+        }
+        .api-pulse {
+            animation: pulse 2s ease-in-out infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        .mock-phone {
+            width: 300px;
+            height: 600px;
+            border: 20px solid #333;
+            border-radius: 40px;
+            overflow: hidden;
+            background: #000;
+        }
+        .phone-screen {
+            width: 100%;
+            height: 100%;
+            background: #fff;
+            overflow-y: auto;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <!-- Header -->
+    <div class="bg-white shadow-lg">
+        <div class="max-w-7xl mx-auto px-4 py-6">
+            <div class="flex items-center justify-between">
+                <div class="flex items-center space-x-4">
+                    <div class="flex items-center">
+                        <div class="bpi-gradient text-white px-4 py-2 rounded-lg font-bold text-lg">
+                            BPI BanKo
+                        </div>
+                        <div class="mx-4 text-2xl">🤝</div>
+                        <div class="haraya-gradient text-white px-4 py-2 rounded-lg font-bold text-lg">
+                            HARAYA
+                        </div>
+                    </div>
+                </div>
+                <div class="text-sm text-gray-600">
+                    <span class="bg-green-100 text-green-800 px-3 py-1 rounded-full">🟢 Live Integration</span>
+                </div>
+            </div>
+            <p class="text-gray-600 mt-2">Real-time demonstration of HARAYA KapwaScore enhancement to BPI BanKo lending products</p>
+        </div>
+    </div>
+
+    <!-- Main Demo Area -->
+    <div class="max-w-7xl mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            
+            <!-- Mobile App Mockup -->
+            <div class="lg:col-span-1">
+                <div class="text-center mb-6">
+                    <h2 class="text-xl font-bold text-gray-800 mb-2">BPI BanKo Mobile App</h2>
+                    <p class="text-sm text-gray-600">Enhanced with HARAYA KapwaScore</p>
+                </div>
+                
+                <div class="flex justify-center">
+                    <div class="mock-phone integration-glow">
+                        <div class="phone-screen" id="phoneScreen">
+                            <!-- BPI BanKo App Interface -->
+                            <div class="bg-blue-600 text-white p-4">
+                                <div class="flex items-center justify-between">
+                                    <h1 class="font-bold text-lg">BPI BanKo</h1>
+                                    <div class="text-sm">🔔</div>
+                                </div>
+                                <p class="text-sm text-blue-100 mt-1">Good morning, Maria!</p>
+                            </div>
+                            
+                            <div class="p-4 space-y-4">
+                                <!-- Account Summary -->
+                                <div class="bg-gray-50 rounded-lg p-4">
+                                    <h3 class="font-semibold text-gray-800 mb-2">Account Balance</h3>
+                                    <div class="text-2xl font-bold text-green-600">₱15,850.00</div>
+                                    <div class="text-sm text-gray-500">Savings Account • 1234-5678</div>
+                                </div>
+                                
+                                <!-- HARAYA Integration Banner -->
+                                <div class="bg-gradient-to-r from-purple-500 to-blue-500 text-white rounded-lg p-4">
+                                    <div class="flex items-center justify-between">
+                                        <div>
+                                            <div class="flex items-center">
+                                                <span class="text-lg font-bold">KapwaScore</span>
+                                                <span class="ml-2 text-xs bg-white/20 px-2 py-1 rounded">NEW</span>
+                                            </div>
+                                            <div class="text-2xl font-bold mt-1">850</div>
+                                            <div class="text-sm text-purple-100">Excellent Community Trust</div>
+                                        </div>
+                                        <div class="text-3xl">🤝</div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Enhanced Loan Products -->
+                                <div class="space-y-3">
+                                    <h3 class="font-semibold text-gray-800">Available Loans</h3>
+                                    
+                                    <!-- NegosyoKo Enhanced -->
+                                    <div class="bg-white border border-gray-200 rounded-lg p-4 transition-smooth hover:shadow-md">
+                                        <div class="flex justify-between items-start">
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <h4 class="font-medium text-gray-800">NegosyoKo Business Loan</h4>
+                                                    <span class="ml-2 text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">KapwaScore Enhanced</span>
+                                                </div>
+                                                <div class="text-sm text-gray-600 mt-1">Up to ₱500,000</div>
+                                                <div class="text-sm text-gray-600">Rate: 1.5% per month</div>
+                                                <div class="text-xs text-green-600 mt-2">✓ Pre-approved based on community trust</div>
+                                            </div>
+                                            <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm">Apply</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- InstaCashKo Enhanced -->
+                                    <div class="bg-white border border-gray-200 rounded-lg p-4 transition-smooth hover:shadow-md">
+                                        <div class="flex justify-between items-start">
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <h4 class="font-medium text-gray-800">InstaCashKo Personal Loan</h4>
+                                                    <span class="ml-2 text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">KapwaScore Enhanced</span>
+                                                </div>
+                                                <div class="text-sm text-gray-600 mt-1">Up to ₱150,000</div>
+                                                <div class="text-sm text-gray-600">Rate: 2.0% per month</div>
+                                                <div class="text-xs text-green-600 mt-2">✓ Community guarantee available</div>
+                                            </div>
+                                            <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm">Apply</button>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- AgriNegosyoKo Enhanced -->
+                                    <div class="bg-white border border-gray-200 rounded-lg p-4 transition-smooth hover:shadow-md">
+                                        <div class="flex justify-between items-start">
+                                            <div class="flex-1">
+                                                <div class="flex items-center">
+                                                    <h4 class="font-medium text-gray-800">AgriNegosyoKo Micro Loan</h4>
+                                                    <span class="ml-2 text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">KapwaScore Enhanced</span>
+                                                </div>
+                                                <div class="text-sm text-gray-600 mt-1">Up to ₱50,000</div>
+                                                <div class="text-sm text-gray-600">Rate: 2.5% per month</div>
+                                                <div class="text-xs text-green-600 mt-2">✓ Bayanihan guarantee circle</div>
+                                            </div>
+                                            <button class="bg-blue-600 text-white px-3 py-1 rounded text-sm">Apply</button>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Community Features -->
+                                <div class="bg-purple-50 rounded-lg p-4">
+                                    <h3 class="font-semibold text-purple-800 mb-3">Community Features</h3>
+                                    <div class="space-y-2">
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-purple-700">Family Network</span>
+                                            <span class="text-sm font-medium">15 members</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-purple-700">Bayanihan Circle</span>
+                                            <span class="text-sm font-medium">8 members</span>
+                                        </div>
+                                        <div class="flex items-center justify-between">
+                                            <span class="text-sm text-purple-700">Trust Level</span>
+                                            <span class="text-sm font-medium text-green-600">Excellent</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Integration Details -->
+            <div class="lg:col-span-2 space-y-6">
+                
+                <!-- API Integration Flow -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Live API Integration Flow</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <!-- BPI System -->
+                        <div class="text-center">
+                            <div class="bpi-gradient rounded-lg p-6 text-white mb-4">
+                                <div class="text-3xl mb-2">🏦</div>
+                                <h3 class="font-bold">BPI Bankware System</h3>
+                                <p class="text-sm text-blue-100 mt-2">Core Banking Platform</p>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <div class="bg-blue-50 p-2 rounded">Customer Data</div>
+                                <div class="mt-1 bg-blue-50 p-2 rounded">Credit History</div>
+                                <div class="mt-1 bg-blue-50 p-2 rounded">Account Status</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Integration Layer -->
+                        <div class="text-center">
+                            <div class="bg-gradient-to-br from-purple-500 to-blue-500 rounded-lg p-6 text-white mb-4 api-pulse">
+                                <div class="text-3xl mb-2">⚡</div>
+                                <h3 class="font-bold">HARAYA API</h3>
+                                <p class="text-sm text-purple-100 mt-2">KapwaScore Engine</p>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <div class="bg-purple-50 p-2 rounded">Cultural Analysis</div>
+                                <div class="mt-1 bg-purple-50 p-2 rounded">Trust Scoring</div>
+                                <div class="mt-1 bg-purple-50 p-2 rounded">Risk Assessment</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Enhanced Output -->
+                        <div class="text-center">
+                            <div class="bg-gradient-to-br from-green-500 to-blue-500 rounded-lg p-6 text-white mb-4">
+                                <div class="text-3xl mb-2">🎯</div>
+                                <h3 class="font-bold">Enhanced Decision</h3>
+                                <p class="text-sm text-green-100 mt-2">Improved Lending</p>
+                            </div>
+                            <div class="text-sm text-gray-600">
+                                <div class="bg-green-50 p-2 rounded">Better Risk Assessment</div>
+                                <div class="mt-1 bg-green-50 p-2 rounded">Higher Approval Rates</div>
+                                <div class="mt-1 bg-green-50 p-2 rounded">Lower Default Risk</div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- API Connection Status -->
+                    <div class="mt-6 border-t pt-6">
+                        <h3 class="font-semibold text-gray-800 mb-4">Real-time Integration Status</h3>
+                        <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                            <div class="text-center">
+                                <div class="text-2xl text-green-500 mb-1">✅</div>
+                                <div class="text-sm font-medium">BPI Connection</div>
+                                <div class="text-xs text-gray-500">Active</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl text-green-500 mb-1">✅</div>
+                                <div class="text-sm font-medium">KapwaScore API</div>
+                                <div class="text-xs text-gray-500">Responding</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl text-green-500 mb-1">✅</div>
+                                <div class="text-sm font-medium">Data Sync</div>
+                                <div class="text-xs text-gray-500">Real-time</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-2xl text-green-500 mb-1">✅</div>
+                                <div class="text-sm font-medium">Security</div>
+                                <div class="text-xs text-gray-500">Encrypted</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Business Impact Metrics -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Business Impact Simulation</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- Before HARAYA -->
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-4">Before HARAYA Integration</h3>
+                            <div class="space-y-3">
+                                <div class="bg-red-50 border border-red-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-red-800">Loan Approval Rate</span>
+                                        <span class="text-lg font-bold text-red-600">45%</span>
+                                    </div>
+                                    <div class="w-full bg-red-200 rounded-full h-2 mt-2">
+                                        <div class="bg-red-600 h-2 rounded-full" style="width: 45%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-yellow-800">Processing Time</span>
+                                        <span class="text-lg font-bold text-yellow-600">7 days</span>
+                                    </div>
+                                    <div class="text-xs text-yellow-600 mt-1">Manual review required</div>
+                                </div>
+                                
+                                <div class="bg-orange-50 border border-orange-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-orange-800">Default Rate</span>
+                                        <span class="text-lg font-bold text-orange-600">12%</span>
+                                    </div>
+                                    <div class="text-xs text-orange-600 mt-1">Limited risk assessment</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- After HARAYA -->
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-4">After HARAYA Integration</h3>
+                            <div class="space-y-3">
+                                <div class="bg-green-50 border border-green-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-green-800">Loan Approval Rate</span>
+                                        <span class="text-lg font-bold text-green-600">72%</span>
+                                    </div>
+                                    <div class="w-full bg-green-200 rounded-full h-2 mt-2">
+                                        <div class="bg-green-600 h-2 rounded-full" style="width: 72%"></div>
+                                    </div>
+                                    <div class="text-xs text-green-600 mt-1">+27% improvement with KapwaScore</div>
+                                </div>
+                                
+                                <div class="bg-blue-50 border border-blue-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-blue-800">Processing Time</span>
+                                        <span class="text-lg font-bold text-blue-600">2 hours</span>
+                                    </div>
+                                    <div class="text-xs text-blue-600 mt-1">Automated cultural assessment</div>
+                                </div>
+                                
+                                <div class="bg-purple-50 border border-purple-200 rounded-lg p-4">
+                                    <div class="flex justify-between items-center">
+                                        <span class="text-sm font-medium text-purple-800">Default Rate</span>
+                                        <span class="text-lg font-bold text-purple-600">6%</span>
+                                    </div>
+                                    <div class="text-xs text-purple-600 mt-1">Community-backed lending</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- ROI Calculation -->
+                    <div class="mt-6 bg-gradient-to-r from-blue-500 to-purple-500 rounded-lg p-6 text-white">
+                        <h3 class="font-bold text-lg mb-4">Projected Business Value</h3>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                            <div class="text-center">
+                                <div class="text-3xl font-bold">₱2.5B</div>
+                                <div class="text-sm text-blue-100">Portfolio Expansion</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold">60%</div>
+                                <div class="text-sm text-blue-100">Risk Reduction</div>
+                            </div>
+                            <div class="text-center">
+                                <div class="text-3xl font-bold">40%</div>
+                                <div class="text-sm text-blue-100">Processing Efficiency</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Technical Integration Details -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Technical Integration Specifications</h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                        <!-- API Endpoints -->
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-4">API Endpoints</h3>
+                            <div class="space-y-3">
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="flex items-center justify-between">
+                                        <code class="text-sm text-green-600">POST /api/v1/kapwa-score</code>
+                                        <span class="text-xs bg-green-100 text-green-800 px-2 py-1 rounded">Active</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-1">Calculate KapwaScore for loan applicant</div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="flex items-center justify-between">
+                                        <code class="text-sm text-blue-600">GET /api/v1/community-network</code>
+                                        <span class="text-xs bg-blue-100 text-blue-800 px-2 py-1 rounded">Active</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-1">Retrieve community trust network data</div>
+                                </div>
+                                
+                                <div class="bg-gray-50 rounded-lg p-3">
+                                    <div class="flex items-center justify-between">
+                                        <code class="text-sm text-purple-600">POST /api/v1/loan-assessment</code>
+                                        <span class="text-xs bg-purple-100 text-purple-800 px-2 py-1 rounded">Active</span>
+                                    </div>
+                                    <div class="text-xs text-gray-600 mt-1">Enhanced loan risk assessment</div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Security & Compliance -->
+                        <div>
+                            <h3 class="font-semibold text-gray-800 mb-4">Security & Compliance</h3>
+                            <div class="space-y-3">
+                                <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                                    <span class="text-sm font-medium text-green-800">BSP Compliance</span>
+                                    <span class="text-2xl text-green-500">✅</span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                                    <span class="text-sm font-medium text-green-800">Data Privacy Act</span>
+                                    <span class="text-2xl text-green-500">✅</span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                                    <span class="text-sm font-medium text-green-800">SSL/TLS Encryption</span>
+                                    <span class="text-2xl text-green-500">✅</span>
+                                </div>
+                                
+                                <div class="flex items-center justify-between p-3 bg-green-50 rounded-lg">
+                                    <span class="text-sm font-medium text-green-800">OAuth 2.0 Authentication</span>
+                                    <span class="text-2xl text-green-500">✅</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- User Journey Simulation -->
+                <div class="bg-white rounded-xl shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Enhanced User Journey</h2>
+                    
+                    <div class="space-y-6">
+                        <!-- Step 1 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">1</div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800">Customer Opens BPI BanKo App</h3>
+                                <p class="text-sm text-gray-600 mt-1">Maria opens her BPI BanKo mobile app and sees her KapwaScore prominently displayed on the dashboard</p>
+                                <div class="mt-2 text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded inline-block">KapwaScore: 850 (Excellent)</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 2 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">2</div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800">Enhanced Loan Products Displayed</h3>
+                                <p class="text-sm text-gray-600 mt-1">All loan products show KapwaScore-enhanced terms with better rates and higher limits based on community trust</p>
+                                <div class="mt-2 flex space-x-2">
+                                    <span class="text-xs text-green-600 bg-green-50 px-2 py-1 rounded">Pre-approved</span>
+                                    <span class="text-xs text-purple-600 bg-purple-50 px-2 py-1 rounded">Community Backed</span>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 3 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-blue-500 text-white rounded-full flex items-center justify-center font-bold">3</div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800">One-Click Application</h3>
+                                <p class="text-sm text-gray-600 mt-1">Maria applies for NegosyoKo loan with minimal documentation required due to high KapwaScore</p>
+                                <div class="mt-2 text-xs text-gray-600">Documentation reduced from 8 to 3 requirements</div>
+                            </div>
+                        </div>
+                        
+                        <!-- Step 4 -->
+                        <div class="flex items-start space-x-4">
+                            <div class="flex-shrink-0 w-8 h-8 bg-green-500 text-white rounded-full flex items-center justify-center font-bold">4</div>
+                            <div class="flex-1">
+                                <h3 class="font-semibold text-gray-800">Instant Approval</h3>
+                                <p class="text-sm text-gray-600 mt-1">Loan approved within 2 hours with community guarantee circle automatically notified</p>
+                                <div class="mt-2 text-xs text-green-600 bg-green-50 px-2 py-1 rounded inline-block">₱250,000 approved at 1.5% monthly</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Footer Call to Action -->
+        <div class="mt-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-xl p-8 text-white text-center">
+            <h2 class="text-2xl font-bold mb-4">Ready for Partnership?</h2>
+            <p class="text-blue-100 mb-6">HARAYA's KapwaScore integration can transform BPI BanKo's lending capabilities with culturally-intelligent risk assessment</p>
+            <div class="flex justify-center space-x-4">
+                <button class="bg-white text-blue-600 px-6 py-3 rounded-lg font-semibold hover:bg-blue-50 transition-smooth">
+                    Schedule Integration Meeting
+                </button>
+                <button class="border border-white text-white px-6 py-3 rounded-lg font-semibold hover:bg-white/10 transition-smooth">
+                    View Technical Documentation
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Simulate live data updates
+        function updateApiStatus() {
+            const statuses = document.querySelectorAll('.api-pulse');
+            statuses.forEach(status => {
+                status.style.transform = 'scale(1)';
+                setTimeout(() => {
+                    status.style.transform = 'scale(1.05)';
+                }, 1000);
+            });
+        }
+
+        // Simulate phone screen interaction
+        function simulatePhoneInteraction() {
+            const phoneScreen = document.getElementById('phoneScreen');
+            phoneScreen.addEventListener('click', function() {
+                this.style.transform = 'scale(0.98)';
+                setTimeout(() => {
+                    this.style.transform = 'scale(1)';
+                }, 150);
+            });
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            setInterval(updateApiStatus, 3000);
+            simulatePhoneInteraction();
+        });
+    </script>
+</body>
+</html>

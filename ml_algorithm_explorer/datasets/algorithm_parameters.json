@@ -1,0 +1,269 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "last_updated": "2025-08-23",
+    "description": "Core algorithm parameters for KapwaScore calculation, clustering, and scoring methodologies"
+  },
+  "kapwa_score_algorithm": {
+    "version": "2.0.0",
+    "scoring_components": {
+      "cultural_intelligence": {
+        "weight": 0.40,
+        "subcomponents": {
+          "kapwa_strength": 0.25,
+          "bayanihan_authenticity": 0.25,
+          "utang_na_loob_depth": 0.20,
+          "community_validation": 0.15,
+          "family_centrality": 0.10,
+          "regional_cultural_fit": 0.05
+        }
+      },
+      "digital_behavior": {
+        "weight": 0.35,
+        "calculation_method": "digital_footprint_coherence",
+        "components": [
+          "digital_literacy_normalized",
+          "smartphone_usage_normalized",
+          "banking_sessions_normalized"
+        ]
+      },
+      "financial_prudence": {
+        "weight": 0.25,
+        "calculation_factors": {
+          "income_variability_inverse": 0.6,
+          "income_stability_factor": 0.4,
+          "income_normalization_threshold": 25000
+        }
+      }
+    },
+    "behavioral_trust_multiplier": {
+      "enabled": true,
+      "calculation_method": "ensemble_prediction",
+      "models": ["random_forest", "neural_network", "anomaly_detector"],
+      "weights": [0.5, 0.5, 0.3]
+    },
+    "final_score_scaling": {
+      "range": [0, 1000],
+      "method": "linear_scaling",
+      "confidence_adjustment": true
+    }
+  },
+  "cultural_intelligence_calculation": {
+    "kapwa_intelligence": {
+      "formula": "weighted_sum",
+      "factors": {
+        "community_standing": 0.4,
+        "stability_network_product": 0.3,
+        "family_normalized": 0.3,
+        "authenticity_boost": 0.2
+      },
+      "family_size_normalization": 6.0,
+      "max_score": 1.0
+    },
+    "bayanihan_intelligence": {
+      "formula": "enhanced_participation",
+      "factors": {
+        "community_standing": 0.5,
+        "participation_factor": 0.3,
+        "velocity_factor": 0.2,
+        "rhythm_enhancement": 0.3
+      },
+      "transaction_normalization": 30.0,
+      "velocity_normalization": 2.0
+    },
+    "utang_na_loob_intelligence": {
+      "formula": "behavioral_enhanced",
+      "factors": {
+        "payment_reliability": 0.5,
+        "stability_trust": 0.3,
+        "age_factor": 0.2
+      },
+      "age_normalization": 42.0,
+      "age_offset": 18
+    },
+    "adaptive_weighting": {
+      "enabled": true,
+      "adjustment_factors": {
+        "community_weight_range": [0.05, 0.35],
+        "authenticity_weight_range": [0.20, 0.30],
+        "network_weight_range": [0.20, 0.30],
+        "bayanihan_weight_calculated": true
+      }
+    }
+  },
+  "behavioral_pattern_analysis": {
+    "transaction_velocity_calculation": {
+      "method": "stability_adjusted",
+      "formula": "avg_daily * stability_factor",
+      "stability_calculation": "1 - (std / (mean + epsilon))",
+      "epsilon": 0.001
+    },
+    "payment_rhythm_calculation": {
+      "method": "interval_regularity",
+      "formula": "1 - (interval_std / (interval_mean + 1))",
+      "minimum_transactions": 2,
+      "default_score": 0.5
+    },
+    "cultural_authenticity_assessment": {
+      "method": "multi_factor_consistency",
+      "components": {
+        "digital_consistency": 0.3,
+        "regional_consistency": 0.3,
+        "family_community_consistency": 0.4
+      },
+      "expected_digital_formula": "max(1, min(10, 11 - (age - 20) * 0.1))",
+      "community_standing_formula": "min(1.0, 0.5 + (family_size / 10.0))"
+    },
+    "temporal_pattern_generation": {
+      "method": "simulated_behavioral",
+      "period_days": 30,
+      "factors": {
+        "base_activity": "digital_literacy / 10",
+        "weekday_factor": 1.2,
+        "weekend_factor": 0.8,
+        "mid_month_factor": 1.3,
+        "early_late_month_factor": 0.9,
+        "consistency_noise": "normal(0, 1 - consistency) * 0.1"
+      }
+    }
+  },
+  "clustering_algorithms": {
+    "dbscan_parameters": {
+      "eps": 0.5,
+      "min_samples": 5,
+      "metric": "euclidean",
+      "algorithm": "auto"
+    },
+    "kmeans_parameters": {
+      "n_clusters": 5,
+      "init": "k-means++",
+      "n_init": 10,
+      "max_iter": 300,
+      "tol": 1e-4,
+      "random_state": 42
+    },
+    "feature_selection": {
+      "behavioral_features": [
+        "transaction_velocity",
+        "community_consistency", 
+        "payment_rhythm",
+        "cultural_authenticity",
+        "network_stability",
+        "financial_prudence",
+        "digital_footprint_coherence"
+      ],
+      "temporal_features": 30,
+      "scaling_method": "StandardScaler"
+    }
+  },
+  "convergence_criteria": {
+    "ml_training": {
+      "max_iterations": 1000,
+      "tolerance": 1e-6,
+      "early_stopping": true,
+      "validation_split": 0.2,
+      "patience": 10
+    },
+    "cultural_weight_adaptation": {
+      "learning_rate": 0.01,
+      "momentum": 0.9,
+      "weight_decay": 0.001,
+      "convergence_threshold": 1e-5
+    },
+    "anomaly_detection": {
+      "contamination_rate": 0.1,
+      "outlier_fraction": 0.05,
+      "isolation_threshold": -0.1
+    }
+  },
+  "performance_metrics": {
+    "model_validation": {
+      "cross_validation_folds": 5,
+      "stratified_sampling": true,
+      "metrics": [
+        "accuracy",
+        "precision", 
+        "recall",
+        "f1_score",
+        "roc_auc",
+        "confusion_matrix"
+      ]
+    },
+    "cultural_accuracy": {
+      "regional_accuracy_threshold": 0.80,
+      "generational_alignment_threshold": 0.75,
+      "value_expression_threshold": 0.70,
+      "community_validation_rate": 0.85
+    },
+    "confidence_calculation": {
+      "method": "weighted_average",
+      "factors": {
+        "authenticity_confidence": 0.3,
+        "consistency_confidence": 0.3,
+        "pattern_confidence": 0.2,
+        "ml_confidence": 0.2
+      },
+      "ml_confidence_formula": "abs(trust_probability - 0.5) * 2"
+    }
+  },
+  "normalization_parameters": {
+    "income_normalization": {
+      "method": "regional_adjusted",
+      "base_threshold": 25000,
+      "regional_adjustments": {
+        "metro_manila": 1.2,
+        "metro_cebu": 1.0,
+        "metro_davao": 0.9,
+        "luzon_rural": 0.7,
+        "visayas_rural": 0.6,
+        "mindanao_rural": 0.5
+      }
+    },
+    "age_normalization": {
+      "working_age_range": [18, 60],
+      "formula": "min(1.0, (age - 18) / 42.0)",
+      "max_age_consideration": 75
+    },
+    "family_size_normalization": {
+      "typical_family_size": 6.0,
+      "formula": "min(1.0, family_size / 6.0)",
+      "single_person_penalty": 0.1
+    },
+    "digital_literacy_normalization": {
+      "scale_range": [1, 10],
+      "formula": "digital_score / 10.0",
+      "age_expectation_adjustment": true
+    }
+  },
+  "fraud_prevention_integration": {
+    "scam_score_integration": {
+      "method": "multiplicative_penalty",
+      "formula": "kapwa_score * (1 - scam_risk_score * penalty_factor)",
+      "penalty_factor": 0.5,
+      "minimum_score_floor": 100
+    },
+    "anomaly_adjustment": {
+      "method": "isolation_forest_decision",
+      "adjustment_range": [0.0, 0.3],
+      "formula": "max(0.0, min(0.3, (anomaly_score + 0.5) * 0.3))"
+    }
+  },
+  "real_time_processing": {
+    "performance_targets": {
+      "maximum_processing_time_ms": 500,
+      "average_processing_time_ms": 150,
+      "memory_usage_limit_mb": 100
+    },
+    "caching_strategy": {
+      "cultural_patterns": "static_cache",
+      "model_weights": "persistent_cache", 
+      "user_profiles": "session_cache",
+      "cache_expiration_hours": 24
+    },
+    "batch_processing": {
+      "batch_size": 100,
+      "parallel_processing": true,
+      "max_concurrent_jobs": 4
+    }
+  }
+}

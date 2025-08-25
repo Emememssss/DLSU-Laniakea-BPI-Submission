@@ -1,0 +1,277 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "last_updated": "2025-08-23",
+    "description": "Integration mapping document showing how Python algorithm logic translates to JavaScript implementation"
+  },
+  "python_to_javascript_mapping": {
+    "ml_kapwa_score_engine": {
+      "python_class": "MLKapwaScoreEngine",
+      "javascript_equivalent": "MLKapwaScoreEngine",
+      "key_methods": {
+        "extract_behavioral_patterns": {
+          "python_method": "extract_behavioral_patterns(persona_data, transaction_history)",
+          "javascript_function": "extractBehavioralPatterns(personaData, transactionHistory)",
+          "return_type": "BehavioralPattern object",
+          "complexity": "medium",
+          "dependencies": ["numpy_equivalents", "date_calculations"]
+        },
+        "calculate_ml_kapwa_score": {
+          "python_method": "calculate_ml_kapwa_score(persona_data)",
+          "javascript_function": "calculateMLKapwaScore(personaData)",
+          "return_type": "comprehensive_score_object",
+          "complexity": "high",
+          "dependencies": ["all_model_components"]
+        },
+        "_calculate_transaction_velocity": {
+          "python_method": "_calculate_transaction_velocity(transactions_df)",
+          "javascript_function": "calculateTransactionVelocity(transactionArray)",
+          "return_type": "float",
+          "complexity": "low",
+          "dependencies": ["array_operations", "date_math"]
+        },
+        "_assess_cultural_authenticity": {
+          "python_method": "_assess_cultural_authenticity(persona_data)",
+          "javascript_function": "assessCulturalAuthenticity(personaData)",
+          "return_type": "float",
+          "complexity": "medium",
+          "dependencies": ["regional_patterns", "age_calculations"]
+        }
+      }
+    },
+    "adaptive_cultural_intelligence": {
+      "python_class": "AdaptiveCulturalIntelligence",
+      "javascript_equivalent": "AdaptiveCulturalIntelligence",
+      "key_methods": {
+        "extract_cultural_profile": {
+          "python_method": "extract_cultural_profile(persona_data, behavioral_patterns)",
+          "javascript_function": "extractCulturalProfile(personaData, behavioralPatterns)",
+          "return_type": "CulturalProfile object",
+          "complexity": "high",
+          "dependencies": ["cultural_patterns_data", "regional_analysis"]
+        },
+        "calculate_adaptive_weights": {
+          "python_method": "calculate_adaptive_weights(cultural_profile, persona_data)",
+          "javascript_function": "calculateAdaptiveWeights(culturalProfile, personaData)",
+          "return_type": "weight_object",
+          "complexity": "medium",
+          "dependencies": ["base_weights", "adjustment_logic"]
+        },
+        "_assess_regional_authenticity": {
+          "python_method": "_assess_regional_authenticity(persona_data)",
+          "javascript_function": "assessRegionalAuthenticity(personaData)",
+          "return_type": "float",
+          "complexity": "medium",
+          "dependencies": ["regional_cultural_patterns"]
+        }
+      }
+    },
+    "scam_detection_system": {
+      "python_class": "ScamDetectionSystem",
+      "javascript_equivalent": "ScamDetectionSystem",
+      "key_methods": {
+        "detect_scam_indicators": {
+          "python_method": "detect_scam_indicators(persona_data, transaction_history)",
+          "javascript_function": "detectScamIndicators(personaData, transactionHistory)",
+          "return_type": "ScamIndicators object",
+          "complexity": "high",
+          "dependencies": ["all_detection_modules"]
+        },
+        "calculate_scam_risk_score": {
+          "python_method": "calculate_scam_risk_score(persona_data, transaction_history)",
+          "javascript_function": "calculateScamRiskScore(personaData, transactionHistory)",
+          "return_type": "risk_assessment_object",
+          "complexity": "high",
+          "dependencies": ["scam_indicators", "weighting_system"]
+        },
+        "_detect_velocity_anomalies": {
+          "python_method": "_detect_velocity_anomalies(persona_data, transaction_history)",
+          "javascript_function": "detectVelocityAnomalies(personaData, transactionHistory)",
+          "return_type": "float",
+          "complexity": "medium",
+          "dependencies": ["velocity_calculations"]
+        }
+      }
+    }
+  },
+  "data_structure_mappings": {
+    "BehavioralPattern": {
+      "python_dataclass": "@dataclass BehavioralPattern",
+      "javascript_equivalent": "class BehavioralPattern",
+      "fields": {
+        "transaction_velocity": "number",
+        "community_consistency": "number",
+        "payment_rhythm": "number",
+        "cultural_authenticity": "number",
+        "network_stability": "number",
+        "financial_prudence": "number",
+        "digital_footprint_coherence": "number",
+        "temporal_patterns": "Array<number>"
+      }
+    },
+    "CulturalProfile": {
+      "python_dataclass": "@dataclass CulturalProfile",
+      "javascript_equivalent": "class CulturalProfile",
+      "fields": {
+        "regional_authenticity": "number",
+        "generational_alignment": "number",
+        "socioeconomic_consistency": "number",
+        "community_integration_depth": "number",
+        "cultural_value_expression": "number",
+        "adaptation_indicators": "number"
+      }
+    },
+    "ScamIndicators": {
+      "python_dataclass": "@dataclass ScamIndicators",
+      "javascript_equivalent": "class ScamIndicators",
+      "fields": {
+        "velocity_anomaly": "number",
+        "pattern_inconsistency": "number",
+        "network_isolation": "number",
+        "cultural_inauthenticity": "number",
+        "temporal_irregularity": "number",
+        "data_fabrication": "number",
+        "relationship_manipulation": "number",
+        "financial_impossibility": "number"
+      }
+    }
+  },
+  "algorithm_implementation_guide": {
+    "numpy_equivalents": {
+      "np.mean()": "array.reduce((a,b) => a + b, 0) / array.length",
+      "np.std()": "Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a,b) => a + b) / array.length)",
+      "np.min()": "Math.min(...array)",
+      "np.max()": "Math.max(...array)",
+      "np.random.normal()": "normalRandom() // Box-Muller implementation",
+      "np.array()": "Array constructor or Float64Array for performance"
+    },
+    "pandas_equivalents": {
+      "df.groupby().size()": "groupBy(array, key).map(group => group.length)",
+      "df.groupby().mean()": "groupBy(array, key).map(group => mean(group.values))",
+      "pd.to_datetime()": "new Date(dateString)",
+      "df['column'].dt.date": "date.toDateString()",
+      "df.diff()": "array.map((val, i) => i > 0 ? val - array[i-1] : null)"
+    },
+    "sklearn_equivalents": {
+      "StandardScaler": "class StandardScaler with fit() and transform() methods",
+      "cross_val_score": "crossValidate(model, X, y, cv) function",
+      "train_test_split": "splitData(X, y, test_size) function",
+      "RandomForestClassifier": "ensemble of decision trees implementation",
+      "IsolationForest": "anomaly detection using isolation trees"
+    }
+  },
+  "configuration_file_usage": {
+    "ml_model_config.json": {
+      "purpose": "Neural network architecture and model parameters",
+      "javascript_usage": "const modelConfig = await fetch('datasets/ml_model_config.json').then(r => r.json())",
+      "key_sections": [
+        "neural_network_architecture",
+        "ensemble_configuration", 
+        "trustworthiness_thresholds",
+        "behavioral_pattern_features"
+      ]
+    },
+    "cultural_patterns.json": {
+      "purpose": "Regional and cultural intelligence patterns",
+      "javascript_usage": "const culturalData = await fetch('datasets/cultural_patterns.json').then(r => r.json())",
+      "key_sections": [
+        "regional_cultural_patterns",
+        "generational_patterns",
+        "cultural_value_indicators",
+        "adaptive_weight_adjustments"
+      ]
+    },
+    "scam_detection_config.json": {
+      "purpose": "Fraud detection thresholds and patterns",
+      "javascript_usage": "const scamConfig = await fetch('datasets/scam_detection_config.json').then(r => r.json())",
+      "key_sections": [
+        "scam_risk_thresholds",
+        "scam_indicator_weights",
+        "behavioral_anomaly_detection",
+        "false_positive_mitigation"
+      ]
+    },
+    "algorithm_parameters.json": {
+      "purpose": "Core algorithm parameters and formulas",
+      "javascript_usage": "const algoParams = await fetch('datasets/algorithm_parameters.json').then(r => r.json())",
+      "key_sections": [
+        "kapwa_score_algorithm",
+        "cultural_intelligence_calculation",
+        "behavioral_pattern_analysis",
+        "normalization_parameters"
+      ]
+    }
+  },
+  "implementation_priority": {
+    "phase_1_core": {
+      "priority": "high",
+      "components": [
+        "Basic KapwaScore calculation",
+        "Cultural authenticity assessment",
+        "Regional pattern matching",
+        "Simple behavioral analysis"
+      ],
+      "estimated_effort": "2-3 days",
+      "dependencies": ["cultural_patterns.json", "algorithm_parameters.json"]
+    },
+    "phase_2_ml": {
+      "priority": "medium",
+      "components": [
+        "Neural network inference",
+        "Ensemble model predictions",
+        "Advanced behavioral patterns",
+        "Anomaly detection"
+      ],
+      "estimated_effort": "3-4 days", 
+      "dependencies": ["ml_model_config.json", "sample_model_weights.json"]
+    },
+    "phase_3_advanced": {
+      "priority": "medium",
+      "components": [
+        "Adaptive weight adjustment",
+        "Scam detection system",
+        "Temporal pattern analysis",
+        "Real-time optimization"
+      ],
+      "estimated_effort": "2-3 days",
+      "dependencies": ["scam_detection_config.json", "all_previous_phases"]
+    }
+  },
+  "javascript_implementation_notes": {
+    "performance_considerations": {
+      "use_typed_arrays": "Float64Array for numerical computations",
+      "avoid_deep_copying": "Use object references where possible",
+      "cache_calculations": "Cache expensive cultural pattern lookups",
+      "lazy_loading": "Load model weights only when needed"
+    },
+    "browser_compatibility": {
+      "es6_features": "Use modern JavaScript features (classes, async/await)",
+      "fallback_functions": "Provide fallbacks for older browsers",
+      "web_workers": "Consider using Web Workers for heavy computations"
+    },
+    "testing_strategy": {
+      "unit_tests": "Test individual calculation functions",
+      "integration_tests": "Test full scoring pipeline",
+      "regression_tests": "Compare with Python implementation results",
+      "performance_tests": "Measure calculation times and memory usage"
+    }
+  },
+  "validation_methodology": {
+    "accuracy_validation": {
+      "method": "Compare JavaScript results with Python baseline",
+      "tolerance": 0.001,
+      "test_cases": 100,
+      "success_criteria": ">95% match rate"
+    },
+    "performance_validation": {
+      "target_processing_time": "< 500ms per calculation",
+      "memory_usage_limit": "< 100MB",
+      "concurrent_calculations": "Support 10+ simultaneous users"
+    },
+    "cultural_validation": {
+      "regional_accuracy": ">80% cultural pattern recognition",
+      "generational_alignment": ">75% age-appropriate scoring",
+      "false_positive_rate": "<10% for legitimate users"
+    }
+  }
+}

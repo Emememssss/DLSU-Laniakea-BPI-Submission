@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARAYA Data Management Test</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-50 p-8">
+    <div class="max-w-4xl mx-auto">
+        <h1 class="text-3xl font-bold mb-6">HARAYA Data Management Test</h1>
+        
+        <div class="grid grid-cols-1 lg:grid-cols-2 gap-8">
+            <!-- Controls -->
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Load Dataset</h2>
+                <div class="space-y-3">
+                    <button onclick="loadPresetDataset('filipino-personas')" class="block w-full text-left p-3 bg-blue-50 rounded-lg hover:bg-blue-100">
+                        Filipino Personas
+                    </button>
+                    <button onclick="loadPresetDataset('scammer-patterns')" class="block w-full text-left p-3 bg-red-50 rounded-lg hover:bg-red-100">
+                        Scammer Patterns  
+                    </button>
+                    <button onclick="loadPresetDataset('cultural-variations')" class="block w-full text-left p-3 bg-green-50 rounded-lg hover:bg-green-100">
+                        Cultural Variations
+                    </button>
+                </div>
+                
+                <div class="mt-6">
+                    <h3 class="font-semibold mb-2">Statistics</h3>
+                    <div class="grid grid-cols-3 gap-2 text-center">
+                        <div class="bg-white p-3 rounded">
+                            <div class="font-bold text-blue-600" id="datasetRows">0</div>
+                            <div class="text-sm">Rows</div>
+                        </div>
+                        <div class="bg-white p-3 rounded">
+                            <div class="font-bold text-green-600" id="datasetColumns">0</div>
+                            <div class="text-sm">Columns</div>
+                        </div>
+                        <div class="bg-white p-3 rounded">
+                            <div class="font-bold text-yellow-600" id="datasetSize">0</div>
+                            <div class="text-sm">KB</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Preview -->
+            <div>
+                <h2 class="text-xl font-semibold mb-4">Data Preview</h2>
+                <div id="dataPreview" class="bg-white rounded-lg p-4 h-80 overflow-auto border">
+                    <p class="text-gray-500 text-center mt-20">No dataset loaded</p>
+                </div>
+                
+                <div class="mt-4 flex gap-2">
+                    <button onclick="exportDataset('json')" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600">
+                        Export JSON
+                    </button>
+                    <button onclick="exportDataset('csv')" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">
+                        Export CSV
+                    </button>
+                    <button onclick="exportDataset('report')" class="px-4 py-2 bg-purple-500 text-white rounded hover:bg-purple-600">
+                        Export Report
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Loading Overlay -->
+        <div id="loadingOverlay" class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center hidden">
+            <div class="bg-white rounded-lg p-8 text-center">
+                <div class="text-4xl mb-4">🧠</div>
+                <h3 class="text-xl font-bold mb-2">Processing Data...</h3>
+                <p class="text-gray-600">Please wait while we load the dataset</p>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Load the data management module -->
+    <script src="assets/js/data-management.js"></script>
+    
+    <script>
+        // Test the system
+        console.log('Test page loaded');
+        console.log('harayaData:', window.harayaData);
+        
+        // Show notification function
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `fixed top-4 right-4 p-4 rounded-lg shadow-lg z-50 ${
+                type === 'error' ? 'bg-red-500 text-white' : 
+                type === 'success' ? 'bg-green-500 text-white' : 
+                'bg-blue-500 text-white'
+            }`;
+            notification.textContent = message;
+            
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+        
+        // Test auto-load
+        setTimeout(() => {
+            loadPresetDataset('filipino-personas');
+        }, 1000);
+    </script>
+</body>
+</html>

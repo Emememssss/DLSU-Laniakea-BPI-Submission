@@ -1,0 +1,261 @@
+{
+  "metadata": {
+    "version": "2.0.0",
+    "last_updated": "2025-08-23",
+    "description": "Scam detection thresholds, behavioral patterns, and fraud prevention configuration"
+  },
+  "scam_risk_thresholds": {
+    "high_risk": 0.8,
+    "suspicious": 0.6,
+    "moderate_risk": 0.4,
+    "low_risk": 0.2
+  },
+  "risk_categories": {
+    "HIGH_SCAM_RISK": {
+      "score_threshold": 0.8,
+      "action": "DENY_APPLICATION",
+      "investigation_required": true,
+      "manual_review": true
+    },
+    "SUSPICIOUS_ACTIVITY": {
+      "score_threshold": 0.6,
+      "action": "ENHANCED_VERIFICATION",
+      "investigation_required": true,
+      "manual_review": true
+    },
+    "MODERATE_CONCERN": {
+      "score_threshold": 0.4,
+      "action": "ADDITIONAL_VERIFICATION",
+      "investigation_required": false,
+      "manual_review": true
+    },
+    "LOW_RISK": {
+      "score_threshold": 0.0,
+      "action": "STANDARD_PROCESS",
+      "investigation_required": false,
+      "manual_review": false
+    }
+  },
+  "scam_indicator_weights": {
+    "velocity_anomaly": 0.15,
+    "pattern_inconsistency": 0.20,
+    "network_isolation": 0.15,
+    "cultural_inauthenticity": 0.20,
+    "temporal_irregularity": 0.10,
+    "data_fabrication": 0.10,
+    "relationship_manipulation": 0.05,
+    "financial_impossibility": 0.05
+  },
+  "behavioral_anomaly_detection": {
+    "transaction_velocity": {
+      "normal_range": [0.3, 2.0],
+      "suspicious_high": 3.0,
+      "suspicious_low": 0.1,
+      "factors": {
+        "income_velocity_ratio": 10000,
+        "digital_literacy_factor": 10.0,
+        "age_adjustment": 100.0
+      }
+    },
+    "pattern_consistency": {
+      "age_income_deviation_threshold": 1.0,
+      "digital_age_deviation_threshold": 0.5,
+      "community_stability_correlation": 0.4,
+      "regional_business_mismatch": 0.6
+    },
+    "network_isolation": {
+      "minimum_family_size": 2,
+      "community_income_ratio": 20000,
+      "stability_threshold": 0.2,
+      "transaction_usage_minimum": 3
+    },
+    "cultural_authenticity": {
+      "family_community_correlation": 0.3,
+      "age_consistency_factor": 0.2,
+      "regional_income_deviation": 2.0,
+      "perfect_score_threshold": 0.98,
+      "perfect_score_count_limit": 2
+    }
+  },
+  "temporal_pattern_detection": {
+    "bot_pattern_indicators": {
+      "single_hour_concentration": 0.5,
+      "night_transaction_threshold": 0.3,
+      "weekend_concentration": 0.7
+    },
+    "irregular_timing_weights": {
+      "exact_timing_penalty": 0.4,
+      "night_activity_penalty": 0.3,
+      "weekend_concentration_penalty": 0.2
+    }
+  },
+  "data_fabrication_indicators": {
+    "round_number_detection": {
+      "income_round_threshold": 5000,
+      "income_minimum": 15000,
+      "digital_score_suspects": [1, 5, 10],
+      "round_number_count_threshold": 2
+    },
+    "perfection_indicators": {
+      "high_score_threshold": 0.95,
+      "high_score_count_threshold": 3,
+      "decimal_simplicity": [0.0, 0.5],
+      "decimal_count_threshold": 2
+    }
+  },
+  "relationship_manipulation_detection": {
+    "family_community_inconsistency": {
+      "large_family_threshold": 6,
+      "low_community_threshold": 0.3,
+      "penalty_score": 0.4
+    },
+    "stability_standing_mismatch": {
+      "high_standing_threshold": 0.8,
+      "low_stability_threshold": 0.3,
+      "penalty_score": 0.5
+    },
+    "age_family_inconsistency": {
+      "young_age_threshold": 25,
+      "large_family_threshold": 6,
+      "old_age_threshold": 60,
+      "small_family_threshold": 2,
+      "young_penalty": 0.3,
+      "old_penalty": 0.2
+    }
+  },
+  "financial_impossibility_checks": {
+    "age_income_limits": {
+      "young_age_threshold": 22,
+      "young_income_limit": 25000,
+      "old_age_threshold": 65,
+      "old_income_limit": 30000,
+      "young_penalty": 0.4,
+      "old_penalty": 0.3
+    },
+    "regional_income_medians": {
+      "metro_manila": 20000,
+      "metro_cebu": 16000,
+      "metro_davao": 14000,
+      "luzon_rural": 10000,
+      "visayas_rural": 9000,
+      "mindanao_rural": 8000,
+      "deviation_multiplier": 3,
+      "penalty_score": 0.3
+    },
+    "business_income_limits": {
+      "sari_sari_store": 18000,
+      "rice_farmer": 15000,
+      "fisherman": 12000,
+      "delivery_driver": 20000,
+      "freelancer": 35000,
+      "online_seller": 40000,
+      "construction": 20000,
+      "retail_shop": 25000,
+      "penalty_score": 0.4
+    },
+    "education_income_inconsistency": {
+      "elementary_income_limit": 20000,
+      "penalty_score": 0.2
+    }
+  },
+  "false_positive_mitigation": {
+    "legitimate_edge_cases": {
+      "young_entrepreneur": {
+        "age_threshold": 30,
+        "urban_regions": ["metro_manila", "metro_cebu", "metro_davao"],
+        "valid_businesses": ["online_seller", "freelancer"],
+        "mitigation_factor": 0.3
+      },
+      "ofw_family": {
+        "family_size_threshold": 5,
+        "income_threshold": 20000,
+        "mitigation_factor": 0.2
+      },
+      "seasonal_worker": {
+        "businesses": ["construction", "tourism_services"],
+        "variability_tolerance": 0.4,
+        "mitigation_factor": 0.4
+      },
+      "recent_migrant": {
+        "stability_threshold": 0.4,
+        "network_isolation_threshold": 0.5,
+        "mitigation_factor": 0.3
+      }
+    },
+    "validation_recommendations": {
+      "high_false_positive_risk": [
+        "Manual review by Filipino cultural expert",
+        "Extended verification period to gather additional data",
+        "Conditional approval with monitoring",
+        "Community validation through local partners"
+      ],
+      "moderate_false_positive_risk": [
+        "Secondary verification of suspicious indicators",
+        "Cultural context review",
+        "Extended application interview"
+      ],
+      "low_false_positive_risk": [
+        "Standard verification process sufficient"
+      ]
+    }
+  },
+  "known_scam_patterns": {
+    "identity_theft": {
+      "indicators": [
+        "multiple_accounts_same_device",
+        "rapid_location_changes",
+        "inconsistent_personal_info"
+      ],
+      "risk_multiplier": 1.5
+    },
+    "synthetic_identity": {
+      "indicators": [
+        "perfect_payment_history",
+        "unrealistic_income_stability",
+        "no_digital_footprint"
+      ],
+      "risk_multiplier": 1.8
+    },
+    "application_fraud": {
+      "indicators": [
+        "income_inflation",
+        "fake_employment",
+        "fabricated_references"
+      ],
+      "risk_multiplier": 1.3
+    },
+    "bust_out_fraud": {
+      "indicators": [
+        "rapid_credit_utilization",
+        "sudden_behavioral_change",
+        "payment_cessation"
+      ],
+      "risk_multiplier": 2.0
+    }
+  },
+  "recommendation_templates": {
+    "high_risk_actions": [
+      "DENY APPLICATION - High scam risk detected",
+      "Flag account for fraud investigation",
+      "Report suspicious patterns to compliance team"
+    ],
+    "suspicious_actions": [
+      "Require additional documentation and verification",
+      "Conduct manual review of all provided information",
+      "Implement enhanced monitoring if approved"
+    ],
+    "moderate_risk_actions": [
+      "Request additional identity verification",
+      "Verify community references through alternative channels",
+      "Start with lower credit limits"
+    ],
+    "low_risk_actions": [
+      "Standard approval process - minimal risk detected"
+    ],
+    "specific_validations": {
+      "cultural_inauthenticity": "Validate cultural information with community leaders",
+      "network_isolation": "Require community vouching or guarantors",
+      "data_fabrication": "Cross-reference all provided data with external sources"
+    }
+  }
+}

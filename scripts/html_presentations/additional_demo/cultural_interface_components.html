@@ -1,0 +1,677 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARAYA - Filipino Cultural Interface Components</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'haraya-brown': '#8B4513',
+                        'haraya-green': '#228B22',
+                        'haraya-gold': '#FFD700',
+                        'haraya-earth': '#D2B48C'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        .bayanihan-glow {
+            box-shadow: 0 0 20px rgba(255, 215, 0, 0.3);
+        }
+        .kapwa-pulse {
+            animation: pulse 2s infinite;
+        }
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.7; }
+        }
+        .cultural-transition {
+            transition: all 0.5s ease-in-out;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-haraya-earth to-haraya-green min-h-screen">
+    <!-- Language Toggle Component -->
+    <div class="fixed top-4 right-4 z-50">
+        <div class="bg-white/90 backdrop-blur-sm rounded-full p-2 shadow-lg">
+            <button id="langToggle" class="flex items-center space-x-2 px-4 py-2 rounded-full bg-haraya-brown text-white hover:bg-haraya-brown/80 cultural-transition">
+                <span id="currentLang">EN</span>
+                <span>🇵🇭</span>
+            </button>
+        </div>
+    </div>
+
+    <!-- Cultural Header -->
+    <div class="container mx-auto px-4 py-8">
+        <div class="text-center mb-8">
+            <h1 id="mainTitle" class="text-4xl font-bold text-white mb-4">
+                HARAYA Cultural Interface
+            </h1>
+            <p id="mainSubtitle" class="text-xl text-white/90" data-en="Authentic Filipino Values in Microfinance Technology" data-tl="Tunay na Filipino Values sa Microfinance Technology">
+                Authentic Filipino Values in Microfinance Technology
+            </p>
+        </div>
+
+        <!-- Kapwa Relationship Selector -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 mb-8">
+            <h2 id="relationshipTitle" class="text-2xl font-bold text-haraya-brown mb-6 text-center" data-en="Select Your Kapwa Relationship" data-tl="Piliin ang Inyong Kapwa Relationship">
+                Select Your Kapwa Relationship
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-4">
+                <!-- Family Relations -->
+                <div class="relationship-card bg-haraya-earth/20 rounded-lg p-4 cursor-pointer hover:bg-haraya-earth/40 cultural-transition border-2 border-transparent hover:border-haraya-gold" data-relationship="pamilya" data-trust="95">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">👨‍👩‍👧‍👦</div>
+                        <h3 class="font-bold text-haraya-brown" data-en="Family (Pamilya)" data-tl="Pamilya">Pamilya</h3>
+                        <p class="text-sm text-gray-600 mt-2" data-en="Highest trust level - unlimited mutual responsibility" data-tl="Pinakamataas na tiwala - walang hanggang responsibilidad sa isa't isa">
+                            Pinakamataas na tiwala
+                        </p>
+                        <div class="mt-2">
+                            <div class="bg-haraya-green h-2 rounded-full"></div>
+                            <span class="text-xs text-haraya-brown font-bold">95% Trust</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Godparent System -->
+                <div class="relationship-card bg-haraya-earth/20 rounded-lg p-4 cursor-pointer hover:bg-haraya-earth/40 cultural-transition border-2 border-transparent hover:border-haraya-gold" data-relationship="kumpare" data-trust="80">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🤝</div>
+                        <h3 class="font-bold text-haraya-brown" data-en="Godparent (Kumpare/Kumadre)" data-tl="Kumpare/Kumadre">Kumpare/Kumadre</h3>
+                        <p class="text-sm text-gray-600 mt-2" data-en="Chosen family - strong business partnership potential" data-tl="Piniling pamilya - malakas na negosyo partnership">
+                            Piniling pamilya
+                        </p>
+                        <div class="mt-2">
+                            <div class="bg-haraya-green h-2 rounded-full w-4/5"></div>
+                            <span class="text-xs text-haraya-brown font-bold">80% Trust</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Neighbors -->
+                <div class="relationship-card bg-haraya-earth/20 rounded-lg p-4 cursor-pointer hover:bg-haraya-earth/40 cultural-transition border-2 border-transparent hover:border-haraya-gold" data-relationship="kapitbahay" data-trust="70">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🏠</div>
+                        <h3 class="font-bold text-haraya-brown" data-en="Neighbor (Kapitbahay)" data-tl="Kapitbahay">Kapitbahay</h3>
+                        <p class="text-sm text-gray-600 mt-2" data-en="Daily interaction trust - immediate community support" data-tl="Araw-araw na pakikipagkunware - mabilis na tulong">
+                            Araw-araw na pakikipagkunware
+                        </p>
+                        <div class="mt-2">
+                            <div class="bg-haraya-green h-2 rounded-full w-3/5"></div>
+                            <span class="text-xs text-haraya-brown font-bold">70% Trust</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community -->
+                <div class="relationship-card bg-haraya-earth/20 rounded-lg p-4 cursor-pointer hover:bg-haraya-earth/40 cultural-transition border-2 border-transparent hover:border-haraya-gold" data-relationship="kabarangay" data-trust="60">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🏘️</div>
+                        <h3 class="font-bold text-haraya-brown" data-en="Community (Kabarangay)" data-tl="Kabarangay">Kabarangay</h3>
+                        <p class="text-sm text-gray-600 mt-2" data-en="Civic trust - local governance participation" data-tl="Civic trust - pakikibahagi sa pamunuan">
+                            Civic trust
+                        </p>
+                        <div class="mt-2">
+                            <div class="bg-haraya-green h-2 rounded-full w-3/5"></div>
+                            <span class="text-xs text-haraya-brown font-bold">60% Trust</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Bayanihan Vouching System -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 mb-8">
+            <h2 id="bayanihanTitle" class="text-2xl font-bold text-haraya-brown mb-6 text-center" data-en="Bayanihan Community Vouching" data-tl="Bayanihan Community Vouching System">
+                Bayanihan Community Vouching
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Crisis Response -->
+                <div class="text-center">
+                    <div class="bg-haraya-earth/20 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">
+                        🌪️
+                    </div>
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Crisis Response" data-tl="Pagtulong sa Krisis">Pagtulong sa Krisis</h3>
+                    <p class="text-sm text-gray-600" data-en="How often do they help during typhoons and emergencies?" data-tl="Gaano kadalas sila tumutulong sa bagyo at emergency?">
+                        Gaano kadalas tumutulong sa bagyo?
+                    </p>
+                    <div class="mt-4">
+                        <input type="range" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" min="0" max="100" value="75" id="crisisRange">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span data-en="Never" data-tl="Hindi">Hindi</span>
+                            <span data-en="Always" data-tl="Lagi">Lagi</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reciprocal Help -->
+                <div class="text-center">
+                    <div class="bg-haraya-earth/20 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">
+                        🤲
+                    </div>
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Reciprocal Assistance" data-tl="Palitan ng Tulong">Palitan ng Tulong</h3>
+                    <p class="text-sm text-gray-600" data-en="Balance between help given and received" data-tl="Balanse ng tulong na binigay at natanggap">
+                        Balanse ng tulong
+                    </p>
+                    <div class="mt-4">
+                        <input type="range" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" min="0" max="100" value="80" id="reciprocalRange">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span data-en="Takes Only" data-tl="Tumatanggap Lang">Tumatanggap Lang</span>
+                            <span data-en="Gives More" data-tl="Nagbibigay Pa">Nagbibigay Pa</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Community Participation -->
+                <div class="text-center">
+                    <div class="bg-haraya-earth/20 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">
+                        🏛️
+                    </div>
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Community Participation" data-tl="Pakikibahagi sa Komunidad">Pakikibahagi</h3>
+                    <p class="text-sm text-gray-600" data-en="Active in barangay meetings and community decisions" data-tl="Aktibo sa barangay meetings at community decisions">
+                        Aktibo sa barangay
+                    </p>
+                    <div class="mt-4">
+                        <input type="range" class="w-full h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" min="0" max="100" value="65" id="participationRange">
+                        <div class="flex justify-between text-xs text-gray-500 mt-1">
+                            <span data-en="Absent" data-tl="Wala">Wala</span>
+                            <span data-en="Leader" data-tl="Lider">Lider</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Bayanihan Score Display -->
+            <div class="mt-8 text-center">
+                <div class="bg-gradient-to-r from-haraya-brown to-haraya-green rounded-lg p-6 text-white">
+                    <h3 class="text-xl font-bold mb-2" data-en="Bayanihan Community Score" data-tl="Bayanihan Community Score">Bayanihan Community Score</h3>
+                    <div class="text-4xl font-bold mb-2" id="bayanihanScore">720</div>
+                    <p class="text-sm opacity-90" data-en="Based on genuine Filipino community values" data-tl="Nakabatay sa tunay na Filipino community values">
+                        Nakabatay sa tunay na Filipino values
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Filipino Values Assessment -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 mb-8">
+            <h2 id="valuesTitle" class="text-2xl font-bold text-haraya-brown mb-6 text-center" data-en="Filipino Values Assessment" data-tl="Filipino Values Assessment">
+                Filipino Values Assessment
+            </h2>
+
+            <div class="space-y-6">
+                <!-- Utang na Loob -->
+                <div class="border-l-4 border-haraya-gold pl-4">
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Utang na Loob (Debt of Gratitude)" data-tl="Utang na Loob">Utang na Loob</h3>
+                    <p class="text-sm text-gray-600 mb-3" data-en="How well do they remember and repay kindness received?" data-tl="Gaano sila kabuti sa pag-alala at pagbabayad ng utang na loob?">
+                        Gaano kabuti sa pag-alala ng utang na loob?
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm" data-en="Ungrateful" data-tl="Walang utang na loob">Walang utang na loob</span>
+                        <input type="range" class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" min="0" max="100" value="85" id="utangRange">
+                        <span class="text-sm" data-en="Always remembers" data-tl="Laging naaalala">Laging naaalala</span>
+                    </div>
+                </div>
+
+                <!-- Hiya (Propriety/Shame) -->
+                <div class="border-l-4 border-haraya-gold pl-4">
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Hiya (Sense of Propriety)" data-tl="Hiya (Sense of Propriety)">Hiya</h3>
+                    <p class="text-sm text-gray-600 mb-3" data-en="Do they have proper sense of shame and propriety in business?" data-tl="May tamang hiya ba sila sa negosyo?">
+                        May tamang hiya ba sa negosyo?
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm" data-en="Shameless" data-tl="Walang hiya">Walang hiya</span>
+                        <input type="range" class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" min="0" max="100" value="75" id="hiyaRange">
+                        <span class="text-sm" data-en="Very respectful" data-tl="Napaka-galang">Napaka-galang</span>
+                    </div>
+                </div>
+
+                <!-- Pakikipagkunware -->
+                <div class="border-l-4 border-haraya-gold pl-4">
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Pakikipagkunware (Accommodation)" data-tl="Pakikipagkunware">Pakikipagkunware</h3>
+                    <p class="text-sm text-gray-600 mb-3" data-en="Do they maintain harmony even in difficult business situations?" data-tl="Pinapanatili ba nila ang harmony sa mahirap na business situations?">
+                        Pinapanatili ba ang harmony sa mahirap na sitwasyon?
+                    </p>
+                    <div class="flex items-center space-x-4">
+                        <span class="text-sm" data-en="Confrontational" data-tl="Palaban">Palaban</span>
+                        <input type="range" class="flex-1 h-2 bg-gray-200 rounded-lg appearance-none cursor-pointer slider" min="0" max="100" value="70" id="kunwareRange">
+                        <span class="text-sm" data-en="Peaceful" data-tl="Mapayapa">Mapayapa</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Cultural Values Score -->
+            <div class="mt-8">
+                <div class="bg-gradient-to-r from-haraya-green to-haraya-brown rounded-lg p-4 text-white text-center">
+                    <h3 class="font-bold mb-2" data-en="Cultural Values Score" data-tl="Cultural Values Score">Cultural Values Score</h3>
+                    <div class="text-3xl font-bold" id="culturalScore">770</div>
+                    <p class="text-sm opacity-90" data-en="Authentic Filipino character assessment" data-tl="Tunay na Filipino character assessment">
+                        Tunay na Filipino character assessment
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Regional Cultural Context -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6">
+            <h2 id="regionalTitle" class="text-2xl font-bold text-haraya-brown mb-6 text-center" data-en="Regional Cultural Context" data-tl="Regional Cultural Context">
+                Regional Cultural Context
+            </h2>
+
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Luzon -->
+                <div class="region-card bg-haraya-earth/10 rounded-lg p-4 cursor-pointer hover:bg-haraya-earth/30 cultural-transition" data-region="luzon">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🏔️</div>
+                        <h3 class="font-bold text-haraya-brown mb-2">Luzon</h3>
+                        <p class="text-sm text-gray-600" data-en="Hierarchical, formal processes, elder-mediated decisions" data-tl="Hierarchical, formal na proseso, elder-mediated decisions">
+                            Hierarchical, respeto sa nakatatanda
+                        </p>
+                        <div class="mt-4 space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span data-en="Formality" data-tl="Formalidad">Formalidad</span>
+                                <span class="font-bold">High</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span data-en="Risk Tolerance" data-tl="Risk Tolerance">Risk Tolerance</span>
+                                <span class="font-bold">Medium</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Visayas -->
+                <div class="region-card bg-haraya-earth/10 rounded-lg p-4 cursor-pointer hover:bg-haraya-earth/30 cultural-transition" data-region="visayas">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🏝️</div>
+                        <h3 class="font-bold text-haraya-brown mb-2">Visayas</h3>
+                        <p class="text-sm text-gray-600" data-en="Entrepreneurial spirit, maritime trading culture, island solidarity" data-tl="Entrepreneurial spirit, maritime trading, island solidarity">
+                            Entrepreneurial, maritime trading
+                        </p>
+                        <div class="mt-4 space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span data-en="Business Mindset" data-tl="Business Mindset">Business Mindset</span>
+                                <span class="font-bold">High</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span data-en="Innovation" data-tl="Innovation">Innovation</span>
+                                <span class="font-bold">High</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mindanao -->
+                <div class="region-card bg-haraya-earth/10 rounded-lg p-4 cursor-pointer hover:bg-haraya-earth/30 cultural-transition" data-region="mindanao">
+                    <div class="text-center">
+                        <div class="text-4xl mb-2">🌾</div>
+                        <h3 class="font-bold text-haraya-brown mb-2">Mindanao</h3>
+                        <p class="text-sm text-gray-600" data-en="Multi-cultural, agricultural focus, frontier innovation" data-tl="Multi-cultural, agricultural focus, frontier innovation">
+                            Multi-cultural, agricultural
+                        </p>
+                        <div class="mt-4 space-y-2">
+                            <div class="flex justify-between text-xs">
+                                <span data-en="Cultural Diversity" data-tl="Cultural Diversity">Cultural Diversity</span>
+                                <span class="font-bold">High</span>
+                            </div>
+                            <div class="flex justify-between text-xs">
+                                <span data-en="Agricultural Tie" data-tl="Agricultural Tie">Agricultural Tie</span>
+                                <span class="font-bold">High</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Regional Adjustment Display -->
+            <div class="mt-6 text-center">
+                <div id="regionalAdjustment" class="inline-block bg-haraya-brown text-white px-6 py-3 rounded-lg">
+                    <span class="text-sm" data-en="Regional Cultural Adjustment: " data-tl="Regional Cultural Adjustment: ">Regional Cultural Adjustment: </span>
+                    <span class="font-bold">+15% (Visayas Entrepreneurial Bonus)</span>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Community Network Visualization Section -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 mb-8">
+            <h2 class="text-2xl font-bold text-haraya-brown mb-6 text-center" data-en="Community Trust Network" data-tl="Community Trust Network">
+                Community Trust Network
+            </h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Trust Network Graph -->
+                <div class="bg-haraya-earth/10 rounded-lg p-4">
+                    <h3 class="font-bold text-haraya-brown mb-4 text-center" data-en="Your Kapwa Network" data-tl="Inyong Kapwa Network">
+                        Your Kapwa Network
+                    </h3>
+                    <div class="relative h-64 flex items-center justify-center">
+                        <!-- Central User -->
+                        <div class="absolute w-16 h-16 bg-haraya-brown rounded-full flex items-center justify-center text-white font-bold z-20">
+                            You
+                        </div>
+                        
+                        <!-- Family Network -->
+                        <div class="absolute top-4 left-1/2 transform -translate-x-1/2 w-12 h-12 bg-haraya-green rounded-full flex items-center justify-center text-white text-xs">
+                            👨‍👩‍👧‍👦
+                        </div>
+                        <div class="absolute top-12 left-1/4 w-8 h-8 bg-haraya-green rounded-full flex items-center justify-center text-white text-xs">
+                            👩
+                        </div>
+                        <div class="absolute top-12 right-1/4 w-8 h-8 bg-haraya-green rounded-full flex items-center justify-center text-white text-xs">
+                            👨
+                        </div>
+                        
+                        <!-- Godparent Network -->
+                        <div class="absolute top-1/2 left-4 transform -translate-y-1/2 w-10 h-10 bg-haraya-gold rounded-full flex items-center justify-center text-white text-xs">
+                            🤝
+                        </div>
+                        <div class="absolute top-1/2 right-4 transform -translate-y-1/2 w-10 h-10 bg-haraya-gold rounded-full flex items-center justify-center text-white text-xs">
+                            🤝
+                        </div>
+                        
+                        <!-- Neighbors -->
+                        <div class="absolute bottom-8 left-1/4 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
+                            🏠
+                        </div>
+                        <div class="absolute bottom-8 right-1/4 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
+                            🏠
+                        </div>
+                        <div class="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-white text-xs">
+                            🏠
+                        </div>
+                        
+                        <!-- Connection Lines -->
+                        <svg class="absolute inset-0 w-full h-full">
+                            <line x1="50%" y1="50%" x2="50%" y2="15%" stroke="#228B22" stroke-width="2" opacity="0.7"/>
+                            <line x1="50%" y1="50%" x2="25%" y2="20%" stroke="#228B22" stroke-width="1.5" opacity="0.6"/>
+                            <line x1="50%" y1="50%" x2="75%" y2="20%" stroke="#228B22" stroke-width="1.5" opacity="0.6"/>
+                            <line x1="50%" y1="50%" x2="10%" y2="50%" stroke="#FFD700" stroke-width="2" opacity="0.8"/>
+                            <line x1="50%" y1="50%" x2="90%" y2="50%" stroke="#FFD700" stroke-width="2" opacity="0.8"/>
+                            <line x1="50%" y1="50%" x2="25%" y2="85%" stroke="#3B82F6" stroke-width="1" opacity="0.5"/>
+                            <line x1="50%" y1="50%" x2="75%" y2="85%" stroke="#3B82F6" stroke-width="1" opacity="0.5"/>
+                            <line x1="50%" y1="50%" x2="50%" y2="90%" stroke="#3B82F6" stroke-width="1" opacity="0.5"/>
+                        </svg>
+                    </div>
+                    
+                    <div class="mt-4 text-center text-sm text-gray-600">
+                        <div class="flex justify-center space-x-4">
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-haraya-green rounded-full mr-1"></div>
+                                <span data-en="Family" data-tl="Pamilya">Family</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-haraya-gold rounded-full mr-1"></div>
+                                <span data-en="Godparents" data-tl="Kumpare">Godparents</span>
+                            </div>
+                            <div class="flex items-center">
+                                <div class="w-3 h-3 bg-blue-500 rounded-full mr-1"></div>
+                                <span data-en="Neighbors" data-tl="Kapitbahay">Neighbors</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Social Capital Metrics -->
+                <div class="space-y-4">
+                    <h3 class="font-bold text-haraya-brown text-center" data-en="Social Capital Metrics" data-tl="Social Capital Metrics">
+                        Social Capital Metrics
+                    </h3>
+                    
+                    <div class="bg-haraya-earth/10 rounded-lg p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium" data-en="Network Density" data-tl="Network Density">Network Density</span>
+                            <span class="font-bold text-haraya-brown">85%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-haraya-green h-2 rounded-full" style="width: 85%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1" data-en="How interconnected your network members are" data-tl="Gaano kakonektado ang network members">How interconnected your network members are</p>
+                    </div>
+                    
+                    <div class="bg-haraya-earth/10 rounded-lg p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium" data-en="Trust Velocity" data-tl="Trust Velocity">Trust Velocity</span>
+                            <span class="font-bold text-haraya-brown">92%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-haraya-gold h-2 rounded-full" style="width: 92%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1" data-en="Speed of trust propagation through network" data-tl="Bilis ng trust propagation sa network">Speed of trust propagation through network</p>
+                    </div>
+                    
+                    <div class="bg-haraya-earth/10 rounded-lg p-4">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium" data-en="Reciprocity Index" data-tl="Reciprocity Index">Reciprocity Index</span>
+                            <span class="font-bold text-haraya-brown">78%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2">
+                            <div class="bg-blue-500 h-2 rounded-full" style="width: 78%"></div>
+                        </div>
+                        <p class="text-xs text-gray-600 mt-1" data-en="Balance of give and take in relationships" data-tl="Balanse ng give and take sa relationships">Balance of give and take in relationships</p>
+                    </div>
+                    
+                    <div class="bg-gradient-to-r from-haraya-brown to-haraya-green rounded-lg p-4 text-white text-center mt-6">
+                        <h4 class="font-bold mb-2" data-en="Overall Social Capital Score" data-tl="Overall Social Capital Score">Overall Social Capital Score</h4>
+                        <div class="text-3xl font-bold">850</div>
+                        <p class="text-sm opacity-90" data-en="Strong community foundation for financial trust" data-tl="Malakas na community foundation para sa financial trust">Strong community foundation for financial trust</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Community Decision Making Process -->
+        <div class="bg-white/95 backdrop-blur-sm rounded-xl shadow-2xl p-6 mb-8">
+            <h2 class="text-2xl font-bold text-haraya-brown mb-6 text-center" data-en="Community Decision Making" data-tl="Community Decision Making">
+                Community Decision Making
+            </h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <!-- Pakikipagkunware Phase -->
+                <div class="text-center">
+                    <div class="bg-haraya-earth/20 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">
+                        👥
+                    </div>
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Pakikipagkunware" data-tl="Pakikipagkunware">Pakikipagkunware</h3>
+                    <p class="text-sm text-gray-600" data-en="Surface-level accommodation and harmony seeking" data-tl="Surface-level accommodation at harmony seeking">Surface-level accommodation and harmony seeking</p>
+                    <div class="mt-4 space-y-2">
+                        <div class="text-xs text-left">
+                            <div class="flex justify-between">
+                                <span data-en="Community input:" data-tl="Community input:">Community input:</span>
+                                <span class="font-bold">Gathered</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span data-en="Initial consensus:" data-tl="Initial consensus:">Initial consensus:</span>
+                                <span class="font-bold">Building</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pakikipagbagay Phase -->
+                <div class="text-center">
+                    <div class="bg-haraya-earth/20 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">
+                        🤝
+                    </div>
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Pakikipagbagay" data-tl="Pakikipagbagay">Pakikipagbagay</h3>
+                    <p class="text-sm text-gray-600" data-en="Mutual adjustment and compromise seeking" data-tl="Mutual adjustment at compromise seeking">Mutual adjustment and compromise seeking</p>
+                    <div class="mt-4 space-y-2">
+                        <div class="text-xs text-left">
+                            <div class="flex justify-between">
+                                <span data-en="Compromise found:" data-tl="Compromise found:">Compromise found:</span>
+                                <span class="font-bold">In Progress</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span data-en="All voices heard:" data-tl="All voices heard:">All voices heard:</span>
+                                <span class="font-bold">Yes</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Pakikipagkaisa Phase -->
+                <div class="text-center">
+                    <div class="bg-haraya-earth/20 rounded-full w-20 h-20 mx-auto mb-4 flex items-center justify-center text-3xl">
+                        ✊
+                    </div>
+                    <h3 class="font-bold text-haraya-brown mb-2" data-en="Pakikipagkaisa" data-tl="Pakikipagkaisa">Pakikipagkaisa</h3>
+                    <p class="text-sm text-gray-600" data-en="Unity of purpose and shared commitment" data-tl="Unity of purpose at shared commitment">Unity of purpose and shared commitment</p>
+                    <div class="mt-4 space-y-2">
+                        <div class="text-xs text-left">
+                            <div class="flex justify-between">
+                                <span data-en="Unified decision:" data-tl="Unified decision:">Unified decision:</span>
+                                <span class="font-bold">Ready</span>
+                            </div>
+                            <div class="flex justify-between">
+                                <span data-en="Community buy-in:" data-tl="Community buy-in:">Community buy-in:</span>
+                                <span class="font-bold">Strong</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-8 text-center">
+                <div class="bg-gradient-to-r from-haraya-brown to-haraya-green rounded-lg p-4 text-white">
+                    <h3 class="font-bold mb-2" data-en="Decision Process Maturity" data-tl="Decision Process Maturity">Decision Process Maturity</h3>
+                    <div class="text-3xl font-bold">Level 3</div>
+                    <p class="text-sm opacity-90" data-en="Community ready for collective financial decisions" data-tl="Community ready para sa collective financial decisions">Community ready for collective financial decisions</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Language system
+        const translations = {
+            en: {
+                currentLang: 'EN'
+            },
+            tl: {
+                currentLang: 'TL'
+            }
+        };
+
+        let currentLanguage = 'en';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'tl' : 'en';
+            updateLanguage();
+        }
+
+        function updateLanguage() {
+            document.getElementById('currentLang').textContent = translations[currentLanguage].currentLang;
+            
+            // Update all elements with data attributes
+            document.querySelectorAll('[data-en][data-tl]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLanguage}`);
+            });
+        }
+
+        // Scoring system
+        function updateScores() {
+            const crisis = parseInt(document.getElementById('crisisRange').value);
+            const reciprocal = parseInt(document.getElementById('reciprocalRange').value);
+            const participation = parseInt(document.getElementById('participationRange').value);
+            
+            const utang = parseInt(document.getElementById('utangRange').value);
+            const hiya = parseInt(document.getElementById('hiyaRange').value);
+            const kunware = parseInt(document.getElementById('kunwareRange').value);
+            
+            // Calculate Bayanihan Score (weighted average)
+            const bayanihanScore = Math.round(
+                (crisis * 0.4) + (reciprocal * 0.35) + (participation * 0.25)
+            ) * 10; // Scale to 1000
+            
+            // Calculate Cultural Values Score
+            const culturalScore = Math.round(
+                (utang * 0.4) + (hiya * 0.3) + (kunware * 0.3)
+            ) * 10; // Scale to 1000
+            
+            document.getElementById('bayanihanScore').textContent = bayanihanScore;
+            document.getElementById('culturalScore').textContent = culturalScore;
+        }
+
+        // Relationship selection
+        function selectRelationship(element) {
+            // Remove previous selections
+            document.querySelectorAll('.relationship-card').forEach(card => {
+                card.classList.remove('bayanihan-glow', 'kapwa-pulse');
+                card.classList.remove('border-haraya-gold');
+                card.classList.add('border-transparent');
+            });
+            
+            // Add selection to clicked card
+            element.classList.add('bayanihan-glow', 'kapwa-pulse');
+            element.classList.remove('border-transparent');
+            element.classList.add('border-haraya-gold');
+            
+            // Update trust display or other logic here
+            const trustLevel = element.getAttribute('data-trust');
+            console.log(`Selected relationship with ${trustLevel}% trust level`);
+        }
+
+        // Regional selection
+        function selectRegion(element) {
+            // Remove previous selections
+            document.querySelectorAll('.region-card').forEach(card => {
+                card.classList.remove('bayanihan-glow');
+            });
+            
+            // Add selection to clicked card
+            element.classList.add('bayanihan-glow');
+            
+            const region = element.getAttribute('data-region');
+            let adjustment = '';
+            
+            switch(region) {
+                case 'luzon':
+                    adjustment = '+5% (Luzon Stability Bonus)';
+                    break;
+                case 'visayas':
+                    adjustment = '+15% (Visayas Entrepreneurial Bonus)';
+                    break;
+                case 'mindanao':
+                    adjustment = '+10% (Mindanao Innovation Bonus)';
+                    break;
+            }
+            
+            document.querySelector('#regionalAdjustment span:last-child').textContent = adjustment;
+        }
+
+        // Event listeners
+        document.getElementById('langToggle').addEventListener('click', toggleLanguage);
+
+        // Range input listeners
+        ['crisisRange', 'reciprocalRange', 'participationRange', 'utangRange', 'hiyaRange', 'kunwareRange'].forEach(id => {
+            document.getElementById(id).addEventListener('input', updateScores);
+        });
+
+        // Relationship card listeners
+        document.querySelectorAll('.relationship-card').forEach(card => {
+            card.addEventListener('click', () => selectRelationship(card));
+        });
+
+        // Region card listeners
+        document.querySelectorAll('.region-card').forEach(card => {
+            card.addEventListener('click', () => selectRegion(card));
+        });
+
+        // Initialize
+        updateLanguage();
+        updateScores();
+
+        // Auto-select default values for demo
+        setTimeout(() => {
+            document.querySelector('[data-relationship="kumpare"]').click();
+            document.querySelector('[data-region="visayas"]').click();
+        }, 1000);
+    </script>
+</body>
+</html>

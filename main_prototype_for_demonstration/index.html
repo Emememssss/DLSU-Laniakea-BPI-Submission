@@ -1,0 +1,625 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HARAYA - Cultural Intelligence Fintech Platform</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://d3js.org/d3.v7.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/shepherd.js@11.2.0/dist/js/shepherd.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/shepherd.js@11.2.0/dist/css/shepherd.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&family=Nunito+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="assets/css/haraya-cultural-theme.css">
+    <meta name="description" content="HARAYA - The world's first culturally-intelligent microfinance platform serving 51M unbanked Filipinos with dignity and cultural relevance.">
+    <meta property="og:title" content="HARAYA Cultural Intelligence Fintech Platform">
+    <meta property="og:description" content="Experience the future of Filipino fintech through Maria Santos' story and our revolutionary KapwaScore algorithm.">
+    <meta property="og:type" content="website">
+</head>
+
+<body class="font-nunito bg-warm-white text-rich-brown antialiased">
+    
+    <!-- Loading Screen -->
+    <div id="loadingScreen" class="fixed inset-0 z-50 flex items-center justify-center bg-warm-white">
+        <div class="text-center">
+            <div class="w-16 h-16 mx-auto mb-4">
+                <svg class="animate-pulse" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <circle cx="32" cy="32" r="30" stroke="#C41E3A" stroke-width="2" opacity="0.3"/>
+                    <path d="M32 12 L52 32 L32 52 L12 32 Z" fill="#C41E3A" opacity="0.8"/>
+                    <circle cx="32" cy="32" r="8" fill="#8B0000"/>
+                </svg>
+            </div>
+            <h2 class="text-2xl font-merriweather font-bold text-bpi-red">HARAYA</h2>
+            <p class="text-sm text-red-gray mt-2">Loading Cultural Intelligence...</p>
+        </div>
+    </div>
+
+    <!-- Navigation Header -->
+    <nav id="mainNavigation" class="bg-white shadow-lg border-b-4 border-bpi-red fixed w-full top-0 z-40 opacity-0">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-16">
+                <div class="flex items-center">
+                    <div class="flex-shrink-0">
+                        <div class="flex items-center space-x-3">
+                            <div class="w-10 h-10 bg-bpi-red rounded-full flex items-center justify-center shadow-lg">
+                                <span class="text-white font-bold text-xl">H</span>
+                            </div>
+                            <div>
+                                <h1 class="text-xl font-merriweather font-bold text-bpi-red">HARAYA</h1>
+                                <p class="text-xs text-red-gray">Cultural Intelligence Platform</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Progress Indicator -->
+                <div class="hidden sm:flex items-center space-x-4">
+                    <div class="text-sm text-rich-brown">
+                        <span id="currentStep">Introduction</span>
+                        <span class="opacity-50">• Step <span id="stepNumber">1</span> of 5</span>
+                    </div>
+                    <div class="w-32 h-2 bg-gray-200 rounded-full">
+                        <div id="progressBar" class="h-2 bg-bpi-red rounded-full transition-all duration-500" style="width: 20%"></div>
+                    </div>
+                </div>
+
+                <!-- Action Buttons -->
+                <div class="flex items-center space-x-3">
+                    <button onclick="openMLExplorer()" class="bg-bpi-red hover:bg-bpi-dark-red text-white px-4 py-2 rounded-lg text-sm font-medium transition-all duration-300 transform hover:scale-105 shadow-lg">
+                        🧠 Explore ML Backend
+                    </button>
+                    <button id="skipTour" class="text-sm text-rich-brown opacity-75 hover:opacity-100 transition-opacity">
+                        Skip Tour
+                    </button>
+                    <button id="restartDemo" class="hidden bg-bpi-red text-white px-4 py-2 rounded-lg text-sm hover:bg-opacity-90 transition-colors">
+                        Restart Demo
+                    </button>
+                    <button id="openNavigation" class="bg-red-rose text-bpi-red px-4 py-2 rounded-lg text-sm font-medium hover:bg-red-cream transition-colors">
+                        Navigate ≣
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Navigation Dropdown Menu -->
+    <div id="navigationDropdown" class="hidden fixed top-16 right-4 z-50 bg-white rounded-lg shadow-lg border border-gray-200 w-64">
+        <div class="p-4">
+            <h3 class="text-lg font-semibold text-bpi-red mb-3">Quick Navigation</h3>
+            <div class="space-y-2">
+                <button data-section="0" class="w-full text-left px-3 py-2 rounded-lg hover:bg-bpi-red/10 transition-colors">
+                    <span class="font-medium">1. Introduction</span>
+                    <span class="text-sm text-gray-600 block">Welcome to HARAYA</span>
+                </button>
+                <button data-section="1" class="w-full text-left px-3 py-2 rounded-lg hover:bg-bpi-red/10 transition-colors">
+                    <span class="font-medium">2. Meet Maria</span>
+                    <span class="text-sm text-gray-600 block">Our Filipino entrepreneur</span>
+                </button>
+                <button data-section="2" class="w-full text-left px-3 py-2 rounded-lg hover:bg-bpi-red/10 transition-colors">
+                    <span class="font-medium">3. Community Network</span>
+                    <span class="text-sm text-gray-600 block">Trust relationship visualization</span>
+                </button>
+                <button data-section="3" class="w-full text-left px-3 py-2 rounded-lg hover:bg-bpi-red/10 transition-colors">
+                    <span class="font-medium">4. KapwaScore Calculator</span>
+                    <span class="text-sm text-gray-600 block">Cultural intelligence algorithm</span>
+                </button>
+                <button data-section="4" class="w-full text-left px-3 py-2 rounded-lg hover:bg-bpi-red/10 transition-colors">
+                    <span class="font-medium">5. BPI Integration</span>
+                    <span class="text-sm text-gray-600 block">Partnership demonstration</span>
+                </button>
+                <button data-section="5" class="w-full text-left px-3 py-2 rounded-lg hover:bg-bpi-red/10 transition-colors">
+                    <span class="font-medium">6. Demo Summary</span>
+                    <span class="text-sm text-gray-600 block">Results and impact</span>
+                </button>
+            </div>
+            <div class="mt-4 pt-4 border-t border-gray-200">
+                <button onclick="openMLExplorer()" class="w-full bg-bpi-red hover:bg-bpi-dark-red text-white py-2 px-4 rounded-lg text-sm font-medium transition-all duration-300 mb-2 transform hover:scale-105">
+                    🧠 Explore ML Backend Algorithms
+                </button>
+                <button id="closeNavigation" class="w-full bg-gray-100 text-gray-700 py-2 px-4 rounded-lg text-sm hover:bg-gray-200 transition-colors">
+                    Close Menu
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content Container -->
+    <main class="pt-16">
+        
+        <!-- Section 1: Welcome & Introduction -->
+        <section id="welcome-section" class="min-h-screen flex items-center justify-center bg-bpi-red text-white">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div class="animate-fade-in">
+                    <!-- HARAYA Logo Animation -->
+                    <div class="mb-8">
+                        <div class="w-24 h-24 mx-auto mb-6 transform hover:scale-110 transition-transform duration-300">
+                            <svg viewBox="0 0 96 96" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full h-full">
+                                <circle cx="48" cy="48" r="46" stroke="rgba(255,255,255,0.3)" stroke-width="2"/>
+                                <path d="M48 16 L80 48 L48 80 L16 48 Z" fill="white" opacity="0.9"/>
+                                <circle cx="48" cy="48" r="12" fill="#8B0000"/>
+                                <path d="M42 44 L50 52 L54 48" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        <h1 class="text-5xl md:text-7xl font-merriweather font-bold mb-4">HARAYA</h1>
+                        <p class="text-xl md:text-2xl opacity-90 mb-2">Cultural Intelligence Fintech Platform</p>
+                        <p class="text-sm opacity-75 max-w-2xl mx-auto">The world's first AI-powered microfinance platform that authentically integrates Filipino cultural values into credit assessment</p>
+                    </div>
+
+                    <!-- Value Propositions -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                            <div class="text-3xl mb-3">🤝</div>
+                            <h3 class="font-semibold mb-2">Cultural Intelligence</h3>
+                            <p class="text-sm opacity-90">First AI system designed specifically for Filipino cultural values</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                            <div class="text-3xl mb-3">🏦</div>
+                            <h3 class="font-semibold mb-2">BPI Integration Ready</h3>
+                            <p class="text-sm opacity-90">Partnership-ready with proven integration capability</p>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-6 rounded-2xl border border-white/20">
+                            <div class="text-3xl mb-3">🌟</div>
+                            <h3 class="font-semibold mb-2">51M Market Opportunity</h3>
+                            <p class="text-sm opacity-90">Serving unbanked Filipinos with dignity and cultural relevance</p>
+                        </div>
+                    </div>
+
+                    <!-- CTA Button -->
+                    <div class="space-y-4">
+                        <button id="startDemo" class="bg-white text-bpi-red px-8 py-4 rounded-2xl font-semibold text-lg hover:bg-red-cream transform hover:scale-105 transition-all duration-300 shadow-lg">
+                            Meet Maria Santos →
+                        </button>
+                        <div class="flex justify-center space-x-4">
+                            <button id="enableFreeMode" class="bg-white/20 backdrop-blur-sm text-white px-6 py-2 rounded-xl text-sm font-medium hover:bg-white/30 transition-all duration-300 border border-white/30">
+                                🗺️ Free Exploration Mode
+                            </button>
+                        </div>
+                        <p class="text-sm opacity-75">Experience HARAYA through the story of a Filipino entrepreneur</p>
+                    </div>
+
+                    <!-- Cultural Quote -->
+                    <div class="mt-12 p-6 bg-white/5 backdrop-blur-sm rounded-2xl border border-white/20 max-w-2xl mx-auto">
+                        <p class="italic text-lg mb-2">"While others copy templates, HARAYA pioneers culturally-intelligent microfinance"</p>
+                        <p class="text-sm opacity-75">Built with respect for Filipino heritage and values</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 2: Meet Maria -->
+        <section id="maria-section" class="hidden min-h-screen bg-warm-white py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-merriweather font-bold text-bpi-red mb-4">Meet Maria Santos</h2>
+                    <p class="text-xl text-rich-brown opacity-75 max-w-2xl mx-auto">A 42-year-old sari-sari store owner from Laguna who dreams of expanding her business</p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                    <!-- Maria's Profile -->
+                    <div class="bg-white rounded-2xl shadow-lg p-8 border-l-4 border-bpi-red">
+                        <div class="flex items-start space-x-6">
+                            <div id="mariaAvatar" class="w-24 h-24 rounded-full bg-red-rose flex items-center justify-center text-4xl shadow-lg">
+                                👩🏽‍💼
+                            </div>
+                            <div class="flex-1">
+                                <h3 class="text-2xl font-semibold text-bpi-red mb-2">Maria Santos</h3>
+                                <p class="text-rich-brown mb-4">Sari-Sari Store Owner • Age 42 • Laguna</p>
+                                
+                                <div class="space-y-3 text-sm">
+                                    <div class="flex items-center">
+                                        <span class="w-2 h-2 bg-bpi-red rounded-full mr-3"></span>
+                                        <span>Monthly Income: ₱18,000 - ₱25,000</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-2 h-2 bg-bpi-red rounded-full mr-3"></span>
+                                        <span>Business: 8 years serving her community</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-2 h-2 bg-bpi-red rounded-full mr-3"></span>
+                                        <span>Family: Supporting 3 children's education</span>
+                                    </div>
+                                    <div class="flex items-center">
+                                        <span class="w-2 h-2 bg-bpi-red rounded-full mr-3"></span>
+                                        <span>Community: Active in barangay activities</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="mt-8 p-4 bg-red-rose rounded-xl">
+                            <h4 class="font-semibold text-bpi-red mb-2">Maria's Dream</h4>
+                            <p class="text-sm text-rich-brown italic">
+                                "I want to expand my store and add more products para sa aming komunidad. 
+                                With a loan, I can buy in bulk and offer better prices to my customers. 
+                                This will help our whole barangay."
+                            </p>
+                        </div>
+                    </div>
+
+                    <!-- Traditional vs HARAYA Assessment -->
+                    <div class="space-y-6">
+                        <div class="bg-red-50 border border-red-200 rounded-2xl p-6">
+                            <h4 class="text-lg font-semibold text-red-700 mb-3">❌ Traditional Credit Assessment</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Credit History:</span>
+                                    <span class="text-red-600 font-medium">Limited/None</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Formal Employment:</span>
+                                    <span class="text-red-600 font-medium">Self-employed (Risky)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Collateral:</span>
+                                    <span class="text-red-600 font-medium">Insufficient</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-red-100 rounded-lg">
+                                <p class="text-red-700 font-semibold">Result: LOAN DENIED</p>
+                            </div>
+                        </div>
+
+                        <div class="bg-red-rose border border-bpi-red/30 rounded-2xl p-6">
+                            <h4 class="text-lg font-semibold text-bpi-red mb-3">✅ HARAYA Cultural Intelligence</h4>
+                            <div class="space-y-2 text-sm">
+                                <div class="flex justify-between">
+                                    <span>Community Trust (Kapwa):</span>
+                                    <span class="text-bpi-red font-medium">Excellent</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Bayanihan Network:</span>
+                                    <span class="text-bpi-red font-medium">Strong (25 members)</span>
+                                </div>
+                                <div class="flex justify-between">
+                                    <span>Utang na Loob History:</span>
+                                    <span class="text-bpi-red font-medium">Outstanding</span>
+                                </div>
+                            </div>
+                            <div class="mt-4 p-3 bg-tropical-green/20 rounded-lg">
+                                <p class="text-tropical-green font-semibold">Result: LOAN APPROVED</p>
+                            </div>
+                        </div>
+
+                        <button id="exploreNetwork" class="w-full bg-bpi-red text-white py-3 px-6 rounded-2xl font-semibold hover:bg-opacity-90 transition-colors">
+                            Explore Maria's Trust Network →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 3: Community Network Visualization -->
+        <section id="network-section" class="hidden min-h-screen bg-red-cream py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-merriweather font-bold text-bpi-red mb-4">Understanding Trust Networks</h2>
+                    <p class="text-xl text-rich-brown opacity-75 max-w-2xl mx-auto">
+                        HARAYA sees Maria not as an isolated individual, but as part of a vibrant community trust network
+                    </p>
+                </div>
+
+                <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+                    <!-- Network Visualization -->
+                    <div class="lg:col-span-2 bg-white rounded-2xl shadow-lg p-8">
+                        <div class="flex justify-between items-center mb-6">
+                            <h3 class="text-xl font-semibold text-bpi-red">Maria's Bayanihan Network</h3>
+                            <div class="text-sm text-rich-brown opacity-75">
+                                Network Strength: <span class="font-semibold text-bpi-red">92%</span>
+                            </div>
+                        </div>
+                        <div id="networkVisualization" class="w-full h-96 border rounded-xl bg-gray-50">
+                            <!-- D3.js network visualization will be inserted here -->
+                        </div>
+                        <div class="mt-4 text-center">
+                            <button id="animateNetwork" class="bg-bpi-red text-white px-4 py-2 rounded-lg text-sm hover:bg-opacity-90 transition-colors">
+                                Animate Trust Flow
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Network Statistics -->
+                    <div class="space-y-6">
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h4 class="text-lg font-semibold text-bpi-red mb-4">Trust Relationships</h4>
+                            <div class="space-y-3">
+                                <div class="flex justify-between items-center p-3 bg-warm-orange/10 rounded-lg">
+                                    <span class="text-sm">Family Core</span>
+                                    <span class="font-semibold text-bpi-red">95%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-tropical-green/10 rounded-lg">
+                                    <span class="text-sm">Suppliers (Suki)</span>
+                                    <span class="font-semibold text-bpi-red">88%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-sea-blue/10 rounded-lg">
+                                    <span class="text-sm">Customers</span>
+                                    <span class="font-semibold text-bpi-red">85%</span>
+                                </div>
+                                <div class="flex justify-between items-center p-3 bg-purple-100 rounded-lg">
+                                    <span class="text-sm">Barangay Officials</span>
+                                    <span class="font-semibold text-purple-600">82%</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white rounded-2xl shadow-lg p-6">
+                            <h4 class="text-lg font-semibold text-bpi-red mb-4">Cultural Factors</h4>
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Kapwa (Shared Identity)</span>
+                                        <span class="font-medium">30%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-bpi-red h-2 rounded-full" style="width: 90%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Bayanihan (Community Spirit)</span>
+                                        <span class="font-medium">25%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-bpi-red h-2 rounded-full" style="width: 95%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Utang na Loob (Gratitude)</span>
+                                        <span class="font-medium">25%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-bpi-red h-2 rounded-full" style="width: 88%"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span>Traditional Factors</span>
+                                        <span class="font-medium">20%</span>
+                                    </div>
+                                    <div class="w-full bg-gray-200 rounded-full h-2">
+                                        <div class="bg-gray-400 h-2 rounded-full" style="width: 65%"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <button id="calculateScore" class="w-full bg-bpi-red hover:bg-bpi-dark-red text-white py-3 px-6 rounded-2xl font-semibold hover:shadow-lg transform hover:scale-105 transition-all duration-300">
+                            Calculate KapwaScore →
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 4: KapwaScore Calculator -->
+        <section id="calculator-section" class="hidden min-h-screen bg-warm-white py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-merriweather font-bold text-bpi-red mb-4">The KapwaScore™</h2>
+                    <p class="text-xl text-rich-brown opacity-75 max-w-2xl mx-auto">
+                        Experience our revolutionary cultural intelligence algorithm in action
+                    </p>
+                </div>
+
+                <div id="kapwaCalculator" class="bg-white rounded-2xl shadow-lg p-8">
+                    <!-- Calculator content will be loaded here -->
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="viewBPIIntegration" class="bg-white text-bpi-red px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-red-cream transform hover:scale-105 transition-all duration-300">
+                        Apply with BPI BanKo →
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 5: BPI Integration -->
+        <section id="bpi-section" class="hidden min-h-screen bg-bpi-dark-red text-white py-20">
+            <div class="max-w-7xl mx-auto px-6">
+                <div class="text-center mb-16">
+                    <h2 class="text-4xl font-merriweather font-bold mb-4">Partnership Ready</h2>
+                    <p class="text-xl opacity-90 max-w-2xl mx-auto">
+                        See how HARAYA enhances BPI BanKo's existing products with cultural intelligence
+                    </p>
+                </div>
+
+                <div id="bpiIntegration" class="bg-white rounded-2xl shadow-lg p-8 text-rich-brown">
+                    <!-- BPI integration mockup will be loaded here -->
+                </div>
+
+                <div class="text-center mt-12">
+                    <div class="bg-white/10 backdrop-blur-sm rounded-2xl p-8 max-w-2xl mx-auto">
+                        <h3 class="text-2xl font-semibold mb-4">Maria's Success Story</h3>
+                        <p class="text-lg opacity-90 italic mb-6">
+                            "Sa tulong ng HARAYA at BPI, nakakuha ko ng loan para sa aming store. 
+                            Ngayon, mas marami na kaming produkto at mas nakakatulong kami sa aming komunidad."
+                        </p>
+                        <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
+                            <div class="bg-white/10 p-4 rounded-xl">
+                                <div class="text-2xl font-bold text-white">₱50,000</div>
+                                <div class="text-sm opacity-75">Loan Approved</div>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-xl">
+                                <div class="text-2xl font-bold text-white">24hrs</div>
+                                <div class="text-sm opacity-75">Processing Time</div>
+                            </div>
+                            <div class="bg-white/10 p-4 rounded-xl">
+                                <div class="text-2xl font-bold text-white">+40%</div>
+                                <div class="text-sm opacity-75">Store Revenue</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="text-center mt-8">
+                    <button id="completeDemo" class="bg-white text-bpi-red px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-red-cream transform hover:scale-105 transition-all duration-300">
+                        Complete Demo Journey
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Section 6: Demo Summary -->
+        <section id="summary-section" class="hidden min-h-screen bg-gradient-to-r from-red-700 to-red-400 text-white py-20">
+            <div class="max-w-4xl mx-auto px-6 text-center">
+                <div class="animate-fade-in">
+                    <h2 class="text-5xl font-merriweather font-bold mb-8">Salamat, Thank You!</h2>
+                    <p class="text-2xl mb-12 opacity-90">
+                        You've experienced the future of culturally-intelligent fintech
+                    </p>
+        
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl">
+                            <h3 class="text-2xl font-semibold mb-4">What You Experienced</h3>
+                            <ul class="text-left space-y-2 opacity-90">
+                                <li>✅ Cultural intelligence in action</li>
+                                <li>✅ Community trust network analysis</li>
+                                <li>✅ KapwaScore™ calculation</li>
+                                <li>✅ BPI partnership integration</li>
+                                <li>✅ Maria's successful loan approval</li>
+                            </ul>
+                        </div>
+                        <div class="bg-white/10 backdrop-blur-sm p-8 rounded-2xl">
+                            <h3 class="text-2xl font-semibold mb-4">Business Impact</h3>
+                            <div class="space-y-3">
+                                <div>
+                                    <div class="text-3xl font-bold text-white">51M</div>
+                                    <div class="text-sm opacity-75">Unbanked Filipinos served</div>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-white">40%</div>
+                                    <div class="text-sm opacity-75">Lower default rates</div>
+                                </div>
+                                <div>
+                                    <div class="text-3xl font-bold text-white">₱2.5B</div>
+                                    <div class="text-sm opacity-75">BPI portfolio expansion</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+        
+                    <div class="space-y-4">
+                        <button id="restartJourney" class="bg-white text-bpi-red px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-red-cream transition-colors mr-4">
+                            Experience Again
+                        </button>
+                        <button id="viewFullPresentation" class="bg-white text-bpi-red px-8 py-3 rounded-2xl font-semibold text-lg hover:bg-red-cream transition-colors">
+                            View Full Presentation
+                        </button>
+                    </div>
+        
+                    <div class="mt-12 p-6 bg-white/5 backdrop-blur-sm rounded-2xl max-w-2xl mx-auto">
+                        <p class="text-xl italic mb-3">
+                            "While others translate interfaces, HARAYA translates values."
+                        </p>
+                        <p class="text-sm opacity-75">
+                            Built with deep respect for Filipino heritage and community
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    <!-- Footer -->
+    <footer class="bg-red-gray text-white py-12 border-t-4 border-bpi-red">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-8">
+                <div class="col-span-1 md:col-span-2">
+                    <div class="flex items-center space-x-3 mb-4">
+                        <div class="w-10 h-10 bg-bpi-red rounded-full flex items-center justify-center">
+                            <span class="text-white font-bold text-xl">H</span>
+                        </div>
+                        <div>
+                            <h3 class="text-2xl font-merriweather font-bold">HARAYA</h3>
+                            <p class="text-sm opacity-75">Cultural Intelligence Fintech Platform</p>
+                        </div>
+                    </div>
+                    <p class="text-sm opacity-75 mb-4">
+                        The world's first AI-powered microfinance platform that authentically integrates 
+                        Filipino cultural values into credit assessment, serving 51M unbanked Filipinos 
+                        with dignity and cultural relevance.
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-3">Innovation</h4>
+                    <ul class="space-y-2 text-sm opacity-75">
+                        <li>Cultural Intelligence AI</li>
+                        <li>KapwaScore Algorithm</li>
+                        <li>Community Trust Networks</li>
+                        <li>Explainable AI Systems</li>
+                    </ul>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-3">Partnership</h4>
+                    <ul class="space-y-2 text-sm opacity-75">
+                        <li>BPI Integration Ready</li>
+                        <li>Production Architecture</li>
+                        <li>BSP Compliance</li>
+                        <li>Academic Validation</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-warm-white/20 mt-8 pt-8 text-center">
+                <p class="text-sm opacity-75">
+                    © 2025 HARAYA Cultural Intelligence Platform. Built with respect for Filipino heritage and values.
+                </p>
+                <p class="text-xs opacity-50 mt-2">
+                    This demonstration showcases HARAYA's capabilities for evaluation purposes.
+                </p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="assets/js/narrative-flow.js"></script>
+    <script src="assets/js/kapwa-calculator.js"></script>
+    <script src="assets/js/network-visualization.js"></script>
+    <script src="assets/js/bpi-integration.js"></script>
+    
+    <!-- Initialize Application -->
+    <script>
+        // Application initialization
+        document.addEventListener('DOMContentLoaded', function() {
+            // Initialize the application
+            if (typeof HarayaApp !== 'undefined') {
+                HarayaApp.init();
+            }
+            
+            // Hide loading screen after 2 seconds
+            setTimeout(() => {
+                document.getElementById('loadingScreen').style.opacity = '0';
+                setTimeout(() => {
+                    document.getElementById('loadingScreen').style.display = 'none';
+                    document.getElementById('mainNavigation').style.opacity = '1';
+                }, 300);
+            }, 2000);
+        });
+
+        // ML Explorer integration function
+        function openMLExplorer() {
+            // Open ML Algorithm Explorer in a new window/tab
+            const explorerUrl = '../ml_algorithm_explorer/index.html';
+            const explorerWindow = window.open(explorerUrl, '_blank', 'width=1400,height=900,scrollbars=yes,resizable=yes');
+            
+            // Focus on the new window if popup is allowed
+            if (explorerWindow) {
+                explorerWindow.focus();
+            }
+            
+            // Close navigation dropdown if open
+            const navigationDropdown = document.getElementById('navigationMenu') || document.getElementById('navigationDropdown');
+            if (navigationDropdown && !navigationDropdown.classList.contains('hidden')) {
+                navigationDropdown.classList.add('hidden');
+            }
+            
+            // Optional: Add analytics or tracking
+            console.log('HARAYA ML Algorithm Explorer launched');
+        }
+    </script>
+
+</body>
+</html>
