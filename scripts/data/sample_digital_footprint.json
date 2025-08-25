@@ -1,0 +1,119 @@
+{
+  "persona_id": "3107c9fc-681d-45a4-8446-a904752de104",
+  "generation_timestamp": "2025-08-23T18:59:14.778769",
+  "data_consent_flags": {
+    "mobile_app_analytics": true,
+    "transaction_history": true,
+    "location_metadata": true,
+    "communication_metadata": true,
+    "device_information": true,
+    "banking_behavior": true
+  },
+  "privacy_compliance": {
+    "data_privacy_act_2012": true,
+    "bsp_digital_banking_regs": true,
+    "user_consent_obtained": true,
+    "data_anonymization_level": "high"
+  },
+  "mobile_app_behavior": {
+    "total_sessions_6_months": 109,
+    "avg_sessions_per_week": 4.5,
+    "avg_session_duration_minutes": 7.2,
+    "most_used_features": [
+      [
+        "account_statements",
+        34
+      ],
+      [
+        "customer_service",
+        30
+      ],
+      [
+        "card_management",
+        30
+      ]
+    ],
+    "usage_pattern": "moderate_usage",
+    "peak_usage_time": "morning",
+    "consistency_score": 0.57,
+    "feature_diversity_score": 1.0
+  },
+  "transaction_patterns": {
+    "total_transactions_12_months": 841,
+    "avg_monthly_transactions": 70.1,
+    "income_regularity_score": 0.3333333333333333,
+    "expense_predictability_score": 0.7,
+    "bill_payment_consistency_score": 0.31666666666666665,
+    "mobile_money_usage_score": 0.49166666666666664,
+    "savings_behavior_score": 0.6,
+    "transaction_diversity_score": 0.6666666666666666,
+    "average_transaction_amount": 176.88,
+    "largest_transaction_amount": 6757.05,
+    "most_frequent_transaction_type": "expense"
+  },
+  "location_metadata": {
+    "location_stability_score": 0.47,
+    "mobility_radius_km": 47.7,
+    "primary_locations_count": 23,
+    "work_home_consistency": 0.47,
+    "weekend_vs_weekday_pattern": "consistent",
+    "most_frequent_region": "luzon_rural",
+    "atm_usage_locations": [
+      "home_area",
+      "work_area"
+    ],
+    "travel_frequency_score": 0.53
+  },
+  "communication_metadata": {
+    "avg_daily_calls": 12.7,
+    "avg_daily_sms": 13.8,
+    "communication_regularity_score": 0.57,
+    "weekend_vs_weekday_ratio": 1.69,
+    "peak_communication_hours": "evening",
+    "contact_network_size_estimate": 111,
+    "business_vs_personal_ratio": 0.53,
+    "communication_consistency_score": 0.58
+  },
+  "device_information": {
+    "device_brand": "Oppo",
+    "device_tier": "budget",
+    "os_type": "Android",
+    "os_version": "14.0",
+    "storage_capacity_gb": 128,
+    "network_provider": "Smart",
+    "connection_type": "5G",
+    "total_apps_installed": 80,
+    "financial_apps_count": 5,
+    "app_installation_frequency": 3.4,
+    "device_security_score": 0.75,
+    "last_security_update_days": 84,
+    "battery_optimization_enabled": true,
+    "location_services_enabled": false
+  },
+  "banking_behavior": {
+    "account_types": [
+      "savings"
+    ],
+    "primary_banking_channel": "mobile_app",
+    "channel_preferences": {
+      "mobile_app": 0.4661016949152542,
+      "atm": 0.25423728813559315,
+      "branch": 0.11864406779661016,
+      "online": 0.16101694915254236
+    },
+    "avg_monthly_transactions": 32.2,
+    "digital_banking_adoption_score": 1.0,
+    "financial_product_usage_score": 0.73,
+    "banking_frequency_score": 1.0,
+    "service_utilization_breadth": 7,
+    "customer_tenure_months": 43,
+    "cross_selling_potential_score": 0.36
+  },
+  "composite_scores": {
+    "digital_engagement_score": 0.796,
+    "financial_stability_score": 0.568,
+    "social_connectivity_score": 0.579,
+    "risk_indicator_score": 0.516,
+    "overall_trust_readiness": 0.313
+  }
+}
